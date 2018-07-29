@@ -194,9 +194,42 @@ The "notebooks" folder contains Jupyter notebooks with interactive examples and 
 
 ### Chapter 6 - Kernel Methods
 
+#### 6.1 - Dual Representations
+#### 6.2 - Constructing Kernels
+#### 6.3 - Radial Basis Function Networks
+
+* ##### 6.3.1 - Nadaraya-Watson model
+
+#### 6.4 - Gaussian Processes
+
+* ##### 6.4.1 - Linear regression revisited
+* ##### 6.4.2 - Gaussian processes for regression
+* ##### 6.4.3 - Learning the hyperparameters
+* ##### 6.4.4 - Automatic relevance determination
+* ##### 6.4.5 - Gaussian processes for classification
+* ##### 6.4.6 - Laplace approximation
+* ##### 6.4.7 - Connection to neural networks
 
 
 ### Chapter 9 - Mixture Models and EM
+
+#### 9.1 - K-means Clustering
+
+* ##### 9.1.1 - Image segmentation and compression
+
+#### 9.2 - Mixtures of Gaussians
+
+* ##### 9.2.1 - Maximum likelihood
+* ##### 9.2.2 - EM for Gaussian mixtures
+
+#### 9.3 - An Alternative View of EM
+
+* ##### 9.3.1 - Gaussian mixtures revisited
+* ##### 9.3.2 - Relation to K-means
+* ##### 9.3.3 - Mixtures of Bernoulli distributions
+* ##### 9.3.4 - EM for Bayesian linear regression
+
+#### 9.4 - The EM Algorithm in General
 
 
 
