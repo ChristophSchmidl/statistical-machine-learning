@@ -78,9 +78,69 @@ The "notebooks" folder contains Jupyter notebooks with interactive examples and 
 
 ### Chapter 3 - Linear Models for Regression
 
+#### 3.1 - Linear Basis Function Models
+
+* ##### 3.1.1 - Maximum likelihood and least squares
+* ##### 3.1.2 - Geometry of least squares
+* ##### 3.1.3 - Sequential learning
+* ##### 3.1.4 - Regularized least squares
+* ##### 3.1.5 - Multiple outputs
+
+#### 3.2 - The Bias-Variance Decomposition
+#### 3.3 - Bayesian Linear Regression
+
+* ##### 3.3.1 - Parameter distribution
+* ##### 3.3.2 - Predictive distribution
+* ##### 3.3.3 - Equivalent kernel
+
+#### 3.4 - Bayesian Model Comparison
+#### 3.5 - The Evidence Approximation
+
+* ##### 3.5.1 - Evaluation of the evidence function
+* ##### 3.5.2 - Maximizing the evidence function
+* ##### 3.5.3 - Effective number of parameters
+
+#### 3.6 - Limitations of Fixed Basis Functions
+
+
+
 
 ### Chapter 4 - Linear Models for Classification
 
+#### 4.1 - Discriminant Functions
+
+* ##### 4.1.1 - Two classes
+* ##### 4.1.2 - Multiple classes
+* ##### 4.1.3 - Least squares for classification
+* ##### 4.1.4 - Fisher's linear discriminant
+* ##### 4.1.5 - Relation to least squares
+* ##### 4.1.6 - Fisher's dicriminant for multiple classes
+* ##### 4.1.7 - The perceptron algorithm
+
+#### 4.2 - Probabilistic Generative Models
+
+* ##### 4.2.1 - Continuous inputs
+* ##### 4.2.2 - Maximum likelihood solution
+* ##### 4.2.3 - Discrete features
+* ##### 4.2.4 - Exponential family
+
+#### 4.3 - Probabilistic Discriminative Models
+
+* ##### 4.3.1 - Fixed basis functions
+* ##### 4.3.2 - Logistic regression
+* ##### 4.3.3 - Iterative reweighted least squares
+* ##### 4.3.4 - Multiclass logistic regression
+* ##### 4.3.5 - Probit regression
+* ##### 4.3.6 - Canonical link functions
+
+#### 4.4 - The Laplace Approximation
+
+* ##### 4.4.1 - Model comparison and BIC
+
+#### 4.5 - Bayesian Logistic Regression
+
+* ##### 4.5.1 - Laplace approximation
+* ##### 4.5.2 - Predictive distribution
 
 
 ### Chapter 5 - Neural Networks
