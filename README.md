@@ -145,6 +145,51 @@ The "notebooks" folder contains Jupyter notebooks with interactive examples and 
 
 ### Chapter 5 - Neural Networks
 
+#### 5.1 - Feed-forward Network Functions
+
+* ##### 5.1.1 - Weight-space symmetries
+
+#### 5.2 - Network Training
+
+* ##### 5.2.1 - Parameter optimization
+* ##### 5.2.2 - Local quadratic approximation
+* ##### 5.2.3 - Use of gradient information
+* ##### 5.2.4 - Gradient descent optimization
+
+#### 5.3 - Error Backpropagation
+
+* ##### 5.3.1 - Evaluation of error-function derivatives
+* ##### 5.3.2 - A simple example
+* ##### 5.3.3 - Efficiency of backpropagation
+* ##### 5.3.4 - The Jacobian matrix
+
+#### 5.4 - The Hessian Matrix
+
+* ##### 5.4.1 - Diagonal approximation
+* ##### 5.4.2 - Outer product approximation
+* ##### 5.4.3 - Inverse Hessian
+* ##### 5.4.4 - Finite differences
+* ##### 5.4.5 - Exact evaluation of the Hessian
+* ##### 5.4.6 - Fast multiplication by the Hessian
+
+#### 5.5 - Regularization in Neural Networks
+
+* ##### 5.5.1 - Consistent Gaussian priors
+* ##### 5.5.2 - Early stopping
+* ##### 5.5.3 - Invariances
+* ##### 5.5.4 - Tangent propagation
+* ##### 5.5.5 - Training with transformed data
+* ##### 5.5.6 - Convolutional networks
+* ##### 5.5.7 - Soft weight sharing
+
+#### 5.6 - Mixture Density Networks
+#### 5.7 - Bayesian Neural Networks
+
+* ##### 5.7.1 - Posterior parameter distribution
+* ##### 5.7.2 - Hyperparameter optimization
+* ##### 5.7.3 - Bayesian neural networks for classification
+
+
 
 
 ### Chapter 6 - Kernel Methods
