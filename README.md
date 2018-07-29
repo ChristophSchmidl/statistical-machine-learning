@@ -12,9 +12,15 @@ The "notebooks" folder contains Jupyter notebooks with interactive examples and 
 ### Chapter 1 - Introduction
 
 #### 1.1 - Example: Polynomial Curve Fitting
+
 #### 1.2 - Probability Theory
 
 * ##### 1.2.1 - Probability densities
+* ##### 1.2.2 - Expectations and covariances
+* ##### 1.2.3 - Bayesian probabilities
+* ##### 1.2.4 - The Gaussian distribution
+* ##### 1.2.5 - Curve fitting re-visited
+* ##### 1.2.6 - Bayesian curve fitting
 
 #### 1.3 - Model Selection
 #### 1.4 - The Curse of Dimensionality
