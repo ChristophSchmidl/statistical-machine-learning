@@ -25,7 +25,20 @@ The "notebooks" folder contains Jupyter notebooks with interactive examples and 
 #### 1.3 - Model Selection
 #### 1.4 - The Curse of Dimensionality
 #### 1.5 - Decision Theory
+
+* ##### 1.5.1 - Minimizing the misclassification rate
+* ##### 1.5.2 - Minimizing the expected loss
+* ##### 1.5.3 - The reject option
+* ##### 1.5.4 - Inference and decision
+* ##### 1.5.5 - Loss functions for regression
+
 #### 1.6 - Information Theory
+
+* ##### 1.6.1 - Relative entropy an mutual information
+
+
+
+
 
 ### Chapter 2 - Probability Distributions
 
