@@ -14,7 +14,7 @@ The "notebooks" folder contains Jupyter notebooks with interactive examples and 
 #### 1.1 - Example: Polynomial Curve Fitting
 #### 1.2 - Probability Theory
 
-##### 1.2.1 - Probability densities
+* ##### 1.2.1 - Probability densities
 
 #### 1.3 - Model Selection
 #### 1.4 - The Curse of Dimensionality
