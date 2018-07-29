@@ -42,6 +42,39 @@ The "notebooks" folder contains Jupyter notebooks with interactive examples and 
 
 ### Chapter 2 - Probability Distributions
 
+#### 2.1 - Binary Variables
+
+* ##### 2.1.1 - The beta distribution
+
+#### 2.2 - Multinominal Variables
+
+* ##### 2.2.1 - The Dirichlet distribution
+
+#### 2.3 - The Gaussian Distribution
+
+* ##### 2.3.1 - Conditional Gaussian distributions
+* ##### 2.3.2 - Marginal Gaussian distributions
+* ##### 2.3.3 - Bayes' theorem for Gaussian variables
+* ##### 2.3.4 - Maximum likelihood for the Gaussian
+* ##### 2.3.5 - Sequential estimation
+* ##### 2.3.6 - Bayesian inference for the Gaussian
+* ##### 2.3.7 - Student's t-distribution
+* ##### 2.3.8 - Periodic variables
+* ##### 2.3.9 - Mixtures of Gaussians
+
+#### 2.4 - The Exponential Family
+
+* ##### 2.4.1 - Maximum likelihood and sufficient statistics
+* ##### 2.4.2 - Conjugate priors
+* ##### 2.4.3 - Noninformative priors
+
+#### 2.5 - Nonparametric Methods
+
+* ##### 2.5.1 - Kernel density estimators
+* ##### 2.5.2 - Nearest-neighbour methods
+
+
+
 
 ### Chapter 3 - Linear Models for Regression
 
