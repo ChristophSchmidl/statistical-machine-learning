@@ -44,38 +44,84 @@
 
 Consider once more the M-th order polynomial
 
-\begin{align*}
+\begin{equation}
 	y(x;w) = w_0 + w_1x + ... + w_Mx^M = \sum_{j = 0}^M w_jx^j
-\end{align*}
+\end{equation}
 
 \subsection*{1.1}
 
-Create the function $f(x) = sin(6(x-2))$ in MATLAB. Generate a data set $\mathcal{D}_{10}$
+Create the function $f(x) = sin(6(x-2))$ in MATLAB. Generate a data set $\mathcal{D}_{10}$ of 10 noisy observation of this function. Take the 10 inputs spaced uniformly in range $[0,1]$, and assume that the noise is gaussian with mean 0 and standard deviation 0.3. $\mathcal{D}_{10}$ will be the training set. In a similar way, generate an additional test set $\mathcal{T}$ of 100 noisy observations over the same interval. plot both the function and observation in $\mathcal{D}_{10}$ in a single graph (similar to Bishop, Fig.1.2).\\
 
+\textbf{Answer:}\\
 
 \subsection*{1.2}
 
+Create a MATLAB function $w = PolCurFit(\mathcal{D}_N,M)$ that takes as input a data set $\mathcal{D}_N$, consisting of $N$ input/output-pairs $\{ x_n, t_n\}$, and a parameter $M$, representing the order of the polynomial in (1), and outputs a vector of weights $w = [w_0, ...,w_M]$ that minimizes the sum-of-squares error function
 
+\begin{equation}
+	E(w) = \frac{1}{2} \sum_{n=1}^N \{ y(x_n;w) - t_n\}^2
+\end{equation}
 
+Hint: use the results from the Tutorial Exercises (Week1, Exercise 5), and the \textbackslash-operator (backslash) in MATLAB to solve a linear system of equations.\\
+
+\textbf{Answer:}\\
 
 \subsection*{1.3}
 
+For the given dataset $\mathcal{D}_{10}$, run the $PolCurFit()$ function for $M = [0,...,9]$, and,
 
+\begin{itemize}
+	\item Plot for various orders $M$ (at least for $M = 0, M = 1, M = 3, M = 9$) the resulting ploynomial, together with the function $f$ and observation $\mathcal{D}_{10}$ (similar to Bishop, Fig 1.4)
+	\item For each order $M \in [0,...,9]$, compute the root-mean-square error
+	
+	\begin{equation}
+		E_{RMS} = \sqrt{2E(w^*)/N}
+	\end{equation}
+	
+	of the corresponding polynomial, evaluated on both the training set $\mathcal{D}_{10}$ and the test set $\mathcal{T}$. Plot both as a function of $M$ in a single graph. (see Bishop, Fig.1.5).\\
+\end{itemize}
+
+\textbf{Answer:}\\
 
 
 
 \subsection*{1.4}
 
 
+Repeat this procedure for a data set $\mathcal{D}_{40}$ of 40 observations (with the same noise level) and compare with the previous result.\\
 
+\textbf{Answer:}\\
 
 
 \subsection*{1.5}
 
+Modify the $PolCurFit()$ function to include an additional penalty parameter $\lambda$, for a procedure that solves the minimization problem for a modified error function with quadratic regularizer (weight decay), given as 
+
+\begin{equation}
+	\widetilde{E} = E + \frac{\lambda}{2} \sum_{j = 0}^M w_j^2
+\end{equation}
+
+Verify that the regularizer drives the weights of high order terms in the polynomial to zero, and see if you can reproduce the explain the effect observed in Bishop, Fig.1.8.\\
+
+\textbf{Answer:}\\
+
 
 \subsection*{1.6}
 
+The polynomial curve fitting procedure can be extened to the case of multidimensional inputs. Assuming an input vector of dimension $D$, namely $x = (x_1,x_2,...,x_D)$, we can write the regression function $y$ as:
 
+\begin{equation}
+	y(x;w) = \sum_{j=0}^M \Bigg( \sum_{n_1+n_2+...n_D=j} w_{n_1 n_2...n_D}x_1^{n_1}x_2^{n_2} ... x_D^{n_D}\Bigg)
+\end{equation}
+
+In the last expression, $j$ refers to the order of the polynomial terms. The inner sum is over all the combinations of non-negative integers $n_1, n_2, ..., n_D$, such that the constraint $n_1+ n_2 + ... + n_D = j$ holds. The terms $n_1, n_2,..., n_D$ correspond to the exponent for each variable $x_1,x_2,...,x_D$ in their respective polynomial term.\\
+
+Note that if $D = 1$, the above expression simplifies to the formula in Equation (1). The reason the second sum disappears is that there is only one combination of the non-negative integer $n_1$ for which the constraint $n_1 = j$ holds, which means that there is only a single term to sum over.\\
+
+Fitting the polynomial curve to a multidimensional input vector works analogously to the one-dimensional case. However, the number of parameters (the size of w) becomes much larger, even when $D = 2$. Write down the general polynomial curve equation in (5) for $D = 2$. How many parameters are needed in the two-dimensional case? Compare this to the number of parameters in the one-dimensional case.\\
+
+
+\textbf{Answer:}\\
 
 \section*{Exercise 2 - weight 2.5}
 
