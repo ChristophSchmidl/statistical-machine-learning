@@ -42,9 +42,15 @@
 
 \section*{Exercise 1 - weight 5}
 
+Consider once more the M-th order polynomial
+
+\begin{align*}
+	y(x;w) = w_0 + w_1x + ... + w_Mx^M = \sum_{j = 0}^M w_jx^j
+\end{align*}
+
 \subsection*{1.1}
 
-
+Create the function $f(x) = sin(6(x-2))$ in MATLAB. Generate a data set $\mathcal{D}_{10}$
 
 
 \subsection*{1.2}
@@ -73,23 +79,43 @@
 
 \section*{Exercise 2 - weight 2.5}
 
+In this exercise, we consider the gradient descent algorithm for function minimization. When the function to be minimized $E(x)$, the gradient descent iteration is
+
+\begin{align*}
+	x_{n+1} = x_n - \eta \nabla E(x_n)
+\end{align*}
+
+where $\eta > 0$ is the so-called learning rate. In the following, we will apply gradient descent to the function
+
+\begin{align*}
+	h(x,y) = 100(y - x^2)^2 + (1 - x)^2
+\end{align*}
+
 \subsection*{2.1}
 
+Make a plot of the function $h$ over the interval $[-2 \leq x \leq 2] \times [-1 \leq y \leq 3]$. Tip: use MATLAB function \textbf{surf}. Can you guess from the plot if numerical minimization with gradient descent will be fast or slow for this function?\\
 
-
+\textbf{Answer:}\\
 
 \subsection*{2.2}
 
+Knowing that a critical point of a function is a point where the gradient vanishes, show that $(1,1)$ is the unique critical point og $h$. Prove that this point is a minimum for $h$.\\
 
+\textbf{Answer:}\\
 
 
 \subsection*{2.3}
 
+Write down the gradient descent iteration rule for this function.
 
+\textbf{Answer:}\\
 
 
 \subsection*{2.4}
 
+Implement gradient descent in MATLAB. Try some different values of $\eta$. Does the algorithm converge? How fast? Make plots of the trajectories on top of a contour plot of $h$. (Hint: have look at the MATLAB example code $contour\_example.m$ on Brightspace for inspiration to plot contours of functions and trajectories). Report your findings. Explan why numerical minimization with gradient descent is slow for this function.\\
+
+\textbf{Answer:}\\
 
 
 \section*{Exercise 3 - weight 2.5}
