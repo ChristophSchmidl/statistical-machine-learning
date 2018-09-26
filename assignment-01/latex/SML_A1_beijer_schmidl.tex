@@ -176,54 +176,67 @@ Suppose we have two healthy but curiously mixed boxes of fruit, with one box con
 
 \textbf{Answer:}\\
 
-Model the box by random variable \textbf{B}\\
-The first piece of fruit by variable $F_1$\\
-The second piece of fruit by variable $F_2$
+Let's define the two random variables more specifically to later on save some writing. 
+
+\begin{align*}
+	B &= \{ 1,2\}\\
+	F &= \{ A,G \}\\
+	F_1 &= \texttt{First piece of fruit}\\
+	F_2 &= \texttt{Second piece of fruit}
+\end{align*}
+
+The random variable $B$ (for Box) can take the values $1$ or $2$ for Box 1 or Box 2 respectively.\\
+The random variable $F$ (for fruit) can take the values $A$ or $G$ for Apple or Grapefruit respectively.\\ 
+
+Box 1 contains:
 
 \begin{itemize}
-	\item Box 1: 8 apples, 4 grapefruits => 12 fruits in total
-	\item Box 2: 15 apples, 3 grapefruits => 18 fruits in total
+	\item 8 apples
+	\item 4 grapefruits
+	\item 12 fruits in total
 \end{itemize}
 
+Box 2 contains :
 
+\begin{itemize}
+	\item 15 apples
+	\item 3 grapefruits
+	\item 18 fruits in total
+\end{itemize}
+
+To answer the question we have to find the following probability:
 
 \begin{align*}
-B = \{ b_1, b_2 \}
+	p(F_1 = A | F_2 = G)\\	
 \end{align*}
 
 
 
-
-
-
-
-
-
+The tricky part is due to the fact that the piece of fruit is returned and then once again from the \textit{same} box a second piece is chosen at random. Otherwise we could just apply Bayes' theorem and would be done. Therefore we have to calculate the probability to pick a grapefruit or apple from each box separately.
 
 \begin{align*}
-	P(F_1 = apple | F_2 = grapefruit)
+	p(F = A | B = 1) &= \frac{2}{3}\\
+	p(F = A | B = 2) &= \frac{5}{6}\\
+	p(F = G | B = 1) &= 1 - p(F = A | B = 1) = 1 - \frac{2}{3} = \frac{1}{3}\\
+	p(F = G | B = 2) &= 1 - p(F = G | B = 2) = 1 - \frac{5}{6} = \frac{1}{6}
 \end{align*}
-
-Calculating the probability of picking a grapefruit from each box:
 
 \begin{align*}
-	P(F = Grapefruit | B = 1) = \frac{4}{12} = \frac{1}{3}\\
-	P(F = Grapefruit | B = 2) = \frac{3}{18} = \frac{1}{6}
+	p(B = 1 | F = G) = \frac{p(F = G | B = 1)p(B = 1)}{p(F = G)} = \frac{\frac{1}{3} \times \frac{1}{2}}{\frac{1}{4}} = \frac{2}{3}\\
+	p(B = 2 | F = G) = \frac{p(F = G | B = 2)p(B = 2)}{p(F = G)} = \frac{\frac{1}{6} \times \frac{1}{2}}{\frac{1}{4}} = \frac{1}{3}
 \end{align*}
 
-Calculating the total probability of picking a grapefruit:
+Now we can calculate the probability of each box:
 
 \begin{align*}
-	P(F = Grapefruit) = P()
+	p(F_1 = A | F_2 = G) &= p(B = 1| F = G)p(F = A | B = 1) + p(B = 2 | F = G)p(F = A | B = 2)\\
+	&= \frac{2}{3} \times \frac{2}{3} +  \frac{1}{3} \times \frac{5}{6}	\\
+	&= \frac{4}{9} \times \frac{5}{18}\\
+	&= \frac{13}{18}
 \end{align*}
 
-
-Calculating the probability of picking an apple from each box:
-
-\begin{align*}
-	P(F = Apple | B = 1) = \frac{8}{12} = \frac{2}{3}\\
-	P(F = Apple | B = 2) = \frac{15}{18} = \frac{5}{6} 
-\end{align*}
+The probability that the first fruit is an apple given that the second fruit is a Grapefruit picked from the same box as the apple is $\frac{13}{18}$.\\
+Probability that the first fruit is an apple given that the second fruit is a grapefruit and both are picked from Box 1 is $\frac{8}{18}$, whereas the probability that the first fruit is an apple given that the second fruit is a grapefruit and both are picked from Box 2 is $\frac{5}{18}$. Therefore the second pick affects the probability of the first pick in such a way that is gives us a clue about the box it was picked from.
 
 \subsection*{3.2}
 
