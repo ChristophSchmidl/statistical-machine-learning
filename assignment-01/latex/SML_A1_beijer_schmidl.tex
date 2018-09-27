@@ -218,7 +218,8 @@ The tricky part is due to the fact that the piece of fruit is returned and then 
 	p(F = A | B = 1) &= \frac{2}{3}\\
 	p(F = A | B = 2) &= \frac{5}{6}\\
 	p(F = G | B = 1) &= 1 - p(F = A | B = 1) = 1 - \frac{2}{3} = \frac{1}{3}\\
-	p(F = G | B = 2) &= 1 - p(F = G | B = 2) = 1 - \frac{5}{6} = \frac{1}{6}
+	p(F = G | B = 2) &= 1 - p(F = G | B = 2) = 1 - \frac{5}{6} = \frac{1}{6}\\
+	p(F = G) &= \frac{1}{3} \times \frac{1}{2} + \frac{1}{6} \times \frac{1}{2} = \frac{1}{4}
 \end{align*}
 
 \begin{align*}
@@ -232,7 +233,7 @@ Now we can calculate the probability of each box:
 	p(F_1 = A | F_2 = G) &= p(B = 1| F = G)p(F = A | B = 1) + p(B = 2 | F = G)p(F = A | B = 2)\\
 	&= \frac{2}{3} \times \frac{2}{3} +  \frac{1}{3} \times \frac{5}{6}	\\
 	&= \frac{4}{9} \times \frac{5}{18}\\
-	&= \frac{13}{18}
+	&= \frac{13}{18} \approx 0.722
 \end{align*}
 
 The probability that the first fruit is an apple given that the second fruit is a Grapefruit picked from the same box as the apple is $\frac{13}{18}$.\\
@@ -248,8 +249,37 @@ The probability that the first fruit is an apple given that the second fruit is 
 We want to find the following probability based on sampling without replacement:
 
 \begin{align*}
-	P(F_1 = apple | F_2 = grapefruit)
+	P(F_1 = A | F_2 = G)
 \end{align*}
+
+We have to extend the original formula from the previous exercise:
+
+\begin{align*}
+	p(F_1 = A | F_2 = G) &= p(B = 1| F = G)p(F = A | B = 1) + p(B = 2 | F = G)p(F = A | B = 2)\\
+\end{align*}
+
+And add the case for sampling without replacement. Therefore, the order of the pick is now important and the amount of fruits in a box changes accordingly:
+
+\begin{align*}
+	p(F_1 = A | B = 1) &= \frac{2}{3}\\
+	p(F_1 = A | B = 2) &= \frac{5}{6}\\
+	p(F_2 = G | B = 1) &= \frac{4}{11}  \quad \texttt{Removed one apple from box 1}\\
+	p(F_2 = G | B = 2) &= \frac{3}{17} \quad \texttt{Removed one apple from box 2}\\
+		p(F_2 = G) &= \frac{4}{11} \times \frac{1}{2} + \frac{3}{17} \times \frac{1}{2} = \frac{101}{374}
+\end{align*}
+
+\begin{align*}
+	p(B = 1 | F_2 = G) = \frac{p(F_2 = G | B = 1)p(B = 1)}{p(F_2 = G)} = \frac{\frac{4}{11} \times \frac{1}{2}}{\frac{101}{374}} = \frac{68}{101}\\
+	p(B = 2 | F_2 = G) = \frac{p(F_2 = G | B = 2)p(B = 2)}{p(F_2 = G)} = \frac{\frac{3}{17} \times \frac{1}{2}}{\frac{101}{374}} = \frac{33}{101}
+\end{align*}
+
+\begin{align*}
+	p(F_1 = A | F_2 = G) &=   p(B = 1| F_2 = G)p(F_1 = A | B = 1) + p(B = 2 | F_2 = G)p(F_1 = A | B = 2)\\
+	&= \frac{68}{101} \times \frac{2}{3} + \frac{33}{101} \times \frac{5}{6}\\
+	&= \frac{437}{606} \approx 0.72112
+\end{align*}
+
+The difference between the probabilities of exercise 3.1 and exercise 3.2 are so minimal that they are nearly the same or not really significant. In the previous exercise the probability of $P(F_1 = A | F_2 = G)$ was $\frac{13}{18}$ which is $\approx 0.72$. In this exercise the probability of $P(F_1 = A | F_2 = G)$ was $\frac{437}{606}$ which is $\approx 0.72112$. The main difference is based on the fact that the total amount of fruits in a box changes after the first pick from either 12 to 11 for Box 1 or from 18 to 17 for Box 2. Because the removed fruit in the first pick is already fixed to being an apple, the probabilities of picking a grapefruit from the reduced amount of total fruits is minimal.
 
 
 \subsection*{3.3}
@@ -258,6 +288,106 @@ We want to find the following probability based on sampling without replacement:
 
 \textbf{Answer:}\\
 
+If we add a dozen (12) oranges to Box 1 then the total distribution among the boxes looks as follows:
+
+Box 1 contains:
+
+\begin{itemize}
+	\item 8 apples
+	\item 4 grapefruits
+	\item 12 oranges
+	\item 24 fruits in total
+\end{itemize}
+
+Box 2 contains :
+
+\begin{itemize}
+	\item 15 apples
+	\item 3 grapefruits
+	\item 18 fruits in total
+\end{itemize}
+
+In order to show that the outcome of the first pick has no impact on the probability that the second pick is a grapefruit, We have to show that
+
+\begin{align*}
+	p(F_2 = G | F_1 = A) = p(F_2 = G | F_1 = G) = p(F_2 = G | F_1 = O)\\
+\end{align*}
+
+\begin{align*}
+	p(F = A | B = 1) &= \frac{1}{3}\\
+	p(F = A | B = 2) &= \frac{5}{6}\\
+	p(F = G | B = 1) &= \frac{1}{6}\\
+	p(F = G | B = 2) &= \frac{1}{6}\\
+	p(F = O | B = 1) &=  \frac{1}{2}\\
+	p(F = O | B = 2) &=  0\\
+	p(F = G) &= \frac{1}{6} \times \frac{1}{2} + \frac{1}{6} \times \frac{1}{2} = \frac{1}{6}\\
+	p(F = A) &= \frac{1}{3} \times  \frac{1}{2} + \frac{5}{6} \times \frac{1}{2} = \frac{7}{12}\\
+	p(F = O) &= \frac{1}{2} \times \frac{1}{2} + 0 \times \frac{1}{2} =  \frac{1}{4}
+\end{align*}
+
+\begin{align*}
+	p(B = 1 | F = G) = \frac{p(F = G | B = 1)p(B = 1)}{p(F = G)} = \frac{\frac{1}{6} \times \frac{1}{2}}{\frac{1}{6}} = \frac{1}{2}\\
+	p(B = 2 | F = G) = \frac{p(F = G | B = 2)p(B = 2)}{p(F = G)} = \frac{\frac{1}{6} \times \frac{1}{2}}{\frac{1}{6}} = \frac{1}{2}
+\end{align*}
+
+Calculating $p(F_2 = G | F_1 = A)$:
+
+\begin{align*}
+	p(F_1 = A | F_2 = G) &= p(B = 1| F = G)p(F = A | B = 1) + p(B = 2 | F = G)p(F = A | B = 2)\\
+	&= \frac{1}{2} \times \frac{1}{3} +  \frac{1}{2} \times \frac{5}{6}\\
+	&= \frac{7}{12}
+\end{align*}
+
+
+\begin{align*}
+	p(F_2 = G | F_1 = A) = p(F_2 = G | F_1 = G) = p(F_2 = G | F_1 = O)\\
+\end{align*}
+
+
+\begin{align*}
+	p(F_2 = G | F_1 = A) &= \frac{p(F_1 = A | F_2 = G)p(F_2 = G)}{p(F_1 = A)}\\
+	&= \frac{\frac{7}{12} \times \frac{1}{6}}{\frac{7}{12}}\\
+	&= \frac{1}{6}
+\end{align*}
+
+
+Calculating $p(F_2 = G | F_1 = G)$:
+
+\begin{align*}
+	p(F_1 = G | F_2 = G) &=  p(B = 1| F = G)p(F = G | B = 1) + p(B = 2 | F = G)p(F = G | B = 2)\\
+	&= \frac{1}{2} \times \frac{1}{6} + \frac{1}{2} \times \frac{1}{6}\\
+	&= \frac{1}{6}
+\end{align*}
+
+\begin{align*}
+	p(F_2 = G | F_1 = G) &= \frac{p(F_1 = G | F_2 = G)p(F_2 = G)}{p(F_1 = G)}\\
+	&= \frac{\frac{1}{6} \times \frac{1}{6}}{\frac{1}{6}}\\
+	&= \frac{1}{6}
+\end{align*}
+
+
+Calculating $p(F_2 = G | F_1 = O)$:
+
+\begin{align*}
+	p(F_1 = O | F_2 = G) &= p(B = 1| F = G)p(F = O | B = 1) + p(B = 2 | F = G)p(F = O | B = 2)\\
+	&= \frac{1}{2} \times \frac{1}{2} +  \frac{1}{2} \times 0\\
+	&= \frac{1}{4}
+\end{align*}
+
+\begin{align*}
+	p(F_2 = G | F_1 = O) &= \frac{p(F_1 = O | F_2 = G)p(F_2 = G)}{p(F_1 = O)}\\
+	&= \frac{\frac{1}{4} \times \frac{1}{6}}{\frac{1}{4}}\\
+	&= \frac{1}{6}
+\end{align*}
+
+Therefore the statement holds that:
+
+\begin{align*}
+p(F_2 = G | F_1 = A) &= p(F_2 = G | F_1 = G) = p(F_2 = G | F_1 = O)\\
+\frac{1}{6} &= \frac{1}{6} = \frac{1}{6}
+\end{align*}
+
+The two picks are independent because the pick of the first fruit does not affect the pick of the second fruit because the probability is equal amongst the picks.
 
 \section*{Exercise 4 - Bonus (weight 1)}
 
