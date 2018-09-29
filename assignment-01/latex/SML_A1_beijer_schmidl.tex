@@ -454,14 +454,14 @@ We can rewrite the factorization as follows:
 We can now marginalize $x_1$ and $x_2$ and apply the sum and product rule at the end to get the joint probabilities:
 
 \begin{align*}
-	p(x_1) = p(x_1|x_2)p(x_2) = p(x_2, x_1)\\
-	p(x_2) = p(x_2|x_1)p(x_1) = p(x_1, x_2)
+	p(x_1) = \sum_{x_2} p(x_1|x_2)p(x_2) = \sum_{x_2} p(x_1,x_2)\\
+	p(x_2) = \sum_{x_1} p(x_2|x_1)p(x_1) = \sum_{x_1} p(x_2, x_1)
 \end{align*}
 
 Therefore:
 
 \begin{align*}
-	p(x_1)p(x_2) = p(x_1,x_2)p(x_2,x_1)\\
+	p(x_1)p(x_2) = \sum_{x_2} p(x_1,x_2) \sum_{x_1} p(x_2, x_1)\\
 	p(x_1, x_2) \neq p(x_1)p(x_2)
 \end{align*}
 
