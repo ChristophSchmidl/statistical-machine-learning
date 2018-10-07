@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.9.15)  7 OCT 2018 18:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.9.15)  7 OCT 2018 19:35
 entering extended mode
 **./SML_A1_beijer_schmidl2.tex
 (SML_A1_beijer_schmidl2.tex
@@ -1136,138 +1136,151 @@ Missing character: There is no ‚ in font cmr8!
 Missing character: There is no Ä in font cmr8!
 Missing character: There is no ù in font cmr8!
 [8 <./Images/rmse_polynomial_order_40.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 421--422
+<Images/train_vs_test_reg.png, id=298, 433.62pt x 289.08pt>
+File: Images/train_vs_test_reg.png Graphic file (type png)
+
+<use Images/train_vs_test_reg.png>
+Package pdftex.def Info: Images/train_vs_test_reg.png used on input line 434.
+(pdftex.def)             Requested size: 352.10284pt x 234.74458pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 449--450
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 423--424
+Underfull \hbox (badness 10000) in paragraph at lines 451--452
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 425--426
+Underfull \hbox (badness 10000) in paragraph at lines 453--454
+
+ []
+
+[9 <./Images/train_vs_test_reg.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 456--457
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 428--429
+Underfull \hbox (badness 10000) in paragraph at lines 474--475
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 446--447
+Underfull \hbox (badness 10000) in paragraph at lines 476--477
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 448--449
-
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 493--494
+Underfull \hbox (badness 10000) in paragraph at lines 521--522
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 495--496
-
- []
-
-
-Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
-d on input line 546.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 567--568
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--580
+Underfull \hbox (badness 10000) in paragraph at lines 523--524
 
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 581--582
+
+Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
+d on input line 574.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 595--596
 
  []
 
-[11] <Images/Path_over_3d_surface.png, id=344, 2775.168pt x 1464.9129pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 607--608
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 609--610
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 611--612
+
+ []
+
+[11] <Images/Path_over_3d_surface.png, id=350, 2775.168pt x 1464.9129pt>
 File: Images/Path_over_3d_surface.png Graphic file (type png)
 
 <use Images/Path_over_3d_surface.png>
-Package pdftex.def Info: Images/Path_over_3d_surface.png used on input line 593
+Package pdftex.def Info: Images/Path_over_3d_surface.png used on input line 619
 .
-(pdftex.def)             Requested size: 704.20569pt x 371.7261pt.
+(pdftex.def)             Requested size: 586.83807pt x 309.7643pt.
 
-Overfull \hbox (66.24092pt too wide) in paragraph at lines 592--594
-[]|  [] 
+Overfull \hbox (62.68433pt too wide) in paragraph at lines 618--620
+ |  [] 
  []
 
-<Images/3dError.png, id=345, 2775.168pt x 1464.9129pt>
+<Images/3dError.png, id=351, 2775.168pt x 1464.9129pt>
 File: Images/3dError.png Graphic file (type png)
 
 <use Images/3dError.png>
-Package pdftex.def Info: Images/3dError.png used on input line 602.
-(pdftex.def)             Requested size: 704.20569pt x 371.7261pt.
+Package pdftex.def Info: Images/3dError.png used on input line 629.
+(pdftex.def)             Requested size: 586.83807pt x 309.7643pt.
 
-Overfull \hbox (66.24092pt too wide) in paragraph at lines 601--603
-[]|  [] 
+Overfull \hbox (62.68433pt too wide) in paragraph at lines 628--630
+ |  [] 
  []
 
 [12 <./Images/Path_over_3d_surface.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 617--618
+Underfull \hbox (badness 10000) in paragraph at lines 644--645
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 619--620
+Underfull \hbox (badness 10000) in paragraph at lines 646--647
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 630--632
+Underfull \hbox (badness 10000) in paragraph at lines 657--659
 
  []
 
 [13 <./Images/3dError.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 687--688
+Underfull \hbox (badness 10000) in paragraph at lines 714--715
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 716--717
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 689--690
+Underfull \hbox (badness 10000) in paragraph at lines 756--757
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 729--730
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 731--732
+Underfull \hbox (badness 10000) in paragraph at lines 758--759
 
  []
 
 [15] [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 851--852
+Underfull \hbox (badness 10000) in paragraph at lines 878--879
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 918--919
+Underfull \hbox (badness 10000) in paragraph at lines 945--946
 
  []
 
 [18] [19]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 951.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 951.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 978.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 978.
  (SML_A1_beijer_schmidl2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 951.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 951.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 978.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 978.
 Package rerunfilecheck Info: File `SML_A1_beijer_schmidl2.out' has not changed.
 
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
@@ -1275,13 +1288,16 @@ Package rerunfilecheck Info: File `SML_A1_beijer_schmidl2.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 951.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 978.
  ) 
 Here is how much of TeX's memory you used:
- 21165 strings out of 493334
- 400731 string characters out of 3136681
- 678069 words of memory out of 3000000
- 24057 multiletter control sequences out of 15000+200000
+ 21176 strings out of 493334
+ 400977 string characters out of 3136681
+ 678369 words of memory out of 3000000
+ 24065 multiletter control sequences out of 15000+200000
  14971 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,12n,76p,742b,1899s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1305,9 +1321,9 @@ ype1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmtt12.pfb>
-Output written on SML_A1_beijer_schmidl2.pdf (19 pages, 2607953 bytes).
+Output written on SML_A1_beijer_schmidl2.pdf (19 pages, 2621877 bytes).
 PDF statistics:
- 513 PDF objects out of 1000 (max. 8388607)
- 253 named destinations out of 1000 (max. 500000)
- 138 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 519 PDF objects out of 1000 (max. 8388607)
+ 255 named destinations out of 1000 (max. 500000)
+ 143 words of extra memory for PDF output out of 10000 (max. 10000000)
 

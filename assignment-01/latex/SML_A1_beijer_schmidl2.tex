@@ -361,7 +361,7 @@ Repeat this procedure for a data set $\mathcal{D}_{40}$ of 40 observations (with
 \end{center}
 \end{figure}
 
-By changing the amount of observations from 10 to 40, the fitting curve is less likely to overfit just like it is described in Bishop. The overall minimum RMSE for 10 observations is about 0.2 at $m = 5$ (see Figure \ref{fig:rmse-polynomial-train-test}) whereas the minimum RMSE for 40 oberservations is about 0.3 at $m = 4$(see Figure \ref{fig:rmse-polynomial-train-test-40}). 
+By changing the amount of observations from 10 to 40, the fitting curve is less likely to overfit just like it is described in Bishop. The overall minimum RMSE for 10 observations is about 0.2 at $m = 5$ (see Figure \ref{fig:rmse-polynomial-train-test}) whereas the minimum RMSE for 40 oberservations is about 0.3 at $m = 4$(see Figure \ref{fig:rmse-polynomial-train-test-40}).
 
 \newpage
 
@@ -376,6 +376,8 @@ Modify the $PolCurFit()$ function to include an additional penalty parameter $\l
 Verify that the regularizer drives the weights of high order terms in the polynomial to zero, and see if you can reproduce the explain the effect observed in Bishop, Fig.1.8.\\
 
 \textbf{Answer:}\\
+
+We were not really able to reproduce the exact results produced by Bishop like you can see in Figure \ref{fig:rtrain_vs_test_reg}. However, we were able to show that the usage of a regularization term was able to drive the weights of high order terms in the polynomial to zero as shown in table \ref{table:reg}.
 
 \begin{lstlisting}[language=Python]
 def pol_cur_fit_with_regularization(data, polynomial_order, regularizer = 0.00):
@@ -408,6 +410,32 @@ def pol_cur_fit_with_regularization(data, polynomial_order, regularizer = 0.00):
     return weights
 \end{lstlisting}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{c | r | r}
+$\textbf{w}$ & $\lambda=0$ & $\lambda=0.1$ \\
+\hline
+$w^*_0$ & 1.43667552e+00 & 1.81108089 \\
+$w^*_1$ & -1.09172964e+02 & -1.13774698 \\
+$w^*_2$ & 2.53526250e+03 & -1.25354931\\
+$w^*_3$ & -2.10047308e+04 & -0.65670679 \\
+$w^*_4$ & 8.80563451e+04 & -0.13509607 \\
+$w^*_5$ & -2.12341753e+05 & 0.24496082 \\
+$w^*_6$ & 3.08196494e+05 & 0.51095209 \\
+$w^*_7$ & -2.66715540e+05 & 0.69349266 \\ 
+$w^*_8$ & -2.57229261e+04 & 0.81597723 
+\end{tabular}
+\caption{Comparison of different regularization values applied to polynomial of order 9.}
+\label{table:reg}
+\end{table}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{Images/train_vs_test_reg.png}
+\caption{Plot of different regularization values applied to the training set of 10 observations and test set of 100 observations. Polynomial order is fixed to 9.}
+\label{fig:rtrain_vs_test_reg}
+\end{center}
+\end{figure}
 
 
 \subsection*{1.6}
@@ -580,17 +608,15 @@ Implement gradient descent in MATLAB. Try some different values of $\eta$. Does 
 
 \textbf{Answer:}\\
 
-The problem with this is that the gradient is often quite high and the boundaries, but not as high in the neighbourhood of (1,1). So what often happens if the learning rate is too high that the next point makes a sudden step to some high value (say ($10^10$,5)), then it jumps to an even higher value, before jumping to such a high value that my computer can't calculate it. And even if that wasn't a problem it would constantly overshoot the (1,1). 
+The problem with this is that the gradient is often quite high and the boundaries, but not as high in the neighbourhood of (1,1). So what often happens if the learning rate is too high that the next point makes a sudden step to some high value (say ($10^10$,5)), then it jumps to an even higher value, before jumping to such a high value that my computer can't calculate it. And even if that wasn't a problem it would constantly overshoot the (1,1).\\
 
-
-
-\newpage
 
 One example of a trajectory is the following:
 
 \begin{figure}[H]
-\hspace*{-6cm}
-\includegraphics[width=1.5\textwidth]{Images/Path_over_3d_surface.png}
+\center
+\hspace*{-2cm}
+\includegraphics[width=1.25\textwidth]{Images/Path_over_3d_surface.png}
 \caption{Path over 3d surface. The orange indicates the path, the red the minimum (1,1). }
 \end{figure}
 
@@ -598,8 +624,9 @@ A plot of how many times the walk converges you can see in the following figure.
 We chose the logarithm for $\eta$ so it can vary widely so we can find an optimal $\eta$.
 
 \begin{figure}[H]
-\hspace*{-6cm}
-\includegraphics[width=1.5\textwidth]{Images/3dError.png}
+\center
+\hspace*{-2cm}
+\includegraphics[width=1.25\textwidth]{Images/3dError.png}
 \caption{How many random paths converge given the amount of steps and the logarithm of $\eta$.}
 \end{figure}
 
