@@ -328,6 +328,43 @@ Repeat this procedure for a data set $\mathcal{D}_{40}$ of 40 observations (with
 \textbf{Answer:}\\
 
 
+\begin{figure*}[h!]
+\begin{multicols}{2}
+    \includegraphics[width=\linewidth]{Images/curvefit_m0_n_40.png}\par 
+    \includegraphics[width=\linewidth]{Images/curvefit_m1_n_40.png}\par 
+    \end{multicols}
+\begin{multicols}{2}
+    \includegraphics[width=\linewidth]{Images/curvefit_m2_n_40.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m3_n_40.png}\par
+\end{multicols}
+\end{figure*}
+
+\newpage 
+\begin{figure}[h!]
+\begin{multicols}{2}
+    \includegraphics[width=\linewidth]{Images/curvefit_m4_n_40.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m5_n_40.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m6_n_40.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m7_n_40.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m8_n_40.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m9_n_40.png}\par
+\end{multicols}
+\label{fig:different-polynomials-rmse-40}
+\caption{Plot of different fitted curves based on different polynomial orders fitting the training set of 40 observations}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{Images/rmse_polynomial_order_40.png}
+\caption{Plot of root-mean-squared-error against polynomial order. Training set containing 40 oberservations. Test set containint 100 observations.}
+\label{fig:rmse-polynomial-train-test-40}
+\end{center}
+\end{figure}
+
+By changing the amount of observations from 10 to 40, the fitting curve is less likely to overfit just like it is described in Bishop. The overall minimum RMSE for 10 observations is about 0.2 at $m = 5$ (see Figure \ref{fig:rmse-polynomial-train-test}) whereas the minimum RMSE for 40 oberservations is about 0.3 at $m = 4$(see Figure \ref{fig:rmse-polynomial-train-test-40}). 
+
+\newpage
+
 \subsection*{1.5}
 
 Modify the $PolCurFit()$ function to include an additional penalty parameter $\lambda$, for a procedure that solves the minimization problem for a modified error function with quadratic regularizer (weight decay), given as 
@@ -340,10 +377,42 @@ Verify that the regularizer drives the weights of high order terms in the polyno
 
 \textbf{Answer:}\\
 
+\begin{lstlisting}[language=Python]
+def pol_cur_fit_with_regularization(data, polynomial_order, regularizer = 0.00):
+    """ Return weights for an optimal polynomial curve fit. """
+    
+    observations = data[0, :] # Get me the first row, D_N
+    targets = data[1, :] # Get me the second row, M
+    
+    # observation matrix
+    A = np.zeros((polynomial_order, polynomial_order)) # Create matrix
+    for i in range(polynomial_order):
+        for j in range(polynomial_order):
+            A[i, j] = np.sum(observations ** (i+j))
+    
+    # Regularization
+    # Multiply the diagonal matrix of order m with regularization term and add it to A
+    A = A + ( regularizer * np.identity(polynomial_order) )
+    
+    # target vector        
+    B = np.zeros(polynomial_order)
+    for i in range(polynomial_order):
+        B[i] = np.sum(targets * observations**i)
+    
+    # numpy.linalg.solve(a, b)
+    # Solve a linear matrix equation, or system of linear scalar equations.
+    # Computes the “exact” solution, x, of the well-determined, i.e., full rank, linear matrix equation ax = b.
+    
+    # Here's where the magic happens. Solve the linear system.
+    weights = np.linalg.solve(A, B)
+    return weights
+\end{lstlisting}
+
+
 
 \subsection*{1.6}
 
-The polynomial curve fitting procedure can be extened to the case of multidimensional inputs. Assuming an input vector of dimension $D$, namely $x = (x_1,x_2,...,x_D)$, we can write the regression function $y$ as:
+The polynomial curve fitting procedure can be extended to the case of multidimensional inputs. Assuming an input vector of dimension $D$, namely $x = (x_1,x_2,...,x_D)$, we can write the regression function $y$ as:
 
 \begin{equation}
 	y(x;w) = \sum_{j=0}^M \Bigg( \sum_{n_1+n_2+...n_D=j} w_{n_1 n_2...n_D}x_1^{n_1}x_2^{n_2} ... x_D^{n_D}\Bigg)
