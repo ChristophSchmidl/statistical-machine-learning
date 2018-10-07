@@ -5,6 +5,8 @@
 \usepackage{color}
 \usepackage{amssymb}
 \usepackage{dsfont}
+\usepackage{multicol}
+\usepackage[lofdepth,lotdepth]{subfig}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage[hyphens]{url}
@@ -84,7 +86,7 @@ Create the function $f(x) = 1 + sin(6(x-2))$ in MATLAB. Generate a data set $\ma
 
 \textbf{Answer:}\\
 
-Throughout this assignment we are going to use Python for all our implementations and make heavy use of the library "numpy". The following code listing generated figure \ref{fig:1.1}.
+Throughout this assignment we are going to use Python for all our implementations and make heavy use of the library "NumPy". The following code listing generated figure \ref{fig:1.1}.
 
 \begin{lstlisting}[language=Python]
 import numpy as np
@@ -156,7 +158,11 @@ Hint: use the results from the Tutorial Exercises (Week1, Exercise 5), and the \
 
 \textbf{Answer:}\\
 
+In order to solve a system of linear equations we use he function \verb|np.linalg.solve(A, B)| provided by the "NumPy" library.
+
 \begin{lstlisting}[language=Python]
+# Exercise 1.2
+
 def SSE(observations, targets):
     """ Calculate the sum-of-squares error. """
     return 0.5 * np.sum((observations - targets)**2)
@@ -164,6 +170,8 @@ def SSE(observations, targets):
 
 def pol_cur_fit(data, polynomial_order):
     """ Return weights for an optimal polynomial curve fit. """
+    
+    polynomial_order = polynomial_order + 1
     
     observations = data[0, :] # Get me the first row, D_N
     targets = data[1, :] # Get me the second row, M
@@ -206,7 +214,111 @@ For the given dataset $\mathcal{D}_{10}$, run the $PolCurFit()$ function for $M 
 
 \textbf{Answer:}\\
 
+\begin{lstlisting}[language=Python]
+# Exercise 1.3
 
+def evaluate_polynomial(point, weights):
+    """ Evaluate a polynomial. """
+    return np.polyval(list(reversed(weights)), point)
+
+def RMSE(observations, targets):
+    """ Calculate the root-mean-squared error. """
+    error = SSE(observations, targets)
+    return np.sqrt(2 * error / len(observations))
+
+
+def evaluate_and_plot_curve_fitting(training_set, test_set, min_polynomial_order = 0, max_polynomial_order = 10):
+    """Evaluate the RMSE based on different polynomial orders"""
+    
+    errors_train = []
+    errors_test = []
+    
+    X = np.linspace(0, 1, 100)
+    y = [f(x) for x in X]
+    
+    for m in range(min_polynomial_order, max_polynomial_order):
+        w = pol_cur_fit(training_data, m)
+        fitted_curve = evaluate_polynomial(X, w)
+        
+        print("Evaluated polynomial: {}".format(fitted_curve))
+
+        rmse_train = RMSE(evaluate_polynomial(training_set[0, :], w), training_set[1, :])
+        rmse_test = RMSE(evaluate_polynomial(test_set[0, :], w), test_set[1, :])
+        errors_train.append(rmse_train)
+        errors_test.append(rmse_test)
+        
+        plt.figure()
+        plt.plot(X, fitted_curve, 'b', label='Fitted Curve')
+        plt.plot(X, y, 'r', label='True function')
+        plt.scatter(training_set[0, :], training_set[1, :], c='g', label='Noisy observations')
+        plt.title('M=%d: train RMSE=%.2f, test RMSE=%.2f' % (m, rmse_train, rmse_test))
+        plt.xlabel("x")
+        plt.ylabel("y")
+        plt.legend()
+        plt.savefig('curvefit_m%d_n_%d.png' % (m, training_set.shape[1]))
+        plt.show()
+        
+    plt.figure()    
+    x_range = np.arange(min_polynomial_order, max_polynomial_order)
+        
+    plt.plot(x_range, errors_test, 'r', label='Test')
+    plt.plot(x_range, errors_train, 'b', label='Training')
+    #plt.ylim([0, 0.4])
+    plt.legend()
+    plt.xlabel("Polynomial order")
+    plt.ylabel("RMSE")
+    plt.savefig("rmse_polynomial_order.png")
+    plt.show()
+    
+    print(errors_train)
+    print(errors_test)
+  
+        
+# Add the linear spacing of y values to training and test set
+full_training_set = np.vstack((np.linspace(0, 1, 10), training_set))
+full_test_set = np.vstack((np.linspace(0, 1, 100), test_set))        
+        
+evaluate_and_plot_curve_fitting(full_training_set, full_test_set)
+\end{lstlisting}
+
+
+\begin{figure*}[h!]
+\begin{multicols}{2}
+    \includegraphics[width=\linewidth]{Images/curvefit_m0_n_10.png}\par 
+    \includegraphics[width=\linewidth]{Images/curvefit_m1_n_10.png}\par 
+    \end{multicols}
+\begin{multicols}{2}
+    \includegraphics[width=\linewidth]{Images/curvefit_m2_n_10.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m3_n_10.png}\par
+\end{multicols}
+\end{figure*}
+
+\newpage 
+\begin{figure}[h!]
+\begin{multicols}{2}
+    \includegraphics[width=\linewidth]{Images/curvefit_m4_n_10.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m5_n_10.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m6_n_10.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m7_n_10.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m8_n_10.png}\par
+    \includegraphics[width=\linewidth]{Images/curvefit_m9_n_10.png}\par
+\end{multicols}
+\label{fig:different-polynomials-rmse}
+\caption{Plot of different fitted curves based on different polynomial orders fitting the training set of 10 observations}
+\end{figure}
+
+As we can see in the different plots of figure \ref{fig:different-polynomials-rmse}, the higher the polynomial order the more flexible the fitting curve becomes and the higher the risk of overfitting the data. Figure \ref{fig:rmse-polynomial-train-test} shows a direct comparison between the root-mean-squared-error (RMSE) and the connection with the polynomial order (m). At $4 \leq m \leq 5$ the RMSE is at its minimum and after that range the RMSE rises again as the polynomial order increases.
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{Images/rmse_polynomial_order.png}
+\caption{Plot of root-mean-squared-error against polynomial order. Training set containing 10 oberservations. Test set containint 100 observations.}
+\label{fig:rmse-polynomial-train-test}
+\end{center}
+\end{figure}
+
+\newpage
 
 \subsection*{1.4}
 
