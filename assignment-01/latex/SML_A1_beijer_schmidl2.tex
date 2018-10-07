@@ -608,7 +608,7 @@ Implement gradient descent in MATLAB. Try some different values of $\eta$. Does 
 
 \textbf{Answer:}\\
 
-The problem with this is that the gradient is often quite high and the boundaries, but not as high in the neighbourhood of (1,1). So what often happens if the learning rate is too high that the next point makes a sudden step to some high value (say ($10^10$,5)), then it jumps to an even higher value, before jumping to such a high value that my computer can't calculate it. And even if that wasn't a problem it would constantly overshoot the (1,1).\\
+The problem with this is that the gradient is often quite high and the boundaries, but not as high in the neighbourhood of (1,1). So what often happens if the learning rate is too high that the next point makes a sudden step to some high value (say ($10^{10}$,5)), then it jumps to an even higher value, before jumping to such a high value that my computer can't calculate it. And even if that wasn't a problem it would constantly overshoot the (1,1).\\
 
 
 One example of a trajectory is the following:
@@ -631,6 +631,55 @@ We chose the logarithm for $\eta$ so it can vary widely so we can find an optima
 \end{figure}
 
 The best results we've had was with  $\eta \approx 0.002$.
+
+
+\begin{lstlisting}[language=Python]
+def Test(eta,StepTimes,TestTimes,xmin,xmax,ymin,ymax,MinDistance,Best=[1,1]):
+    Result = 0
+    for i in range(TestTimes):
+        RandBegin = np.array([rand.uniform(xmin,xmax),rand.uniform(ymin,ymax)])
+        for j in range(StepTimes):
+            NewPoint = RandBegin - eta * NabHvec(RandBegin)
+            RandBegin = NewPoint
+            if(TooFar(RandBegin)):
+                break
+        if(Distance(RandBegin,Best) < MinDistance):
+            Result += 1
+    return Result
+    
+if(ReCalculate):
+    LogEtas = np.linspace(LogEtasMin,LogEtasMax,AmountEtas)
+    Etas = 10**LogEtas
+    StepTimes = np.linspace(StepTimesMin,StepTimesMax,StepTimesMax,dtype=int)
+    
+    Etas,StepTimes = np.meshgrid(Etas,StepTimes)
+    Result = np.zeros_like(Etas)
+    
+    for i in range(len(Etas)):
+        print(i)
+        for j in range(len(Etas[0])):
+            Result[i][j] = Test(Etas[i][j],StepTimes[i][j],TestTimes,xmin,xmax,ymin,ymax,MinDistance)
+    save1D(LogEtas,'LogEtas.txt')
+    save2D(Etas,'Etas.txt')
+    save2D(StepTimes,'StepTimes.txt')
+    save2D(Result,'Result.txt')
+else:
+    LogEtas = np.genfromtxt('LogEtas.txt')
+    Etas = np.genfromtxt('Etas.txt')
+    StepTimes = np.genfromtxt('StepTimes.txt')
+    Result = np.genfromtxt('Result.txt')
+
+fig2 = plt.figure("Eta vs Times vs Good")
+ax2 = fig2.gca(projection='3d')
+surf2 = ax2.plot_surface(LogEtas, StepTimes, Result, cmap=cm.coolwarm,
+                       linewidth=0, antialiased=True)
+
+plt.title("Amount of sucessful walks for a given $\eta$ and amount of steps.")
+plt.xlabel('LogEta',labelpad=20)
+plt.ylabel('Time',labelpad=20)
+fig2.colorbar(surf2, shrink=0.5, aspect=5)    
+\end{lstlisting}
+
 
 
 \section*{Exercise 3 - weight 2.5}
@@ -877,64 +926,37 @@ show (using the sum and product rules for marginals and conditionals) that the f
 
 \textbf{Answer:}\\
 
-In order to show that $X_1 \independent X_2$, we have to prove that $p(x_1, x_2) = p(x_1)p(x_2)$. Figure \ref{fig:directed_graph} gives a visual representation of the factorization as a directed graph. We can already see that the statement $X_1 \independent X_2$ does not hold.
+In order to show that $X_1 \independent X_2$, we have to prove that $p(x_1, x_2) = p(x_1)p(x_2)$. We can sum over the variables $x_3$ and $x_4$ to get them out of the distribution.
 
+\begin{eqnarray}
+p(x_1,x_2,x_3) &=& \sum_{x_4} p(x_1,x_2,x_3,x_4)\\
+&=& \sum_{x_4} p(x_1,x_4|x_2) p(x_2,x_3|x_1)\\
+&=& p(x_1|x_2)p(x_2,x_3|x_1)\\
+p(x_1,x_2) &=& \sum_{x_3} p(x_1,x_2,x_3)\\
+&=& \sum_{x_3}p(x_1|x_2)p(x_2,x_3|x_1)\\
+&=& p(x_1|x_2) p(x_2|x_1)
+\end{eqnarray}
 
-\begin{figure}[h]
-\centering
-    \begin{tikzpicture}[
-            > = stealth, % arrow head style
-            shorten > = 1pt, % don't touch arrow head to node
-            auto,
-            node distance = 3cm, % distance between nodes
-            semithick % line style
-        ]
+Here we have used the sum rule as seen in Bishop page 14:
 
-        \tikzstyle{every state}=[
-            draw = black,
-            thick,
-            fill = white,
-            minimum size = 4mm
-        ]
+\begin{equation}
+p(X) = \sum_Y p(X,Y)
+\end{equation}
 
-        \node[state] (x_1) {$x_1$};
-        \node[state] (x_2) [above right of=x_1] {$x_2$};
-        \node[state] (x_3) [below right of=x_1] {$x_3$};
-        \node[state] (x_4) [right of=x_1] {$x_4$};
-        
+Now we will use the product rule, also from page 14 of Bishop. Also, probabilities are symmetrical in that $p(X,Y) = p(Y,X)$.
 
-        \path[->] (x_1) edge node {} (x_2);
-        \path[->] (x_2) edge[bend right] node {} (x_1);
-        \path[->] (x_1) edge node {} (x_3);
-        \path[->] (x_2) edge node {} (x_4);
-      
+\begin{eqnarray}
+p(X,Y) &=&  p(Y|X)p(X)\\
+p(x_1,x_2) &=& p(x_2|x_1)p(x_1)\\
+p(x_2|x_1)p(x_1) &=& p(x_1|x_2) p(x_2|x_1)\\
+p(x_1) &=& p(x_1|x_2)\\
+p(x_2,x_1) &=& p(x_1|x_2)p(x_2)\\
+p(x_1|x_2)p(x_2) &=& p(x_1|x_2) p(x_2|x_1)\\
+p(x_2) &=& p(x_2|x_1)
+\end{eqnarray}
 
-    \end{tikzpicture}
-\caption{Factorization as directed graph} \label{fig:directed_graph}
-\end{figure}
-
-We can rewrite the factorization as follows:
-
-\begin{align*}
-	p(x_1,x_2,x_3,x_4) &= p(x_1,x_4|x_2)p(x_2,x_3|x_1)\\
-	&= p(x_1|x_2)p(x_4|x_2)p(x_2|x_1)p(x_3|x_1)
-\end{align*}
-
-We can now marginalize $x_1$ and $x_2$ and apply the sum and product rule at the end to get the joint probabilities:
-
-\begin{align*}
-	p(x_1) = \sum_{x_2} p(x_1|x_2)p(x_2) = \sum_{x_2} p(x_1,x_2)\\
-	p(x_2) = \sum_{x_1} p(x_2|x_1)p(x_1) = \sum_{x_1} p(x_2, x_1)
-\end{align*}
-
-Therefore:
-
-\begin{align*}
-	p(x_1)p(x_2) = \sum_{x_2} p(x_1,x_2) \sum_{x_1} p(x_2, x_1)\\
-	p(x_1, x_2) \neq p(x_1)p(x_2)
-\end{align*}
-
-Based on this contradiction the statement $X_1 \independent X_2$ does \textbf{not} hold.
+So we can see that $p(x_1) = p(x_1|x_2)$ and $p(x_2) = p(x_2|x_1)$. So the probability of $x_1$ ($p(x_1)$) and of $x_2$ ($p(x_2)$) doesn't change if you condition on the other variable.
+So $x_1$ and $x_2$ are independent of each other. QED.
 
 \subsection*{4.2}
 
