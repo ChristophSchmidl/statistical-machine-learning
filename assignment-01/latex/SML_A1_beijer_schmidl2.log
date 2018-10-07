@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.9.15)  7 OCT 2018 19:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.9.15)  7 OCT 2018 19:38
 entering extended mode
 **./SML_A1_beijer_schmidl2.tex
 (SML_A1_beijer_schmidl2.tex
@@ -1296,7 +1296,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 978.
 Here is how much of TeX's memory you used:
  21176 strings out of 493334
  400977 string characters out of 3136681
- 678369 words of memory out of 3000000
+ 678363 words of memory out of 3000000
  24065 multiletter control sequences out of 15000+200000
  14971 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1321,7 +1321,7 @@ ype1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmtt12.pfb>
-Output written on SML_A1_beijer_schmidl2.pdf (19 pages, 2621877 bytes).
+Output written on SML_A1_beijer_schmidl2.pdf (19 pages, 2621853 bytes).
 PDF statistics:
  519 PDF objects out of 1000 (max. 8388607)
  255 named destinations out of 1000 (max. 500000)
