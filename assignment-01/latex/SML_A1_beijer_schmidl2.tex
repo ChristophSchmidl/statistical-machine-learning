@@ -156,12 +156,45 @@ Hint: use the results from the Tutorial Exercises (Week1, Exercise 5), and the \
 
 \textbf{Answer:}\\
 
+\begin{lstlisting}[language=Python]
+def SSE(observations, targets):
+    """ Calculate the sum-of-squares error. """
+    return 0.5 * np.sum((observations - targets)**2)
+
+
+def pol_cur_fit(data, polynomial_order):
+    """ Return weights for an optimal polynomial curve fit. """
+    
+    observations = data[0, :] # Get me the first row, D_N
+    targets = data[1, :] # Get me the second row, M
+    
+    # observation matrix
+    A = np.zeros((polynomial_order, polynomial_order)) # Create matrix
+    for i in range(polynomial_order):
+        for j in range(polynomial_order):
+            A[i, j] = np.sum(observations ** (i+j))
+    
+    # target vector        
+    B = np.zeros(polynomial_order)
+    for i in range(polynomial_order):
+        B[i] = np.sum(targets * observations**i)
+    
+    # numpy.linalg.solve(a, b)
+    # Solve a linear matrix equation, or system of linear scalar equations.
+    # Computes the “exact” solution, x, of the well-determined, i.e., full rank, linear matrix equation ax = b.
+    
+    # Here's where the magic happens. Solve the linear system.
+    weights = np.linalg.solve(A, B)
+    return weights
+\end{lstlisting}
+
+
 \subsection*{1.3}
 
 For the given dataset $\mathcal{D}_{10}$, run the $PolCurFit()$ function for $M = [0,...,9]$, and,
 
 \begin{itemize}
-	\item Plot for various orders $M$ (at least for $M = 0, M = 1, M = 3, M = 9$) the resulting ploynomial, together with the function $f$ and observation $\mathcal{D}_{10}$ (similar to Bishop, Fig 1.4)
+	\item Plot for various orders $M$ (at least for $M = 0, M = 1, M = 3, M = 9$) the resulting polynomial, together with the function $f$ and observation $\mathcal{D}_{10}$ (similar to Bishop, Fig 1.4)
 	\item For each order $M \in [0,...,9]$, compute the root-mean-square error
 	
 	\begin{equation}

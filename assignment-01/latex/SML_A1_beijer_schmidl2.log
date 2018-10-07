@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.9.15)  7 OCT 2018 14:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.9.15)  7 OCT 2018 16:17
 entering extended mode
 **./SML_A1_beijer_schmidl2.tex
 (SML_A1_beijer_schmidl2.tex
@@ -832,34 +832,16 @@ has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.169 	\end{equation}
-                      <./Images/exercise_1_1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+l.173  
+          for i in range(polynomial_order): <./Images/exercise_1_1.png>]
+Missing character: There is no ‚ in font cmr8!
+Missing character: There is no Ä in font cmr8!
+Missing character: There is no ú in font cmr8!
+Missing character: There is no ‚ in font cmr8!
+Missing character: There is no Ä in font cmr8!
+Missing character: There is no ù in font cmr8!
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 196--197
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
 
  []
 
@@ -869,162 +851,186 @@ Underfull \hbox (badness 10000) in paragraph at lines 207--208
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--210
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 211--212
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 214--215
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
+
+ []
+
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 234--235
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
+Underfull \hbox (badness 10000) in paragraph at lines 247--248
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 281--282
+Underfull \hbox (badness 10000) in paragraph at lines 265--266
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--268
 
  []
 
 [4]
+Underfull \hbox (badness 10000) in paragraph at lines 312--313
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 314--315
+
+ []
+
 
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
-d on input line 332.
+d on input line 365.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 353--354
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 365--366
+Underfull \hbox (badness 10000) in paragraph at lines 386--387
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 367--368
+Underfull \hbox (badness 10000) in paragraph at lines 398--399
 
  []
 
-[5] <Images/Path_over_3d_surface.png, id=136, 2775.168pt x 1464.9129pt>
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 400--401
+
+ []
+
+[6] <Images/Path_over_3d_surface.png, id=170, 2775.168pt x 1464.9129pt>
 File: Images/Path_over_3d_surface.png Graphic file (type png)
 
 <use Images/Path_over_3d_surface.png>
-Package pdftex.def Info: Images/Path_over_3d_surface.png used on input line 379
+Package pdftex.def Info: Images/Path_over_3d_surface.png used on input line 412
 .
 (pdftex.def)             Requested size: 704.20569pt x 371.7261pt.
 
-Overfull \hbox (66.24092pt too wide) in paragraph at lines 378--380
+Overfull \hbox (66.24092pt too wide) in paragraph at lines 411--413
 []|  []
  []
 
-<Images/3dError.png, id=137, 2775.168pt x 1464.9129pt>
+<Images/3dError.png, id=171, 2775.168pt x 1464.9129pt>
 File: Images/3dError.png Graphic file (type png)
 
 <use Images/3dError.png>
-Package pdftex.def Info: Images/3dError.png used on input line 388.
+Package pdftex.def Info: Images/3dError.png used on input line 421.
 (pdftex.def)             Requested size: 704.20569pt x 371.7261pt.
 
-Overfull \hbox (66.24092pt too wide) in paragraph at lines 387--389
+Overfull \hbox (66.24092pt too wide) in paragraph at lines 420--422
 []|  []
  []
 
-[6pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
+[7pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.391 
+l.424 
        <./Images/Path_over_3d_surface.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
+Underfull \hbox (badness 10000) in paragraph at lines 436--437
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 405--406
+Underfull \hbox (badness 10000) in paragraph at lines 438--439
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 416--418
+Underfull \hbox (badness 10000) in paragraph at lines 449--451
 
  []
 
-[7pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.418 
+l.451 
        <./Images/3dError.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 473--474
+Underfull \hbox (badness 10000) in paragraph at lines 506--507
 
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 475--476
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 515--516
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 508--509
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 517--518
-
- []
-
-[9] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 637--638
+Underfull \hbox (badness 10000) in paragraph at lines 548--549
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 704--705
+Underfull \hbox (badness 10000) in paragraph at lines 550--551
 
  []
 
-[12pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
+[10] [11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 670--671
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 737--738
+
+ []
+
+[13pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.722 \begin{align*}
-                    ] [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 737.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 737.
+l.755 \begin{align*}
+                    ] [14]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 770.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 770.
  (SML_A1_beijer_schmidl2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 737.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 737.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 770.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 770.
 Package rerunfilecheck Info: File `SML_A1_beijer_schmidl2.out' has not changed.
 
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 737.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 770.
  ) 
 Here is how much of TeX's memory you used:
- 19564 strings out of 493334
- 371241 string characters out of 3136681
+ 19609 strings out of 493334
+ 371837 string characters out of 3136681
  564750 words of memory out of 3000000
- 22632 multiletter control sequences out of 15000+200000
+ 22646 multiletter control sequences out of 15000+200000
  14971 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,12n,76p,742b,1898s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1048,9 +1054,9 @@ ype1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmtt12.pfb>
-Output written on SML_A1_beijer_schmidl2.pdf (13 pages, 2019833 bytes).
+Output written on SML_A1_beijer_schmidl2.pdf (14 pages, 2028342 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 113 named destinations out of 1000 (max. 500000)
+ 315 PDF objects out of 1000 (max. 8388607)
+ 144 named destinations out of 1000 (max. 500000)
  28 words of extra memory for PDF output out of 10000 (max. 10000000)
 
