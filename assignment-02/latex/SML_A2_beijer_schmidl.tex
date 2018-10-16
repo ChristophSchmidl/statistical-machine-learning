@@ -252,18 +252,103 @@ from this distribution. (These will be the 'true' means, hence the subscript t).
 
 \textbf{Part 2 - Generating the data}
 
+Here we assume we are dealing with a 2d-Gaussian daa generating process
 
+\begin{equation}
+	p(x) = \mathcal{N}(x|\mu, \Sigma)
+\end{equation}
+
+For the mean $\mu$, we will use the value $\mu_t$ drawn in \ref{} in order to generate the data. Subsequently, we will pretend that we do not know this "true" value $\mu_t$ of $\mu$, and estimate $\mu$ from the data. For the covariance matrix $\Sigma$ we will use the "true" value
+
+\[ \Sigma_t = \left( \begin{array}{cc}
+2.0 & 0.8  \\
+0.8 & 4.0 \end{array} \right)\] 
+
+to generate the data.
+
+
+\subsection*{3.2.1}
+
+[MATLAB] - Generate at least 1000 data pairs $\{ x_i, y_i\}$, distributed according to \ref{} with $\mu = \mu_t$ and $\Sigma = \Sigma_t$ and save them to a file in plain-text format.\\
+
+\textbf{Answer:}\\
+
+
+
+\subsection*{3.2.2}
+
+From now on, we will assume (pretend) the 'true' mean $\mu_t$ is unknown and estimate $\mu$ from the data. Calculate the maximum likelihood estimate of $\mu_{ML}$ and $\Sigma_{ML}$ for the data, and also an unbiased estimate of $\Sigma$ (see Bishop, §2.3.4). Compare with the true values $\mu_t$ and $\Sigma_t$.\\
+
+\textbf{Answer:}\\
 
 
 
 \textbf{Part 3 - Sequential learning algorithms}
 
+We will now estimate the mean $\mu$ from the generated data and the known variance $\Sigma_t$ sequentially, i.e., by considering the data points one-by-one.
+
+\subsection*{3.3.1}
+
+[MATLAB] - Write a procedure that processes the data points $\{ x_n \}$ in the generated file one-by-one, and after each step comptues an updated estimate of $\mu_{ML}$, the maximum likelihood of the mean (using Bishop, eq. 2.126).\\
+
+
+\textbf{Answer:}\\
 
 
 
 
+
+\subsection*{3.3.2}
+
+
+Now we also use the prior information $p(\mu) = \mathcal{N}(\mu | \mu_p, \Sigma_p)$. From the prior, the generated data and the known variance $\Sigma_t$, we will estimate the mean $\mu$.\\
+
+Work out the details of sequential Bayesian inference (see eq. 2.144) for the mean $\mu$. Apply Bayes' theorem in eq. 2.113 - 2.117 at each step $n = 1, ..., N$ to compute the new posterior mean $\mu^{(n)}$ and covariance $\Sigma^{(n)}$ after a new point $(x_n)$ has arrived from the old posterior step. The first step starts from the original prior \ref{}.\\
+\textbf{Note:} Do not confuse the posterior $\Sigma^{(n)}$ with the known $\Sigma_t$ of the data generating process. For some more hints, see appendix.\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{3.3.3}
+
+[MATLAB] - Write a procedure that processes the data points $\{ x_n\}$ in the generated file one-by-one, and after each step computes an updated estimate of $\mu_{MAP}$ - the maximum of the posterior distribution, using the results of the previous exercise.\\
+
+
+\textbf{Answer:}\\
+
+
+\subsection*{3.3.4}
+
+[MATLAB] - Plot both estimates (ML and MAP) in a single graph (1d or 2d) as a function of the number of data points observed. Indicate the true values $\{ \mu_{t1}, \mu_{t2}\}$ as well. Evaluate your result.\\
+
+\textbf{Answer:}\\
 
 \section*{Hints}
+
+Below are some hints for \textbf{Exercise 3 - Part 3 - Question 2}.\\
+
+Bayes'r rule is also valid if earlier acquired information is taken into account. For example, if this is earlier seen data $D_{n - 1} = \{ x_1,..., x_{n - 1}\}$. Bayes' rule conditioned on this earlier data is 
+
+\begin{align*}
+	P(\mu | x_n, D_{n - 1}) \propto P(\mu | D_{n - 1}) P(x_n | \mu, D_{n - 1})
+\end{align*}
+
+Since $D_n = \{ x_1, ..., x_n\}$ this is written more conveniently as 
+
+\begin{align*}
+	P(\mu | D_{n}) \propto P(\mu | D_{n - 1}) P(x_n | \mu, D_{n - 1})
+\end{align*}
+
+
+If, given the model paramters $\mu$, the probability distribution of $x_n$ is independent of earlier data $D_{n - 1}$, we can further reduce this to
+
+\begin{align*}
+	P(\mu | D_{n}) \propto P(\mu | D_{n - 1}) P(x_n | \mu)
+\end{align*}
+
+You should be able to see the realtion with (2.144) and see in particular that the factor between brackets in (2.144) is to be identified with $P(\mu | D_{n - 1})$.\\
+Another important insight is that if $P(\mu | D_{n - 1})$ and $P(x_n | \mu)$ are of the form (2.113) and (2.114), i.e., if $P(\mu | D_{n - 1})$ is a Gaussian distribution over $\mu$ with a certain mean and covariance (you are free to give these any name, e.g. $\mu^{(n-1)}, \Sigma^{(n-1)}$) and if $P(x_n | \mu)$ is also Gaussian with a mean that is linear $\mu$, then you can use (2.116) and (2.117) to compute the posterior $P(\mu | D_n)$, which therefore is also Gaussian.\\
+So it is your task to show this. To do this you have to figure out the mapping of the variables and parameters in the current exercise, i.e., what is the correspondence between $\mu, x_n, \Sigma_t, \mu^{(n-1)}, \Sigma^{(n-1)}$ etc. with $x, \mu, \Lambda, A, b, L$. Don't forget that some quantities can also be zero or and other may be identity matrices.
 
 
 
