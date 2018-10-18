@@ -166,12 +166,21 @@ The mean is calculated as following:
 \end{eqnarray}
 
 **************************************************
-
+%Bishop page 71
 The mean and variance are therefore:
 
 \begin{eqnarray}
-\mathbb E [\mu] &=& \frac{\alpha}{\alpha + \beta } = 
+\mathbb E [\mu] &=& \frac{\alpha}{\alpha + \beta } = 4.5\cdot 10^{-1}\\
+ var [\mu ] &=& \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)} \approx 1.23 \cdot 10^{-3}
 \end{eqnarray}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{BetaPlotEx2.png}
+\caption{Plot of the beta distrubition for $alpha$ = 90 and $\beta$ = 110.}
+\end{figure}
+
+
+
 
 
 \subsection*{2.2}
@@ -180,7 +189,17 @@ A random sample of 1000 British citizens is taken, and 60\% of the people polled
 
 \textbf{Answer:}\\
 
+The posterior probabilty is described as:
 
+\begin{equation}
+p(\mu|m,l,\alpha,\beta) = \frac{\Gamma(m+\alpha+l+\beta)}{\Gamma(m+\alpha)\Gamma(l+\beta)} \mu^{m+\alpha-1}(1-\mu)^{l+\beta-1}
+\end{equation}
+
+So the value of $\alpha$ is increased by m and the value of $\beta$ is increased by l.The value of m is the amount of people in support, the value of m is how many people will vote in favour, while l is how many people will vote against. So the new mean is:
+
+\begin{eqnarray}
+\mathbb E [\mu] &=& \frac{\alpha + m}{\alpha + m + \beta + l}= 
+\end{eqnarray}
 
 
 
