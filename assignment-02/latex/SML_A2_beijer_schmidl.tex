@@ -156,6 +156,24 @@ Beta(\mu|\alpha, \beta) = \frac{\Gamma (\alpha + \beta )}{\Gamma(\alpha) \Gamma(
 \end{equation}
 
 
+*Not sure if this is needed, but we can do it some time regardless.*************************\\
+The mean is calculated as following:
+
+\begin{eqnarray}
+\mathbb E[\mu] &=& \int_0^{1} \text{Beta(}\mu|\alpha,\beta) \mu d \mu \\
+&=& \int_0^1 \frac{\Gamma (\alpha + \beta )}{\Gamma(\alpha) \Gamma(\beta)} \mu^{\alpha}(1-\mu)^{\beta - 1} d\mu \\
+&=& \frac{\Gamma (\alpha + \beta )}{\Gamma(\alpha) \Gamma(\beta)} \int_0^1 \mu^{\alpha}(1-\mu)^{\beta - 1} d\mu 
+\end{eqnarray}
+
+**************************************************
+
+The mean and variance are therefore:
+
+\begin{eqnarray}
+\mathbb E [\mu] &=& \frac{\alpha}{\alpha + \beta } = 
+\end{eqnarray}
+
+
 \subsection*{2.2}
 
 A random sample of 1000 British citizens is taken, and 60\% of the people polled support leaving the European Union. What are the posterior mean and variance for $\theta$? Plot the posterior density function together with the prior density. Explain how the data from the sample changed the prior belief.\\
