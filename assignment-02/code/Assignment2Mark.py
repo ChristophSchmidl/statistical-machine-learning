@@ -70,3 +70,7 @@ plt.plot(x,y)
 #%%
 
 
+Mean2 = (Alpha + m)/(Alpha + Beta + l + m)
+Variance2 = ( (Alpha + m)*(Beta + l) )/( (Alpha + Beta + l + m)**2*(Alpha + Beta + l + m + 1)  )
+print("The new mean is\t" + '{:.2e}'.format(Mean2))
+print("The new variance is\t" + '{:.2e}'.format(Variance2))
