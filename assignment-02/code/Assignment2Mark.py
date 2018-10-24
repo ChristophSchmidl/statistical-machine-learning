@@ -13,8 +13,8 @@ Assignment 2 - Exercise 2
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-print(matplotlib.__file__)
-
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
 
 #%% Constants
 
@@ -105,7 +105,7 @@ plt.legend()
 
 AlphaMin = BetaMin = 0
 AlphaMax = BetaMax = 200
-Amount = 1000
+Amount = 10000
 
 
 Alpha = np.linspace(AlphaMin,AlphaMax,Amount)
@@ -122,4 +122,5 @@ fig = plt.figure("First 3d Plot")
 ax = fig.gca(projection='3d')
 
 surf = ax.plot_surface(Alpha, Beta, Mean3D, cmap=cm.coolwarm,
-                       linewidth=0, antialiased=True)
+                       linewidth=1, antialiased=True)
+fig.colorbar(surf, shrink=0.5, aspect=5)
