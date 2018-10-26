@@ -104,18 +104,17 @@ plt.legend()
 #%%
 
 AlphaMin = BetaMin = 0
-AlphaMax = BetaMax = 200
+AlphaMax = BetaMax = 1000
 Amount = 10000
 
 
 Alpha = np.linspace(AlphaMin,AlphaMax,Amount)
-Beta = np.linspace(BetaMin,BetaMin,Amount)
+Beta = np.linspace(BetaMin,BetaMax,Amount)
 Alpha,Beta = np.meshgrid(Alpha,Beta)
 
-Alpha += m
-Beta += l
 
-Mean3D = Alpha/(Alpha + Beta)
+Mean3D = (Alpha+l)/(Alpha + Beta + l + m)
+Var3D = ( (Alpha + m)*(Beta + l) )/( (Alpha + Beta + l + m)**2*(Alpha + Beta + l + m + 1)  )
 
 fig = plt.figure("First 3d Plot")
 
@@ -124,3 +123,19 @@ ax = fig.gca(projection='3d')
 surf = ax.plot_surface(Alpha, Beta, Mean3D, cmap=cm.coolwarm,
                        linewidth=1, antialiased=True)
 fig.colorbar(surf, shrink=0.5, aspect=5)
+plt.xlabel(r"$\alpha$",fontsize=50)
+plt.ylabel(r"$\beta$",fontsize=50)
+ax.view_init(elev=80, azim=270)
+fig2 = plt.figure("Second 3d Plot")
+ax2 = fig2.gca(projection='3d')
+surf2 = ax2.plot_surface(Alpha, Beta, Var3D, cmap=cm.coolwarm,
+                       linewidth=1, antialiased=True)
+fig2.colorbar(surf, shrink=0.5, aspect=5)
+
+plt.xlabel(r"$\alpha$",fontsize=50)
+plt.ylabel(r"$\beta$",fontsize=50)
+ax2.view_init(elev=80, azim=270)
+
+
+
+

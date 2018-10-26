@@ -6,7 +6,7 @@
 \usepackage{amssymb}
 \usepackage{dsfont}
 \usepackage{multicol}
-\usepackage[lofdepth,lotdepth]{subfig}
+%\usepackage[lofdepth,lotdepth]{subfig}  This gives errors when used together with "subcaption", which is needed to create subfigures.
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage[hyphens]{url}
@@ -20,6 +20,7 @@
 \definecolor{mylilas}{RGB}{170,55,241}
 \setlength\parindent{0pt}
 \usepackage{float}
+\usepackage{subcaption}
 
 
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
@@ -217,6 +218,28 @@ Examine the effect of changing the prior hyperparameters $(\alpha, \beta)$ on th
 \textbf{Answer:}\\
 
 
+I took different values of $\alpha$ and $\beta$ and plotted them against each other:
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth} % width of left subfigure
+		\includegraphics[width=\textwidth]{First_3d_Plot.png}
+		\caption{$\mu$ plotted against $\alpha$ and $\beta$} % subcaption
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth} % width of right subfigure
+		\includegraphics[width=\textwidth]{Second_3d_Plot.png}
+		\caption{The variance plotted against $\alpha$ and $\beta$} % subcaption
+	\end{subfigure}
+	\caption{The mean and variance given different hyperparamters $\alpha$ and $\beta$.} % caption for whole figure
+	\label{Double3D}
+\end{figure}
+
+At figure \ref{Double3D} you can see the mean is higher for higher $alpha$ and lower $\beta$. The variance increases when $\alpha$ or $\beta$ is lowered. 
+If you have a non-informed prior your guess is somewhere in the middle with a high variance. This corresponds to a low $\alpha$ and $\beta$, while $\alpha=\beta$ so the mean will be $\frac{\alpha}{2\alpha} = 0.5$.
+This makes sense, for if you gather more information you can update your hyperparameters, thus making them larger. So the hyperparameters in the prior tells us what we believe the distribution is likely to be.
+
+The size of $\alpha$ and $\beta$ tells us about the strenghth of our believe. If they are higher it is as if we had low hyperparameters to start with, but saw lots of evidence suggesting our current state of hyperparamenters. They also give rise to a low variance as seen in figure \ref{Double3D}.
 
 
 
