@@ -21,6 +21,7 @@
 \setlength\parindent{0pt}
 \usepackage{float}
 \usepackage{subcaption}
+\usepackage{polynom}
 
 
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
@@ -93,6 +94,33 @@ Compute the normalization constants $\alpha_0$ and $\alpha_1$. How does the $z$ 
 \textbf{Answer:}\\
 
 
+We integrate over all possible values of z, which has to equal 1, for it is sure that give c some value of z will be chosen.
+
+\begin{eqnarray}
+1&=& \int_0^1 \alpha_0 (1-z^2) dz\\
+&=& \alpha_0z - \frac{\alpha_0}{3} z^3\Bigg|_0^1\\
+&=& \left (\alpha_0 -\frac{\alpha_0}{3}\right ) = \frac{2 }{3}\alpha_0\\
+a_0 &=& \frac{3}{2}
+\end{eqnarray}
+
+And for the next constant:
+
+\begin{eqnarray}
+1 &=& \int_0^1 \alpha_1 z(z+1) dz\\
+&=& \frac{\alpha_1}{3}z^3 + \frac{\alpha_1}{2}z^2 \Bigg |_0^1\\
+&=& \frac{1}{3}\alpha_1 + \frac{1}{2}\alpha_1 = \frac{5}{6}\alpha_1\\
+\alpha_1 &=& \frac{6}{5}
+\end{eqnarray}
+
+From the plot at figure \ref{Fig1.1} we see that for higher values of z the probabilty p(z$|$c=1) is higher. Therefore we think that higher values of z correspond with a higher change that the claim is true/not fraudulent.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Exercise1,1.png}
+\caption{ The probabilty p(z$|$c) plotted against z, with 0 $<$ z $<$ 1.}
+\label{Fig1.1}
+\end{figure}
+
+
 
 \subsection*{1.2}
 
@@ -103,8 +131,23 @@ Use the sum and product rule to show that the probability distribution function 
 \end{equation}
 
 
+
+
+
 \textbf{Answer:}\\
 
+For this we need to sum over the possible values of c and add the probabilty of c times the conditional probability over c. 
+
+\begin{eqnarray}
+p(z) &=& p(c=0)p(z|c=0) + p(c=1)p(z|c=1)\\
+&=& \frac{1}{6} \frac{3}{2}(1-z^2) + \frac{5}{6}\frac{6}{5}z(z+1)\\
+&=& \frac{3}{12} (1-z^2) + \frac{30}{30} z(z+1)\\
+&=& \frac{1}{4}(1-z^2) +  z(z+1)\\
+&=& \frac{1}{4}(1-z^2) + \frac{4z(z+1)}{4}\\
+&=& \frac{4z^2+4z-z^2+1}{4}\\
+&=& \frac{3z^2+4z+1}{4}\\
+&=& \frac{(3z+1)(z+1)}{4}
+\end{eqnarray}
 
 
 
@@ -115,6 +158,35 @@ Use Bayes' rule to compute the posterior probability distribution function $p(c|
 
 \textbf{Answer:}\\
 
+Bayes rule states that:
+
+\begin{equation}
+p(c|z) = \frac{p(z|c) p(c) }{p(z)}
+\end{equation}
+
+So for both values of c we get:
+
+\begin{eqnarray}
+p(c=0|z) &=& \frac{\frac{2}{3} (1-z^2) \frac{1}{6} \cdot 4}{(3z+1)(z+1)}\\
+&=& \frac{8}{18} \frac{1-z^2}{(3z+1)(z+1)}\\
+&=& \frac{4}{9} \frac{1-z^2}{(3z+1)(z+1)}\\
+&=& \frac{4}{9} \frac{(1+z)(1-z)}{(3z+1)(z+1)}\\
+&=& \frac{4}{9} \frac{1-z}{3z+1}\\
+p(c=1|z) &=& \frac{\frac{6}{5} z(z+1) \frac{5}{6}\cdot 4}{(3z+1)(z+1)}\\
+&=& \frac{4z(z+1)}{(3z+1)(z+1)}\\
+&=& \frac{4z}{3z+1}
+\end{eqnarray}
+
+\newpage
+The plot of the distribution can be seen in figure \ref{Fig1.3}.
+
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Exercise1,3.png}
+\caption{ The probabilty p(c$|$z) plotted against z, with 0 $<$ z $<$ 1.}
+\label{Fig1.3}
+\end{figure}
 
 
 \subsection*{1.4}
@@ -125,6 +197,18 @@ Compute the optimal decision boundary (based on our numerical score $z$) that mi
 \textbf{Answer:}\\
 
 
+We take the decision boundary at the point where the two functions, as plotted at Figure \ref{Fig1.3}, interesect. This happens at the point where they equal:
+
+\begin{eqnarray}
+\frac{4}{9} \frac{1-z	}{3z+1} &=& \frac{4z}{3z+1}\\
+\frac{4}{9}(1-z) &=& 4z\\
+1-z &=& 9z\\
+1 &=& 10z\\
+z &=& 0.1
+\end{eqnarray}
+
+We have also found the point 0.1 using our program.
+
 
 \subsection*{1.5}
 
@@ -133,6 +217,64 @@ Compute the misclassification rate, given the optimal decision boundary determin
 
 \textbf{Answer:}\\
 
+
+We integrate the probabilities up to the descision point and from the decision point to 1. Then we compare the change of actually getting the right label vs us putting the decision boundary at 0.1 . 
+
+
+If z is less then 0.1 we classify it as c=0. The actual change is:
+
+\polyset{style=C, div=:,vars=z}
+\begin{eqnarray}
+p(z<0.1)p(c=0|z<0.1) &=& \int_0^{0.1} \frac{4}{9}\frac{1-z}{3z+1}dz\\
+\frac{1-z}{3z+1} &=&  \frac{4}{3(3z+1)} - \frac{1}{3}\\
+p(z<0.1)p(c=0|z<0.1) &=& \frac{4}{9} \int_0^{0.1} \left ( \frac{4}{3} \frac{1}{(3z+1)} - \frac{1}{3}\right )dz\\
+&=& \frac{4}{9} \left ( \frac{4}{9} \ln(3z+1) - \frac{z}{3}  \right )\Bigg | _0^{0.1}\\
+&=& \frac{16}{81}\ln(1.3) - \frac{1}{30}
+\end{eqnarray}
+
+Now for the other possibility:
+
+
+\begin{eqnarray}
+p(z<0.1)p(c=1|z<0.1) &=& \int_0^{0.1} \frac{4z}{3z+1} dz\\
+\frac{4z}{3z+1} &=& \frac{4}{3}\frac{1}{3z+1} - \frac{4}{3}\\
+&=& \frac{4}{3}\left (\frac{1}{3z+1} - 1\right )\\
+p(z<0.1)p(c=1|z<0.1) &=& \frac{4}{3}\int_0^{0.1} \frac{1}{3z+1}-1 dz\\
+&=& \frac{4}{3}\left (\frac{1}{3} \ln(3z+1) - z\right ) \Bigg |_0^{0.1}\\
+&=& \frac{4}{3}\left ( \frac{1}{3} \ln(1.3) - \frac{1}{10}\right )\\
+&=& \frac{4}{9} \ln(1.3) -\frac{2}{45}
+\end{eqnarray}
+
+
+For both $\ln(1) = 0$, so filling in z = 0 gives us 0. 
+
+Now the fraction of the two:
+
+
+\begin{eqnarray}
+\text{Classification error} = \frac{p(c=0|z<0.1)}{p(c=1|z<0.1)} &\approx & 25.63 \% 
+\end{eqnarray}
+
+Now we do the same for z$>$0.1.
+
+\begin{eqnarray}
+p(z>0.1)p(c=0|z>0.1) &=& \int_{0.1}^1 \frac{4}{9}\frac{1-z}{3z+1}dz\\
+&=& \frac{4}{9} \left ( \frac{4}{9} \ln(3z+1) - \frac{z}{3}  \right )\Bigg | _{0.1}^{1}\\
+&=& \frac{4}{9}\left [\left ( \frac{4}{9}\ln(4) - \frac{1}{3}\right ) - \left (\frac{4}{9}\ln(1.3) - \frac{1}{30} \right )\right ]
+\end{eqnarray}
+
+
+And for c=1:
+
+\begin{eqnarray}
+p(z>0.1)p(c=1|z>0.1) &=& \int_{0.1}^{1} \frac{4z}{3z+1} dz\\
+&=& \frac{4}{3}\left (\frac{1}{3} \ln(3z+1) - z\right ) \Bigg |_{0.1}^{1}\\
+&=& \frac{4}{3}\left [ \left (\frac{1}{3}\ln(4) - 1\right ) - \left ( \frac{1}{3}\ln(1.3) - 0.1\right )\right ]
+\end{eqnarray}
+
+\begin{eqnarray}
+\text{Classification error} = \frac{p(c=1|z>0.1)}{p(c=0|z>0.1)} &\approx & 25.63 \% 
+\end{eqnarray}
 
 
 
@@ -177,7 +319,7 @@ The mean and variance are therefore:
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{BetaPlotEx2.png}
-\caption{Plot of the beta distrubition for $alpha$ = 90 and $\beta$ = 110.}
+\caption{Plot of the beta distrubition for $\alpha$ = 90 and $\beta$ = 110.}
 \end{figure}
 
 
@@ -193,14 +335,14 @@ A random sample of 1000 British citizens is taken, and 60\% of the people polled
 The posterior probabilty is described as:
 
 \begin{equation}
-p(\mu|m,l,\alpha,\beta) = \frac{\Gamma(m+\alpha+l+\beta)}{\Gamma(m+\alpha)\Gamma(l+\beta)} \mu^{m+\alpha-1}(1-\mu)^{l+\beta-1}
+p(\theta|m,l,\alpha,\beta) = \frac{\Gamma(m+\alpha+l+\beta)}{\Gamma(m+\alpha)\Gamma(l+\beta)} \mu^{m+\alpha-1}(1-\mu)^{l+\beta-1}
 \end{equation}
 
 So the value of $\alpha$ is increased by m and the value of $\beta$ is increased by l.The value of m is the amount of people in support, the value of m is how many people will vote in favour, while l is how many people will vote against. So the new mean is:
 
 \begin{eqnarray}
-\mathbb E [\mu] &=& \frac{\alpha + m}{\alpha + m + \beta + l}= 5.75 \cdot 10^{-1}\\
-var[\mu]  &=& \frac{(\alpha + m ) ( \beta + l)}{(\alpha + \beta + l + m)^2(\alpha + \beta + m + l + 1 )} = 2.03\cdot 10^{-4}
+\mathbb E [\theta] &=& \frac{\alpha + m}{\alpha + m + \beta + l}= 5.75 \cdot 10^{-1}\\
+var[\theta]  &=& \frac{(\alpha + m ) ( \beta + l)}{(\alpha + \beta + l + m)^2(\alpha + \beta + m + l + 1 )} = 2.03\cdot 10^{-4}
 \end{eqnarray}
 
 \begin{figure}[H]
@@ -225,7 +367,7 @@ I took different values of $\alpha$ and $\beta$ and plotted them against each ot
 	\centering
 	\begin{subfigure}{0.45\textwidth} % width of left subfigure
 		\includegraphics[width=\textwidth]{First_3d_Plot.png}
-		\caption{$\mu$ plotted against $\alpha$ and $\beta$} % subcaption
+		\caption{The mean plotted against $\alpha$ and $\beta$} % subcaption
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth} % width of right subfigure
 		\includegraphics[width=\textwidth]{Second_3d_Plot.png}
@@ -253,6 +395,14 @@ Imagine you are now a reporter for the polling agency and you have been sent on 
 
 \textbf{Answer:}\\
 
+
+Equation (1.68) says:
+
+\begin{equation}
+p(t|x,\bold x,\bold t) = \int p(t|x,w)p(w|\bold x,\bold t) dw
+\end{equation}
+
+%No clue if this is right:
 
 
 

@@ -56,7 +56,6 @@ def BetaDisLog(Mu,Alpha,Beta):
 
 
 def LogGamma(n):
-
     Total = 0    
     while(n > 3):
         Total += np.log(n-1)
@@ -82,7 +81,7 @@ y = BetaDis(x,Alpha,Beta)
 
 plt.rcParams.update({'font.size': 22})
 
-plt.xlabel("$\mu$",fontsize=50)
+plt.xlabel("$\\theta$",fontsize=50)
 
 plt.plot(x,y)
 
@@ -98,7 +97,7 @@ plt.figure("Second plot")
 
 y2 = BetaDis(x,Alpha + m, Beta + l)
 
-plt.xlabel("$\mu$",fontsize=50)
+plt.xlabel("$\\theta$",fontsize=50)
 
 
 plt.plot(x,y,label="prior density")
