@@ -18,13 +18,18 @@ from mpl_toolkits.mplot3d import Axes3D
 
 #%% Constants
 
-
+#Exercise 2
 Alpha = 90
 Beta = 110
 
 m = 0.6*1000 #People in favour
 l = 0.4*1000 #People against
 
+#Exercise 3
+
+Sigma = np.matrix([[0.14,-0.3,0,0.2],[-0.3,1.16,0.2,-0.8],[0,0.2,1,1],[0.2,-0.8,1,2]])
+
+Lambda = Sigma**-1
 #%% Functions
 
 TempTestList = []
