@@ -229,7 +229,7 @@ p(z<0.1)p(c=0|z<0.1) &=& \int_0^{0.1} \frac{4}{9}\frac{1-z}{3z+1}dz\\
 \frac{1-z}{3z+1} &=&  \frac{4}{3(3z+1)} - \frac{1}{3}\\
 p(z<0.1)p(c=0|z<0.1) &=& \frac{4}{9} \int_0^{0.1} \left ( \frac{4}{3} \frac{1}{(3z+1)} - \frac{1}{3}\right )dz\\
 &=& \frac{4}{9} \left ( \frac{4}{9} \ln(3z+1) - \frac{z}{3}  \right )\Bigg | _0^{0.1}\\
-&=& \frac{16}{81}\ln(1.3) - \frac{1}{30}
+&\approx &  0.0370 
 \end{eqnarray}
 
 Now for the other possibility:
@@ -237,12 +237,11 @@ Now for the other possibility:
 
 \begin{eqnarray}
 p(z<0.1)p(c=1|z<0.1) &=& \int_0^{0.1} \frac{4z}{3z+1} dz\\
-\frac{4z}{3z+1} &=& \frac{4}{3}\frac{1}{3z+1} - \frac{4}{3}\\
-&=& \frac{4}{3}\left (\frac{1}{3z+1} - 1\right )\\
-p(z<0.1)p(c=1|z<0.1) &=& \frac{4}{3}\int_0^{0.1} \frac{1}{3z+1}-1 dz\\
-&=& \frac{4}{3}\left (\frac{1}{3} \ln(3z+1) - z\right ) \Bigg |_0^{0.1}\\
-&=& \frac{4}{3}\left ( \frac{1}{3} \ln(1.3) - \frac{1}{10}\right )\\
-&=& \frac{4}{9} \ln(1.3) -\frac{2}{45}
+\frac{4z}{3z+1} &=& \frac{4}{3}-  \frac{4}{3}\frac{1}{3z+1}\\
+&=& \frac{4}{3}\left ( 1 - \frac{1}{3z+1}\right )\\
+p(z<0.1)p(c=1|z<0.1) &=& \frac{4}{3}\int_0^{0.1} 1 - \frac{1}{3z+1}dz\\
+&=& \frac{4}{3}\left (z - \frac{1}{3} \ln(3z+1)\right ) \Bigg |_0^{0.1}\\
+&\approx & 0.0167 
 \end{eqnarray}
 
 
@@ -252,15 +251,16 @@ Now the fraction of the two:
 
 
 \begin{eqnarray}
-\text{Classification error} = \frac{p(c=0|z<0.1)}{p(c=1|z<0.1)} &\approx & 25.63 \% 
+\text{Classification error} = \frac{p(c=1|z<0.1)}{p(c=0|z<0.1)} &\approx & 45.20 \% 
 \end{eqnarray}
 
-Now we do the same for z$>$0.1.
+Now we do the same for z$>$0.1. Here we already calculated the indefinite integrals, so we only have to fill in the boundaries:
+
 
 \begin{eqnarray}
 p(z>0.1)p(c=0|z>0.1) &=& \int_{0.1}^1 \frac{4}{9}\frac{1-z}{3z+1}dz\\
 &=& \frac{4}{9} \left ( \frac{4}{9} \ln(3z+1) - \frac{z}{3}  \right )\Bigg | _{0.1}^{1}\\
-&=& \frac{4}{9}\left [\left ( \frac{4}{9}\ln(4) - \frac{1}{3}\right ) - \left (\frac{4}{9}\ln(1.3) - \frac{1}{30} \right )\right ]
+&\approx & 0.0887
 \end{eqnarray}
 
 
@@ -269,13 +269,37 @@ And for c=1:
 \begin{eqnarray}
 p(z>0.1)p(c=1|z>0.1) &=& \int_{0.1}^{1} \frac{4z}{3z+1} dz\\
 &=& \frac{4}{3}\left (\frac{1}{3} \ln(3z+1) - z\right ) \Bigg |_{0.1}^{1}\\
-&=& \frac{4}{3}\left [ \left (\frac{1}{3}\ln(4) - 1\right ) - \left ( \frac{1}{3}\ln(1.3) - 0.1\right )\right ]
+&\approx & 0467 
 \end{eqnarray}
 
 \begin{eqnarray}
-\text{Classification error} = \frac{p(c=1|z>0.1)}{p(c=0|z>0.1)} &\approx & 25.63 \% 
+\text{Classification error} = \frac{p(c=0|z>0.1)}{p(c=1|z>0.1)} &\approx & 18.98\%
 \end{eqnarray}
 
+
+
+Now the total classification error is the sum of the two errors, weighted by the probability of z lying in these regions. So let's integrate z:
+
+\begin{eqnarray}
+p(z) &=& \frac{(3z+1)(z+1)}{4}\\
+&=& \frac{1}{4}(3z^2+4z+1)\\
+\int p(z) dz &=& \frac{1}{4} \left (z^3 + 2z^2 + z + C\right )
+\end{eqnarray}
+
+C is the integration constant independent of z. 
+
+Now we calculate the integrals:
+
+\begin{eqnarray}
+p(z<0.1) &=& \int_0^{0.1} \frac{(3z+1)(z+1)}{4} \approx 0.03025\\
+p(z>0.1) &=& \int_{0.1}^{1} \frac{(3z+1)(z+1)}{4} \approx 0.96975
+\end{eqnarray}
+
+So the total error is:
+
+\begin{equation}
+\text{Misclassification error} = 0.03025\cdot 45.20\% + 0.96975\cdot 18.98\% \approx 19.77\%
+\end{equation}
 
 
 \section*{Exercise 2 - weight 2}
