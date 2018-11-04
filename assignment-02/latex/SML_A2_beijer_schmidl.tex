@@ -715,6 +715,68 @@ From now on, we will assume (pretend) the 'true' mean $\mu_t$ is unknown and est
 \textbf{Answer:}\\
 
 
+\begin{lstlisting}[language=Python]
+# Exercise 3.2.2
+
+mle_mean = np.mean(data, axis=0) # to take the mean of each col
+print(mean)
+normalized_data = data - mle_mean
+mle_covariance = np.dot(normalized_data.T, normalized_data) / number_of_datapoints
+mle_covariance_unbiased =  np.dot(normalized_data.T, normalized_data) / (number_of_datapoints - 1)
+print(mle_covariance)
+print(mle_covariance_unbiased)
+
+# [ 0.24887413  1.39664922]
+# [[ 1.91424907  0.90025163]
+#  [ 0.90025163  3.91668677]]
+# [[ 1.91616523  0.90115278]
+#  [ 0.90115278  3.92060738]]
+\end{lstlisting}
+
+\vspace{1em}
+
+The maximum likelihood estimate of $\mu_{ML}$ is calculated directly on our generated dataset given the above code and approximates to:
+
+\begin{equation*}
+	\mu_{ML} = \frac{1}{N} \Sigma^N_{n=1} x_n = \begin{pmatrix}
+	0.25\\1.4
+	\end{pmatrix}
+\end{equation*}
+
+The maximum likelihood estimate of the covariance is calculated directly on the data given the above code and approximates to:
+
+\begin{equation*}
+	\Sigma_{ML} = \frac{1}{N} \Sigma^N_{n=1} (x_n - \mu_{ML})(x_n - \mu_{ML})^T = \begin{pmatrix}
+	1.914 & 0.9\\0.9 & 3.917
+	\end{pmatrix}
+\end{equation*}
+
+The unbiased maximum likelihood estimate of the covariance is calculated directly on the data given the above code, was normalized beforehand and approximates to:
+
+\begin{equation*}
+	\Sigma_{ML} = \frac{1}{N-1} \Sigma^N_{n=1} (x_n - \mu_{ML})(x_n - \mu_{ML})^T = \begin{pmatrix}
+	1.916 & 0.9\\0.9 & 3.92
+	\end{pmatrix}
+\end{equation*}
+
+
+The "true" values were:
+
+\[ \Sigma_t = \left( \begin{array}{cc}
+2.0 & 0.8  \\
+0.8 & 4.0 \end{array} \right)\] 
+
+and 
+
+\begin{align*}
+	\mu_t = \begin{pmatrix}0.26 \\ 1.32 \end{pmatrix}
+\end{align*}
+
+\vspace{1em}
+
+Therefore we can see that our estimates are close to the true values and that the values of the unbiased maximum likelihood estimate of the covariance do not change much.
+
+\vspace{1em}
 
 \textbf{Part 3 - Sequential learning algorithms}
 
