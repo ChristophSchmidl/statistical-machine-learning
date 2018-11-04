@@ -637,9 +637,39 @@ By executing the above code we get the following:
 
 \textbf{Answer:}\\
 
+Instead of using the MATLAB \texttt{mvnpdf} function, we used the Python library and function\\ \texttt{scipy.stats.multivariate\_normal}.
+
+\begin{lstlisting}[language=Python]
+# Exercise 3.1.3
+
+x, y = np.mgrid[-0.25:2.25:.01, -1:2:.01]
+pos = np.empty(x.shape + (2,))
+pos[:, :, 0] = x
+pos[:, :, 1] = y
+mu_p = [0.8, 0.8]
+cov_p = [[0.1, -0.1], [-0.1, 0.12]]
+z = multivariate_normal(mu_p, cov_p).pdf(pos)
+
+fig = plt.figure(figsize=(10, 10), dpi=300)
+ax = fig.gca(projection='3d')
+ax.plot_surface(x, y, z)
+plt.xlabel('$x_1$')
+plt.ylabel('$x_2$')
+ax.set_zlabel('$p(x_1, x_2 | x_3=0, x_4=0)$')
+plt.savefig('3_1_3.png', bbox_inches='tight', dpi=300)
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.75\textwidth]{Images/3_1_3.png}
+\caption{Plot of the probability density}
+\label{Fig3.1.3}
+\end{figure}
+
 \textbf{Part 2 - Generating the data}
 
-Here we assume we are dealing with a 2d-Gaussian daa generating process
+Here we assume we are dealing with a 2d-Gaussian data generating process
 
 \begin{equation}
 	p(x) = \mathcal{N}(x|\mu, \Sigma)
@@ -659,6 +689,22 @@ to generate the data.
 [MATLAB] - Generate at least 1000 data pairs $\{ x_i, y_i\}$, distributed according to \ref{} with $\mu = \mu_t$ and $\Sigma = \Sigma_t$ and save them to a file in plain-text format.\\
 
 \textbf{Answer:}\\
+
+\begin{lstlisting}[language=Python]
+# Exercise 3.2.1
+
+number_of_datapoints = 1000
+
+covariance_3_2 = np.array([[2.0, 0.8],[0.8, 4.0]])
+print(covariance_3_2)
+
+data = np.random.multivariate_normal(
+    random_pair,
+    covariance_3_2,
+    number_of_datapoints)
+
+np.savetxt('ex3_data.txt', data)
+\end{lstlisting}
 
 
 
