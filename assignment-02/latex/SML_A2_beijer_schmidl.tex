@@ -789,9 +789,37 @@ We will now estimate the mean $\mu$ from the generated data and the known varian
 
 \textbf{Answer:}\\
 
+In section 2.3.5 "Sequential estimation" of Bishop, equation 2.126, a one-by-one estimate of $\mu_{ML}$ is described as follows:
 
+\begin{align*}
+\mu^{(N)}_{ML} = \mu^{(N-1)}_{ML} + \frac{1}{N} (x_N - \mu^{(N-1)}_{ML})
+\end{align*}
 
+The corresponding python code:
 
+\begin{lstlisting}[language=Python]
+# Exercise 3.3.1
+
+mu = 0
+for i in range(1, np.size(data, 0)+1):
+    mu = mu + 1.0 / i * (data[i-1] - mu)
+    print(mu)
+
+# .
+# .
+# .
+# [ 0.2476993   1.39181433]
+# [ 0.24847877  1.39458494]
+# [ 0.24593138  1.39564682]
+# [ 0.24639905  1.39454373]
+# [ 0.24649338  1.39428266]
+# [ 0.24598495  1.39340938]
+# [ 0.2468215   1.39439567]
+# [ 0.2458356   1.39225878]
+# [ 0.24887413  1.39664922]
+\end{lstlisting}
+
+We can see that at the end of the process the mean converges towards the previousy calculated mean and therefore works correctly.
 
 \subsection*{3.3.2}
 

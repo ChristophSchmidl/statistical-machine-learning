@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.4)  4 NOV 2018 23:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.4)  4 NOV 2018 23:32
 entering extended mode
 **./SML_A2_beijer_schmidl.tex
 (SML_A2_beijer_schmidl.tex
@@ -1066,67 +1066,67 @@ Underfull \hbox (badness 10000) in paragraph at lines 790--791
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 799--800
+Underfull \hbox (badness 10000) in paragraph at lines 827--828
 
  []
 
 
-LaTeX Warning: Reference `' on page 14 undefined on input line 801.
+LaTeX Warning: Reference `' on page 14 undefined on input line 829.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 801--803
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 804--805
+Underfull \hbox (badness 10000) in paragraph at lines 829--831
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 809--810
+Underfull \hbox (badness 10000) in paragraph at lines 832--833
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 837--838
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 812--813
+Underfull \hbox (badness 10000) in paragraph at lines 840--841
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 817--818
+Underfull \hbox (badness 10000) in paragraph at lines 845--846
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--820
+Underfull \hbox (badness 10000) in paragraph at lines 847--848
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 823--824
+Underfull \hbox (badness 10000) in paragraph at lines 851--852
 
  []
 
-[14] [15]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 850.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 850.
+[15]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 878.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 878.
  (SML_A2_beijer_schmidl.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 850.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 850.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 878.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 878.
 Package rerunfilecheck Info: File `SML_A2_beijer_schmidl.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 850.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 878.
  ) 
 Here is how much of TeX's memory you used:
- 21584 strings out of 492970
- 399560 string characters out of 3135864
+ 21608 strings out of 492970
+ 399895 string characters out of 3135864
  734298 words of memory out of 3000000
- 24914 multiletter control sequences out of 15000+200000
+ 24918 multiletter control sequences out of 15000+200000
  14625 words of font info for 57 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,14n,66p,655b,2023s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1147,9 +1147,9 @@ lic/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 tt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on SML_A2_beijer_schmidl.pdf (15 pages, 1822448 bytes).
+Output written on SML_A2_beijer_schmidl.pdf (15 pages, 1827112 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 174 named destinations out of 1000 (max. 500000)
+ 386 PDF objects out of 1000 (max. 8388607)
+ 194 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
