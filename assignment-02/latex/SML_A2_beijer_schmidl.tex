@@ -602,8 +602,31 @@ from this distribution. (These will be the 'true' means, hence the subscript t).
 
 \textbf{Answer:}\\
 
+We used the \texttt{numpy.random.multivariate\_normal} function to generate the random number pairs.
 
+\begin{lstlisting}[language=Python]
+# Exercise 3.1.2
 
+# numpy.random.multivariate_normal(mean, cov[, size, check_valid, tol])
+
+# Draw random samples from a multivariate normal distribution.
+
+def generate_random_number_pair():
+    return np.random.multivariate_normal(
+    [0.8, 0.8],
+    [[0.1, -0.1], [-0.1, 0.12]])
+
+random_pair = generate_random_number_pair()
+print(random_pair)
+
+# [ 0.25822872  1.32385609]
+\end{lstlisting}
+
+By executing the above code we get the following:
+
+\begin{align*}
+	\mu_t = \begin{pmatrix}0.26 \\ 1.32 \end{pmatrix}
+\end{align*}
 
 \subsection*{3.1.3}
 
