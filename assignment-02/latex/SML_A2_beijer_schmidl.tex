@@ -467,6 +467,125 @@ Use the partitioned precision matrix $\tilde{\Lambda} = \tilde{\Sigma}^{-1}$ to 
 
 \textbf{Answer:}\\
 
+We can compute the precision matrix by taking the inverse of the given covariance matrix using the Python numpy function \texttt{numpy.linalg.inv}. The following python code just gives us this precision matrix.
+
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+
+# Exercise 3.1.1
+
+# numpy.linalg.inv(a)
+# Compute the (multiplicative) inverse of a matrix.
+# Given a square matrix a, return the matrix ainv 
+# satisfying dot(a, ainv) = dot(ainv, a) = eye(a.shape[0]).
+
+# See: https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.linalg.inv.html
+
+covariance_matrix = np.array([
+        [0.14, -0.3, 0.0, 0.2], 
+        [-0.3, 1.16, 0.2, -0.8], 
+        [0.0, 0.2, 1.0, 1.0], 
+        [0.2, -0.8, 1.0, 2.0]])
+
+precision_matrix = np.linalg.inv(covariance_matrix)
+
+print(precision_matrix)
+
+#[[ 60.   50.  -48.   38. ]
+# [ 50.   50.  -50.   40. ]
+# [-48.  -50.   52.4 -41.4]
+# [ 38.   40.  -41.4  33.4]]
+
+precision_matrix_aa = np.array([
+        [60, 50], 
+        [50, 50]])
+
+inv_presision_matrix_aa = np.linalg.inv(precision_matrix_aa)
+
+print(inv_presision_matrix_aa)
+
+#[[ 0.1  -0.1 ]
+# [-0.1   0.12]]
+\end{lstlisting}
+
+\vspace{1em}
+
+The precision matrix is therefore: 
+
+\[ \tilde{\Lambda} = \tilde{\Sigma}^{-1} = 
+	\left(
+	\begin{array}{cc|cc}
+	60 & 50 & -48 & 38 \\
+	50 & 50 & -50 & 40 \\
+	\hline
+	-48 & -50 & 52.4 & -41.4 \\
+	38 & 40 & -41.4 & 33.4 \\	
+	\end{array}
+	\right) = \left(
+	\begin{array}{c|c}
+	\tilde{\Lambda}_{aa} & \tilde{\Lambda}_{ab} \\
+	\hline
+	\tilde{\Lambda}_{ba} & \tilde{\Lambda}_{bb} \\	
+	\end{array}
+	\right)
+\]	
+
+\vspace{1em}
+
+The last part of this equation is the partitioned form of the precision matrix as described in section 2.3.1, equation 2.69 of Bishop:
+
+\[ \tilde{\Lambda} = 
+	\left(
+	\begin{array}{c|c}
+	\tilde{\Lambda}_{aa} & \tilde{\Lambda}_{ab} \\
+	\hline
+	\tilde{\Lambda}_{ba} & \tilde{\Lambda}_{bb} \\	
+	\end{array}
+	\right)
+\]	
+
+
+In section 2.3.1, equation 2.73 of Bishop, it is described how one can conclude the covariance of $p(x_a|x_b)$ by using
+
+\begin{equation*}
+	\Sigma_{a|b} = \Lambda^{-1}_{aa}
+\end{equation*}
+
+and in section 2.3.1, equation 2.75, how to conclude the mean by using
+
+\begin{align*}
+ 	\mu_{a|b} &= \Sigma_{a|b} \{ \Lambda_{aa} \mu_a - \Lambda_{ab}(x_b - \mu_b)\}\\
+ 	&= \mu_a - \Lambda^{-1}_{aa} \Lambda_{ab} (x_b - \mu_b)
+\end{align*}
+
+Therefore, the conditional covariance is:
+
+
+\[ \Sigma_p = \tilde{\Lambda}^{-1}_{aa} = 
+	\left(
+	\begin{array}{cc}
+	0.1 & -0.1 \\
+	-0.1 & 0.12 \\	
+	\end{array}
+	\right)
+\]	
+
+And the conditional mean is:
+
+\begin{align*}
+ 	\mu_p &= \mu_a - \Lambda^{-1}_{aa} \Lambda_{ab} (x_b - \mu_b)\\
+ 	&= \begin{pmatrix}1 \\ 0 \end{pmatrix}  - 
+\begin{pmatrix} 0.1 & -0.1 \\-0.1 & 0.12 \end{pmatrix} \begin{pmatrix} -48 & 38 \\-50 & 40\end{pmatrix}
+\Bigg[\begin{pmatrix}0 \\ 0\end{pmatrix} - \begin{pmatrix}1 \\ 2\end{pmatrix}\Bigg] \\
+&= \begin{pmatrix}1 \\ 0 \end{pmatrix}  - \begin{pmatrix} 0.1 & -0.1 \\-0.1 & 0.12 \end{pmatrix} \begin{pmatrix} -48 & 38 \\-50 & 40\end{pmatrix} \begin{pmatrix}-1 \\ -2 \end{pmatrix}\\
+&= \begin{pmatrix}1 \\ 0 \end{pmatrix}  - \begin{pmatrix} 0.2 & -0.2 \\-1.2 & 1 \end{pmatrix}  \begin{pmatrix}-1 \\ -2 \end{pmatrix}\\
+&= \begin{pmatrix}1 \\ 0 \end{pmatrix}  -  \begin{pmatrix}0.2 \\ -0.8 \end{pmatrix}\\
+&= \begin{pmatrix}0.8 \\ 0.8 \end{pmatrix}
+\end{align*}
 
 
 \subsection*{3.1.2}
