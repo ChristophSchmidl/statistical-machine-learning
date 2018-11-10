@@ -24,6 +24,7 @@
 \usepackage{polynom}
 
 
+
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 
@@ -61,6 +62,9 @@
  
 \lstset{style=mystyle}
 
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \title{Statistical Machine Learning 2018\\Assignment 3\\Deadline: 25th of November 2018}
 \author{
@@ -152,6 +156,195 @@ Plot $p(\alpha|\mathcal{D}, \beta = 2)$ as a function of $\alpha$ over the inter
 
 \textbf{Answer:}\\
 
+
+
+
+\textbf{Part 2 - Generate the lighthouse data}\\
+
+
+We will try to solve the original problem by letting matlab/Python find the lighthouse for us. For that we first need a data set.
+
+\subsection*{1.2.1}
+
+Sample a random position $(\alpha_t, \beta_t)$ from a uniform distribution over an interval of 10 km along the coast and between 2 and 4 km out to sea.\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{1.2.2}
+
+From this position generate a data set $\mathcal{D} = \{ x_1,..., x_N \}$ of 500 flashes in random directions that have been registered by a detector at point $x_i$ along the coast. Assume that the flashes are i.i.d. according to (1).\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{1.2.3}
+
+Make a plot of the mean of the data set as a function of the number of points. Compare with the true position of the lighthouse $\alpha_t$. How many points do you expect to need to obtain a reasonable estimate of $\alpha_t$ from the mean? Explain.\\
+
+\textbf{Answer:}\\
+
+
+
+\textbf{Part 3 - Find the lighthouse}\\
+
+From the analysis in the first part we know that trying to find a maximum likelihood estimate in the usual way is possible (compute gradient, set equal to zero and solve), but that this does not result in a ‘nice’ closed-form expression for the solution, even when one of the parameters is assumed to be known. As we want to find estimates of both $\alpha$ and $\beta$ from the data, we will try a different approach instead.
+
+\subsection*{1.3.1}
+
+Use (3) to get an expression for the loglikelihood of the data $\mathcal{D}$ as a function of $\alpha$ and $\beta$.\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{1.3.2}
+
+We can see how this likelihood (as a function of $\alpha$ and $\beta$) changes, as data points come in.\\
+
+Process your data set $\mathcal{D}$ one by one and make a plot of the (log)likelihood after one, two, three, and 20 points have arrived, respectively. Explain what happens.\\
+
+Hint: Create a function that calculates the (log)likelihood at a specific point $(\alpha, \beta)$ after the first $k$ data points $\{x_1, . . . , x_k \}$ have come in. Use this with the matlab \texttt{ meshgrid} and \texttt{surf}  functions to make plots over the interval $[-10 \leq \alpha \leq +10] \times [0 \leq \beta \leq 5]$. Decide if/when it makes more sense to use the likelihood directly or the log of the likelihood.\\
+
+\textbf{Answer:}\\
+
+
+
+\subsection*{1.3.3}
+
+We can make a reasonable (visual) estimate of the most probable position of the lighthouse from the graph, after a few data points have been observed. However, as we are working with a computer, we will let matlab do the dirty work for us.\\
+
+Create a function that uses matlab function \texttt{fminsearch} to compute the values of $\alpha$ and $\beta$ that maximize the likelihood for a data set of $k$ points, and plot these as a function of the number of points. Use $[0, 1]$ as the initial starting value for \texttt{ fminsearch} (see examples in matlab-help). Compare your final estimate with the true values $(\alpha_t,\beta_t)$.\\
+
+\textbf{Answer:}\\
+
+
+
+\section*{Exercise 2 - Bayesian linear regression (weight 2)}
+
+This exercise builds on exercise 2, week 7, “Fitting a straight line to data”. For a detailed de- scription (and explanation) see Exercises and Answers, Week 7 in Brightspace. The final part of that exercise computed the predictive distribution after a single data point was observed. Here we consider a new data set, consisting of no less than two points: ${x_1,t_1} = (0.4,0.1)$ and ${x_2, t_2} = (0.6, -0.4)$.
+
+
+\subsection*{2.1}
+
+Assume $\alpha = 1$ and $\beta = 15$. Compute the predictive distribution $p(t|x, \textbf{t}, \textbf{x}, \alpha, \beta)$ after these two points are observed.\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{2.2}
+
+
+Plot the mean of the predictive Gaussian distribution and one standard deviation on both sides as a function of $x$ over the interval $[0,1]$. Plot the data in the same figure. See \texttt{a009plotideas.m} in Brightspace for some plotting hints. Compare your plot with Figure 3.8b (Bishop, p.157) and explain the difference.\\
+
+\textbf{Answer:}\\
+
+
+
+\subsection*{2.3}
+
+Sample five functions $y(x,\textbf{w})$ from the posterior distribution over $\textbf{w}$ for this data set and plot them in the same graph (i.e. with the predictive distribution). You may use the Matlab function \texttt{mvnrnd}. See again \texttt{a009plotideas.m} for some plotting hints.\\
+
+\textbf{Answer:}\\
+
+
+
+\section*{Exercise 3 - Gradient descent revisited (weight 3)}
+
+In this exercise, we will have a closer look at the gradient descent algorithm for function minimization. When the function to be minimized is $E(x)$, the gradient descent iteration is
+
+
+\begin{eqnarray}
+\textbf{x}_{n + 1} = \textbf{x}_n - \eta \nabla E(\textbf{x}_n)
+\end{eqnarray}
+
+where $\eta > 0$ is the so-called learning-rate.
+
+\subsection*{3.1}
+
+Consider the function $f(x) = \frac{\lambda}{2}(x - a)^2$ with parameters $\lambda > 0$, and $a$ arbitrary.
+
+
+\subsection*{3.1a}
+
+Write down the gradient descent iteration rule. Verify that the minimum of $f$ is a fixed point\footnote{A fixed point $x^*$ of an iteration $x_{n+1} = F(x_n)$ satisfies $x^* = F(x^*)$.} of the gradient descent iteration rule.\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{3.1b}
+
+Find $\eta$ for which convergence is the fastest (actually in one step).\\
+
+\textbf{Answer:}\\
+
+
+
+\subsection*{3.1c}
+
+We will investigate the convergence properties for different values of $\eta$. For this we look at the ratio of the distance to the fixed point after the step and the distance before the step:
+ 
+\begin{eqnarray}
+r_n = \frac{|x_{n+1} - x^*|}{|x_n - x*|}
+\end{eqnarray}
+
+\subsubsection*{3.1c.i}
+
+What does it mean if all $r_n < c < 1$ (i.e. all ratio’s are smaller than a certain number below 1). Give for this case the (optimal) upper bound of the distance $|x_n - x^*|$ in terms of $|x_0 - x^*|$ , $c$ and $n$.\\
+
+\textbf{Answer:}\\
+
+
+\subsubsection*{3.1c.ii}
+
+What is the consequence if all $r_ > c > 1$? Give for this case the optimal lower bound of the distance $|x_n - x^*|$ in terms of $|x_0 - x^*|$, $c$ and $n$.\\
+
+\textbf{Answer:}\\
+
+\subsection*{3.1d}
+
+Show that in our case, $r_n = |1 - \eta \lambda| \equiv r$, independent of $n$ (we refer to $r$ as the convergence rate). For which $\eta$ is the algorithm convergent?\\
+
+\textbf{Answer:}\\
+
+
+
+\subsection*{3.2}
+
+Consider the function $g(x, y) = \frac{\lambda_1}{2}(x - a_1)^2 + \frac{\lambda_2}{2} (y - a_2)^2$ with parameters $0 < \lambda_1 \leq \lambda_2$, and $a_i$ arbitrary.
+
+\subsection*{3.2a}
+
+Write down the gradient descent iteration rule. Verify that the minimum of $f$ is a fixed point.\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{3.2b}
+
+Show that $\eta = \frac{2}{\lambda_2 + \lambda_1}$ minimizes the larger ratio between $r_{n,x} = \frac{|x_{n+1} - x^*|}{|x_n - x^*|}$ and 	$r_{n,y} = \frac{|y_{n+1} - y^*|}{|y_n - y^*|}$, i.e., $\argmin_\eta \{ max\{r_{n,x},r_{n,y} \} \} = \frac{2}{\lambda_2 + \lambda_1}$. What happens if $\eta$ is smaller than this optimal value? What happens if it is larger?\\
+
+\textbf{Answer:}\\
+
+\subsection*{3.2c}
+
+What is the convergence rate for this $\eta$? What does this say about the applicability of
+gradient descent to functions with steep hills and flat valleys (i.e., if $\lambda_2 \gg \lambda_1$)?\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{3.2d}
+
+Implement the gradient descent algorithm for g in matlab.\\
+
+\textbf{Answer:}\\
+
+
+\subsection*{3.2e}
+
+Make some plots of the trajectories $\{(x_n,y_n)\}^N_{n=0}$ for different values of $\lambda_i$ and $\eta$ ($\eta$ optimal, larger than optimal, and smaller than optimal) to illustrate what is going on. Plot these trajectories on top of a contour plot of g. Monitor the convergence rates. Explain what happens.\\
+
+\textbf{Answer:}\\
 
 
 
