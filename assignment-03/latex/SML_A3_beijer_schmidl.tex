@@ -24,6 +24,7 @@
 \usepackage{polynom}
 \usepackage{physics}
 
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
@@ -329,7 +330,7 @@ You can also see this by looking at the iteration rule. Since when $\eta = \lamb
 We will investigate the convergence properties for different values of $\eta$. For this we look at the ratio of the distance to the fixed point after the step and the distance before the step:
  
 \begin{eqnarray}
-r_n = \frac{|x_{n+1} - x^*|}{|x_n - x*|}
+r_n = \frac{|x_{n+1} - x^*|}{|x_n - x^*|}
 \end{eqnarray}
 
 \subsubsection*{3.1c.i}
@@ -356,13 +357,34 @@ What is the consequence if all $r_ > c > 1$? Give for this case the optimal lowe
 \textbf{Answer:}\\
 
 
-Then with every step you get further and further away from the optimal point $x^*$. Therefore you'll diverge from the point $x^*$. while $r_c$ would be strictly greater then 1, any value just slightly higher then 1 is reachable in n steps. Thus 
+Then with every step you get further and further away from the optimal point $x^*$. Therefore you'll diverge from the point $x^*$. The constant c is larger than 1, so it is bounded by 1. While c can't be 1, it is the lower bound. Taking this we get that the best case scenario the distance won't change, so we get:
+
+\begin{equation}
+\abs{x_n-x^*} = \abs{x_0-x^*} + \epsilon
+\end{equation}
+
+With $0 < \epsilon$.
 
 \subsection*{3.1d}
 
 Show that in our case, $r_n = |1 - \eta \lambda| \equiv r$, independent of $n$ (we refer to $r$ as the convergence rate). For which $\eta$ is the algorithm convergent?\\
 
 \textbf{Answer:}\\
+
+\begin{eqnarray}
+r_n &=& \frac{\abs{x_{n+1} - x^*}}{\abs{x_n - x^*}}\\
+&=& \frac{\abs{ x_n - \eta \lambda (x_n - a) - a}}{\abs{x_n - a}}\\
+&=& \frac{\abs{(1-\eta \lambda) (x_n - a)}}{\abs{x_n - a}}\\
+&=& \abs{1-\eta \lambda}
+\end{eqnarray}
+
+
+This converges for when $r_n$ is strictly smaller then 1, so when $0 < \eta \lambda < 2$. So:
+
+\begin{equation}
+0 < \eta < \frac{2}{\lambda }
+\end{equation}
+
 
 
 
@@ -376,12 +398,108 @@ Write down the gradient descent iteration rule. Verify that the minimum of $f$ i
 
 \textbf{Answer:}\\
 
+The gradient of the function g is:
+
+\begin{eqnarray}
+\pdv{g}{x} &=& \lambda_1(x-a_1)\\
+\pdv{g}{y} &=& \lambda_2(y-a_2)\\
+\nabla g &=& \begin{bmatrix}
+\pdv{g}{x}\\
+\pdv{g}{y}
+\end{bmatrix} = \begin{bmatrix}
+\lambda_1 (x-a_1)\\
+\lambda_2 (y-a_2)
+\end{bmatrix}\\
+\begin{bmatrix}
+x_{n+1}\\
+y_{n+1}
+\end{bmatrix} &=& \begin{bmatrix}
+x_n\\
+y_n
+\end{bmatrix} +  \eta \nabla g(x)\\
+&=& \begin{bmatrix}
+x_n\\
+y_n
+\end{bmatrix} + \eta \begin{bmatrix}
+\lambda_1 (x-a_1)\\
+\lambda_2 (y-a_2)
+\end{bmatrix}
+\end{eqnarray}
+
+The minimum of g is: (I think the f was a typing error)
+
+\begin{eqnarray}
+\nabla g  &=& \begin{bmatrix}
+0\\
+0
+\end{bmatrix}\\
+&=& \begin{bmatrix}
+\lambda_1 (x-a_1)\\
+\lambda_2 (y-a_2)
+\end{bmatrix}\\
+\lambda_1 (x-a_1) &=& 0 \rightarrow x = a_1\\
+\lambda_2 (y-a_2) &=& 0 \rightarrow y = a_2\\
+\end{eqnarray}
+
+Now to show it is a fixed point:
+
+\begin{eqnarray}
+\begin{bmatrix}
+x_{n+1}\\
+y_{n+1}
+\end{bmatrix} &=& \begin{bmatrix}
+a_1\\
+a_2
+\end{bmatrix} + \eta \begin{bmatrix}
+\lambda_1 (a_1-a_1)\\
+\lambda_2 (a_2-a_2)
+\end{bmatrix}\\
+&=& \begin{bmatrix}
+a_1\\
+a_2
+\end{bmatrix}
+\end{eqnarray}
+
 
 \subsection*{3.2b}
 
 Show that $\eta = \frac{2}{\lambda_2 + \lambda_1}$ minimizes the larger ratio between $r_{n,x} = \frac{|x_{n+1} - x^*|}{|x_n - x^*|}$ and 	$r_{n,y} = \frac{|y_{n+1} - y^*|}{|y_n - y^*|}$, i.e., $\argmin_\eta \{ max\{r_{n,x},r_{n,y} \} \} = \frac{2}{\lambda_2 + \lambda_1}$. What happens if $\eta$ is smaller than this optimal value? What happens if it is larger?\\
 
 \textbf{Answer:}\\
+
+
+For the first ratio:
+
+\begin{eqnarray}
+r_{n,x} &=& \frac{\abs{x_{n+1}- x^*}}{\abs{x_n - x^*}}\\
+&=& \frac{\abs{x_n + \eta\lambda_1 (x_n-a_1) - a_1}}{\abs{x_n - a_1}}\\
+&=& \frac{\abs{ (1- \eta \lambda_1) (x_n - a_1)}}{\abs{x_n - a_1}}\\
+&=& \abs{1-\eta \lambda_1}
+\end{eqnarray}
+
+For the second ratio:
+
+\begin{eqnarray}
+r_{n,y} &=& \frac{\abs{y_{n+1}- y^*}}{\abs{y_n - y^*}}\\
+&=& \frac{\abs{y_n + \eta\lambda_2 (y_n-a_2) - a_2}}{\abs{y_n - a_2}}\\
+&=& \frac{\abs{ (1- \eta \lambda_2) (y_n - a_2)}}{\abs{y_n - a_2}}\\
+&=& \abs{1-\eta \lambda_2}
+\end{eqnarray}
+
+When they are at the minimum, the values are equal. For if one is not equal but higher you can always go in one direction to lower the first until it lowers so much it equals the second. This is easier to understand by looking at an example plot, here $\lambda_1 = 1$ and $\lambda_2 = 2$.
+
+\begin{eqnarray}
+\abs{1-\eta \lambda_1} &=& \abs{1-\eta \lambda_2}\\
+(1-\eta \lambda_1)^2 &=& (1- \eta \lambda_2)^2\\
+1 - \eta \lambda_1 &=& \pm (1-\eta \lambda_2)\\
+1 - \eta \lambda_1 &=& 1 - \eta \lambda_2\\
+\eta \lambda_2 - \eta \lambda_1 &=& 0 \\
+\eta &=& 0 \tab \text{Not the lowest solution, let's try the -}\\
+1 - \eta \lambda_1 &=& \eta \lambda_2 - 1\\
+2 &=& \eta (\lambda_1 + \lambda_2)\\
+\eta &=& \frac{2}{\lambda_1 + \lambda_2}
+\end{eqnarray}
+
 
 \subsection*{3.2c}
 
