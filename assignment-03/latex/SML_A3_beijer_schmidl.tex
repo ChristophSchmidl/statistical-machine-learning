@@ -23,7 +23,6 @@
 \usepackage{subcaption}
 \usepackage{polynom}
 \usepackage{physics}
-
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
 
@@ -487,6 +486,11 @@ r_{n,y} &=& \frac{\abs{y_{n+1}- y^*}}{\abs{y_n - y^*}}\\
 \end{eqnarray}
 
 When they are at the minimum, the values are equal. For if one is not equal but higher you can always go in one direction to lower the first until it lowers so much it equals the second. This is easier to understand by looking at an example plot, here $\lambda_1 = 1$ and $\lambda_2 = 2$.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/32b.png}
+\caption{Two ratios for $\lambda_1 = 1$ and $\lambda_2$ = 2. Notice that the optimal value is found at the second intersection, where $\eta \neq 0$, for the highest value of both of the functions is the lowest, moving left or right of that point either one is higher then at the intersection.}
+\end{figure}
 
 \begin{eqnarray}
 \abs{1-\eta \lambda_1} &=& \abs{1-\eta \lambda_2}\\
