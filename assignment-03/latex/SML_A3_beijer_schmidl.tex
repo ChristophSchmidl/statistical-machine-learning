@@ -22,6 +22,7 @@
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{polynom}
+\usepackage{physics}
 
 
 
@@ -270,6 +271,40 @@ Write down the gradient descent iteration rule. Verify that the minimum of $f$ i
 
 \textbf{Answer:}\\
 
+The gradient of f is:
+
+\begin{equation}
+\nabla f(x) = \lambda (x-a)
+\end{equation}
+
+And therefore the gradient descent iteration rule is:
+
+\begin{equation}
+x_{n+1} = x_n - \eta \lambda (x_n-a)
+\end{equation}
+
+The minimum of f can be found by setting it's gradient to 0:
+
+\begin{eqnarray}
+\lambda(x-a) &=& 0\\
+x-a &=& 0 \\
+x &=& a
+\end{eqnarray}
+
+To show it's a minimum we can take the second derivitive at point a:
+
+\begin{equation}
+f''(x) = \lambda \rightarrow f''(a) = \lambda
+\end{equation}
+
+Since $\lambda$ is strictly greater then 0, the second derivative at a is strictly greater then 0 and therefor a is the minimum.
+
+a is a fixed point since:
+
+\begin{eqnarray}
+x_{n+1} &=& a - \eta \nabla f(a)\\
+&=& a - \eta \lambda (a-a) = a
+\end{eqnarray}
 
 \subsection*{3.1b}
 
@@ -277,7 +312,17 @@ Find $\eta$ for which convergence is the fastest (actually in one step).\\
 
 \textbf{Answer:}\\
 
+Since it is given that the fastest is in one step, we can write :
 
+\begin{eqnarray}
+a &=& x - \eta \lambda f(x)\\
+&=& x - \eta \lambda (x-a)\\
+\eta \lambda (x-a) &=& x - a\\
+\eta \lambda &=& 1\\
+\eta &=& \frac{1}{\lambda}
+\end{eqnarray}
+
+You can also see this by looking at the iteration rule. Since when $\eta = \lambda^{-1}$, in the next iteration $x_n$ will cancel and you're left with (-(-a))=a, thus arriving at the minimum in one step, independent of x. 
 
 \subsection*{3.1c}
 
@@ -293,12 +338,25 @@ What does it mean if all $r_n < c < 1$ (i.e. all ratio’s are smaller than a ce
 
 \textbf{Answer:}\\
 
+If for all $r_n < c < 1$ then it means that always, independent of the iteration step, beginning starting point $x_0$, the ratios of the next iteration and the current are always lower then some number strictly smaller then 1. This means that the distance $r_n$ to the fixed point always decreases with a rate bounded by c. It also means that every new step brings you closer to a, it's not like there is some other fixed point you might end up at.
+\newpage 
+At every step the distance is multiplied by at least c, since the difference between the distance of the current and next step is c or lower. So the upper bound on the distance would be:
+
+\begin{equation}
+\abs{x_n-x^*} = c^n \abs{x_0 - x^{*}}
+\end{equation}
+
+Note that $c^n < 1$ since $ 0 < c < 1$.
+
 
 \subsubsection*{3.1c.ii}
 
 What is the consequence if all $r_ > c > 1$? Give for this case the optimal lower bound of the distance $|x_n - x^*|$ in terms of $|x_0 - x^*|$, $c$ and $n$.\\
 
 \textbf{Answer:}\\
+
+
+Then with every step you get further and further away from the optimal point $x^*$. Therefore you'll diverge from the point $x^*$. while $r_c$ would be strictly greater then 1, any value just slightly higher then 1 is reachable in n steps. Thus 
 
 \subsection*{3.1d}
 
