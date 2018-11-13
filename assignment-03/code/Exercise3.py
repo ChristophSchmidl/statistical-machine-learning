@@ -24,4 +24,4 @@ plt.ylabel('$r_n$',size=40)
 
 
 
-plt.legend(size=50)
+plt.legend(prop={'size': 20})
