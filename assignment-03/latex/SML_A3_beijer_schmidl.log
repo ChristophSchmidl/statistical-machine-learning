@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  13 NOV 2018 17:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.12)  14 NOV 2018 14:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2086,12 +2086,8 @@ File: Images/32b.png Graphic file (type png)
 Package pdftex.def Info: Images/32b.png used on input line 491.
 (pdftex.def)             Requested size: 469.47046pt x 249.53798pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 510--512
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 513--514
+[8 <./Images/32b.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 515--517
 
  []
 
@@ -2101,35 +2097,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 518--519
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--521
+Underfull \hbox (badness 10000) in paragraph at lines 549--550
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 525--526
+Underfull \hbox (badness 10000) in paragraph at lines 551--552
 
  []
 
-[8 <./Images/32b.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 527--528
+
+Underfull \hbox (badness 10000) in paragraph at lines 556--557
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 558--559
 
  []
 
 [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 531.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 531.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 562.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 562.
  (./SML_A3_beijer_schmidl.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 531.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 531.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 562.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 562.
 Package rerunfilecheck Info: File `SML_A3_beijer_schmidl.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 531.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 562.
  ) 
 Here is how much of TeX's memory you used:
- 27907 strings out of 493029
- 532231 string characters out of 6136233
- 598687 words of memory out of 5000000
- 31009 multiletter control sequences out of 15000+600000
+ 27911 strings out of 493029
+ 532279 string characters out of 6136233
+ 598983 words of memory out of 5000000
+ 31010 multiletter control sequences out of 15000+600000
  12795 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,12n,66p,10434b,350s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2153,10 +2154,10 @@ type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmtt12.pfb>
-Output written on SML_A3_beijer_schmidl.pdf (9 pages, 362001 bytes).
+Output written on SML_A3_beijer_schmidl.pdf (9 pages, 364324 bytes).
 PDF statistics:
- 208 PDF objects out of 1000 (max. 8388607)
- 170 compressed objects within 2 object streams
- 64 named destinations out of 1000 (max. 500000)
+ 213 PDF objects out of 1000 (max. 8388607)
+ 175 compressed objects within 2 object streams
+ 67 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

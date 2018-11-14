@@ -490,6 +490,7 @@ When they are at the minimum, the values are equal. For if one is not equal but 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Images/32b.png}
 \caption{Two ratios for $\lambda_1 = 1$ and $\lambda_2$ = 2. Notice that the optimal value is found at the second intersection, where $\eta \neq 0$, for the highest value of both of the functions is the lowest, moving left or right of that point either one is higher then at the intersection.}
+\label{Converg}
 \end{figure}
 
 \begin{eqnarray}
@@ -504,7 +505,11 @@ When they are at the minimum, the values are equal. For if one is not equal but 
 \eta &=& \frac{2}{\lambda_1 + \lambda_2}
 \end{eqnarray}
 
+We can say without loss of generality that $\lambda_1 < \lambda_2$. If that's not the case we can either swap lables. If they are the same then the ideal rate is optimal in both dimensions, and using an $\eta$ different then the optimal will decrease the converging rate for both directions x and y.
 
+As we can see in figure $\ref{Converg}$, a value of $\eta$ which is lower then the optimal will make y converge faster, though if it's negative it would make x diverge not as fast. If $\eta$ is greater then the optimal value, x will converge faster and after some point diverge slower then y.
+
+\newpage
 \subsection*{3.2c}
 
 What is the convergence rate for this $\eta$? What does this say about the applicability of
@@ -512,6 +517,32 @@ gradient descent to functions with steep hills and flat valleys (i.e., if $\lamb
 
 \textbf{Answer:}\\
 
+The convergence rate for x and y  will be:
+
+\begin{eqnarray}
+r_{n,x} &=& \abs{1 - \frac{2\lambda_1}{\lambda_1 + \lambda_2}}\\
+r_{n,y} &=& \abs{1 - \frac{2\lambda_2}{\lambda_1 + \lambda_2}}
+\end{eqnarray}
+
+In the case that $\lambda_2 \gg \lambda_1$, we can say that $\lambda_1 = \epsilon \lambda_2$. Then we can take the limit for $\epsilon \rightarrow 0$.
+
+\begin{eqnarray}
+\lim_{\epsilon \rightarrow 0} (1+\epsilon) &=& 1\\
+r_{n,x} &=& \abs{1 - \frac{2\epsilon \lambda_2}{(1 + \epsilon) \lambda_2}}\\
+\lim_{ \epsilon\rightarrow 0} r_{n,x} &=& \lim_{ \epsilon\rightarrow 0} \abs{1 - \frac{2\epsilon \lambda_2}{(1 + \epsilon) \lambda_2}}\\
+&=& \lim_{ \epsilon\rightarrow 0} \abs{1 - \frac{2 \epsilon\lambda_2}{\lambda_2}}\\
+&=& 1
+\end{eqnarray}
+
+Now for y:
+
+\begin{eqnarray}
+r_{n,y} &=& \abs{ 1- \frac{2\lambda_2}{(1+\epsilon) \lambda_2}}\\
+\lim_{ \epsilon\rightarrow 0} r_{n,y} &=& \lim_{ \epsilon\rightarrow 0} \abs{ 1- \frac{2\lambda_2}{(1+\epsilon) \lambda_2}}\\
+&=& \abs{1 - 2} = 1
+\end{eqnarray}
+
+So it won't converge it either direction. 
 
 \subsection*{3.2d}
 
