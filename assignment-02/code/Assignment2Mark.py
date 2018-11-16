@@ -62,6 +62,10 @@ def LogGamma(n):
         n -= 1
     return Total + np.log(np.math.gamma(n))
 
+def Bernouli(x,theta):
+    return theta**x*(1-theta)**(1-x)
+
+
 #%%
 
 Mean = Alpha/(Alpha+Beta)
@@ -140,6 +144,12 @@ plt.xlabel(r"$\alpha$",fontsize=50)
 plt.ylabel(r"$\beta$",fontsize=50)
 ax2.view_init(elev=80, azim=270)
 
+#%%
+
+
+y = Bernouli(x,0.9)
+
+plt.plot(x,y)
 
 
 

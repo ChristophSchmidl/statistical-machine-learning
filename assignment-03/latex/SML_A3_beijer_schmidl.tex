@@ -415,13 +415,13 @@ y_{n+1}
 \end{bmatrix} &=& \begin{bmatrix}
 x_n\\
 y_n
-\end{bmatrix} +  \eta \nabla g(x)\\
+\end{bmatrix} -  \eta \nabla g(x_n)\\
 &=& \begin{bmatrix}
 x_n\\
 y_n
-\end{bmatrix} + \eta \begin{bmatrix}
-\lambda_1 (x-a_1)\\
-\lambda_2 (y-a_2)
+\end{bmatrix} - \eta \begin{bmatrix}
+\lambda_1 (x_n-a_1)\\
+\lambda_2 (y_n-a_2)
 \end{bmatrix}
 \end{eqnarray}
 
@@ -449,7 +449,7 @@ y_{n+1}
 \end{bmatrix} &=& \begin{bmatrix}
 a_1\\
 a_2
-\end{bmatrix} + \eta \begin{bmatrix}
+\end{bmatrix} - \eta \begin{bmatrix}
 \lambda_1 (a_1-a_1)\\
 \lambda_2 (a_2-a_2)
 \end{bmatrix}\\
@@ -471,7 +471,7 @@ For the first ratio:
 
 \begin{eqnarray}
 r_{n,x} &=& \frac{\abs{x_{n+1}- x^*}}{\abs{x_n - x^*}}\\
-&=& \frac{\abs{x_n + \eta\lambda_1 (x_n-a_1) - a_1}}{\abs{x_n - a_1}}\\
+&=& \frac{\abs{x_n - \eta\lambda_1 (x_n-a_1) - a_1}}{\abs{x_n - a_1}}\\
 &=& \frac{\abs{ (1- \eta \lambda_1) (x_n - a_1)}}{\abs{x_n - a_1}}\\
 &=& \abs{1-\eta \lambda_1}
 \end{eqnarray}
@@ -480,7 +480,7 @@ For the second ratio:
 
 \begin{eqnarray}
 r_{n,y} &=& \frac{\abs{y_{n+1}- y^*}}{\abs{y_n - y^*}}\\
-&=& \frac{\abs{y_n + \eta\lambda_2 (y_n-a_2) - a_2}}{\abs{y_n - a_2}}\\
+&=& \frac{\abs{y_n - \eta\lambda_2 (y_n-a_2) - a_2}}{\abs{y_n - a_2}}\\
 &=& \frac{\abs{ (1- \eta \lambda_2) (y_n - a_2)}}{\abs{y_n - a_2}}\\
 &=& \abs{1-\eta \lambda_2}
 \end{eqnarray}
@@ -557,6 +557,21 @@ Make some plots of the trajectories $\{(x_n,y_n)\}^N_{n=0}$ for different values
 
 \textbf{Answer:}\\
 
+Let's first take an example from what we saw in 3.2c. We've chosen $\lambda_1 = 10^7$ and $\lambda_2 = 1$. We've token $\eta$ to be the optimal value. $x_0 = 3$ and $y_0 = 4$ for all the situations.
 
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/HighLamb.png}
+\caption{Gradient descent for high $\lambda_1$. Notice how high the hill is ($10^8$). In the x direction it hops between $\approx$ 3 and $\approx$ -1. y stays at $\approx$ 4.}
+\label{mountain}
+\end{figure}
+
+What happens at \ref{mountain} is that in x, $\eta \lambda$ equals 2. So it would need to go to x=1, but it overshoots by going exactly twice the required amount. So it will land on $3 - (2\cdot -2) = -1$.
+From there it will overshoot going back and it will land again on $x\approx 2$. For y $\eta \lambda$ almost equals 0, so it doesn't go anywhere and stays at y=4.
+
+I use approximate because it doesn't go exactly to -1, it first for examples goes to -0.9999996000000402. This is because it will have this behaviour in the event of $\lambda_1 \rightarrow \infty$ and we're not quite there yet for $\lambda_1 = 10^7$, but we can get arbitrary close to it if we make $\lambda_1$ larger. (This all assumes $\lambda_2$ stays the same)
+\\
+
+Another way to make it stuck forever (this time truly forever) is by chosing $\eta$ in such a way that it will always overshoot. If we take $\lambda_1 = \lambda_2 = \lambda$, then $\eta = \frac{2}{\lambda}$ will give the desired result, since then $r_n = \abs{1-\eta \lambda} = \abs{1 - 2} = 1$
 
 \end{document}
