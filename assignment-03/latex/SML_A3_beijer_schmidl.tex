@@ -531,6 +531,7 @@ In the case that $\lambda_2 \gg \lambda_1$, we can say that $\lambda_1 = \epsilo
 r_{n,x} &=& \abs{1 - \frac{2\epsilon \lambda_2}{(1 + \epsilon) \lambda_2}}\\
 \lim_{ \epsilon\rightarrow 0} r_{n,x} &=& \lim_{ \epsilon\rightarrow 0} \abs{1 - \frac{2\epsilon \lambda_2}{(1 + \epsilon) \lambda_2}}\\
 &=& \lim_{ \epsilon\rightarrow 0} \abs{1 - \frac{2 \epsilon\lambda_2}{\lambda_2}}\\
+&=& \lim_{ \epsilon\rightarrow 0} \abs{1 - 2\epsilon}\\
 &=& 1
 \end{eqnarray}
 
@@ -539,6 +540,7 @@ Now for y:
 \begin{eqnarray}
 r_{n,y} &=& \abs{ 1- \frac{2\lambda_2}{(1+\epsilon) \lambda_2}}\\
 \lim_{ \epsilon\rightarrow 0} r_{n,y} &=& \lim_{ \epsilon\rightarrow 0} \abs{ 1- \frac{2\lambda_2}{(1+\epsilon) \lambda_2}}\\
+&=& \lim_{ \epsilon\rightarrow 0} \abs{ 1- \frac{2\lambda_2}{ \lambda_2}}\\
 &=& \abs{1 - 2} = 1
 \end{eqnarray}
 
@@ -557,11 +559,11 @@ Make some plots of the trajectories $\{(x_n,y_n)\}^N_{n=0}$ for different values
 
 \textbf{Answer:}\\
 
-Let's first take an example from what we saw in 3.2c. We've chosen $\lambda_1 = 10^7$ and $\lambda_2 = 1$. We've token $\eta$ to be the optimal value. $x_0 = 3$ and $y_0 = 4$ for all the situations.
+Let's first take an example from what we saw in 3.2c. We've chosen $\lambda_1 = 10^7$ and $\lambda_2 = 1$. We've taken $\eta$ to be the optimal value ($\frac{2}{\lambda_1 + \lambda_2}$). $x_0 = 3$ and $y_0 = 4$ for all the situations.
 
 
 \begin{figure}[H]
-\includegraphics[width=\textwidth]{Images/HighLamb.png}
+\includegraphics[width=0.7\textwidth]{Images/HighLamb.png}
 \caption{Gradient descent for high $\lambda_1$. Notice how high the hill is ($10^8$). In the x direction it hops between $\approx$ 3 and $\approx$ -1. y stays at $\approx$ 4.}
 \label{mountain}
 \end{figure}
@@ -572,6 +574,60 @@ From there it will overshoot going back and it will land again on $x\approx 2$. 
 I use approximate because it doesn't go exactly to -1, it first for examples goes to -0.9999996000000402. This is because it will have this behaviour in the event of $\lambda_1 \rightarrow \infty$ and we're not quite there yet for $\lambda_1 = 10^7$, but we can get arbitrary close to it if we make $\lambda_1$ larger. (This all assumes $\lambda_2$ stays the same)
 \\
 
-Another way to make it stuck forever (this time truly forever) is by chosing $\eta$ in such a way that it will always overshoot. If we take $\lambda_1 = \lambda_2 = \lambda$, then $\eta = \frac{2}{\lambda}$ will give the desired result, since then $r_n = \abs{1-\eta \lambda} = \abs{1 - 2} = 1$
+Another way to make it stuck forever (this time truly forever) is by chosing $\eta$ in such a way that it will always overshoot. If we take $\lambda_1 = \lambda_2 = \lambda$, then $\eta = \frac{2}{\lambda}$ will give the desired result, since then $r_n = \abs{1-\eta \lambda} = \abs{1 - 2} = 1$. An example is that for $\lambda = 1$ and $\eta = 2$. This you can see in figure \ref{NonConLamb}.
+
+\begin{figure}[H]
+\includegraphics[width=0.7\textwidth]{Images/NonConLamb.png}
+\caption{Gradient descent for $\lambda_1=\lambda_2 = 1$ and $\eta = 2$. Now the distance to the optimal point won't increase or decrease, and it jumps to and from the two only reachable points. }
+\label{NonConLamb}
+\end{figure}
+
+
+\newpage
+
+Now let's look at two examples of converging paths. If we set $\eta$ at the optimal value it can converge in one step if the $\lambda_1=\lambda_2$. Then for both directions the ideal $\eta$ is the same. We took $\lambda_1=\lambda_2 = 1$ and the ideal number for $\eta$. Then we get the following graph as seen in figure \ref{Ideal}.
+
+\begin{figure}[H]
+\includegraphics[width=0.7\textwidth]{Images/ConvOnce.png}
+\caption{Gradient descent for $\lambda_1=\lambda_2=1$ and $\eta$ the optimal value of 1. It converges in one step.}
+\label{Ideal}
+\end{figure}
+
+Now if the $\lambda_1 \neq \lambda_2$ we won't have a convergence. For both $r_{n,x}$ and $r_{n,y}$ will have a fixed value between 0 and 1, but not quite 0. So even after $10^5$ iterations we won't get the value to be exactly at the minimum, but ended up at x = 1.0000000000000002 and y = 1.0000000000000004 . In this case you could however say you're satisfied if you're within a certain range of the minimum. This we tested with $\lambda_1 = 10$, $\lambda_2 = 1$ and $\eta$ optimal.
+
+
+\begin{figure}[H]
+\includegraphics[width=0.7\textwidth]{Images/ConvMany.png}
+\caption{Gradient descent for $\lambda_1 = 10$ and $\lambda_2 = 1$, with an optimal $\eta$. Notice how it overshoots for x, since $1-\eta\lambda_1 < 0$ . Vice versa it slowly converges in the y direction. This is because the if the subtraction $x_{n+1} - x^*$ flips sign, it will be on the other side of $x^*$. Therefore it will overshoot. And vice versa.}
+\end{figure}
+
+\newpage
+
+We can also have the same situation as before, where it converges, but $\eta = \frac{\eta_{optimal}}{10} = \frac{1}{10} \frac{2}{\lambda_1+\lambda_2} = \frac{2}{110} = \frac{1}{55}$. Then we will have a slower converge. For example, in 100 steps it will still be at a distance of $r = \abs{x_n - x^*} + \abs{y_n - y^*} \approx 0.48$ while at the optimal rate it would be at distance $r \approx 9.6\cdot 10^{-9}$. This you can see at figure \ref{SlowConv}:
+
+
+\begin{figure}[H]
+\includegraphics[width=0.7\textwidth]{Images/SlowConv}
+\caption{Gradient descent which converges for the same parameters as at \ref{Ideal}, but with $\eta = \frac{\eta_{optimal}}{10}$. It looks smoother but it doesn't converge as fast.}
+\label{SlowConv}
+\end{figure} 
+\newpage
+What can also happen is that it converges in one dimension but diverges in another. This happens if $r_n=\abs{1-\eta \lambda}$ is smaller then 1 for one direction and greater then 1 for the other. For example, this happens for $\eta = 3$, $\lambda_1 = 1$ and $\lambda_2 = 0.5$. Then we will have $r_{n,x} = \abs{1-3} = 2$ and $r_{n,y} = \abs{1-1.5} = 0.5$. And since the sum in de absolute argument is negative for both, they will both jump over the minimum, but this is always the case for diverging paths since $\eta$ and $\lambda$ are both positive. This you can see in figure \ref{TopHalfConv}, where I have chosen the values for the $\lambda's$ I just mentioned, and the starting points are $x_0 = 3$ and $x_y =90$, so it is more evident it converges in y and diverges in x. Also, in this case $\eta$ should have been lower, it should have been $\eta_{optimal} = \frac{2}{\lambda_1+\lambda+2} = \frac{2}{1.5}< 2 < 3$. 
+
+\begin{figure}[H]
+\includegraphics[width = 0.7\textwidth]{Images/TopHalfConv}
+\caption{Gradient descent where it diverges in x and converges in y.}
+\label{TopHalfConv}
+\end{figure}
+
+Now the final situation is when it diverges in both directions. If I fix $\eta = 1$ then it would happen for $\lambda_1 =3$, $ \lambda_2 = 2.5$. This you can see in figure \ref{BothDiverge}. 
+
+\begin{figure}[H]
+\includegraphics[width=0.7\textwidth]{Images/BothDiverge}
+\caption{Gradient descent where it diverges in both x and y since $\lambda_1 = 3$, $\lambda_2 = 2.5$ and $\eta = 1$.}
+\label{BothDiverge}
+\end{figure} 
+
+
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.9.28)  15 NOV 2018 22:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.9.28)  19 NOV 2018 09:48
 entering extended mode
 **./SML_A3_beijer_schmidl.tex
 (SML_A3_beijer_schmidl.tex
@@ -2218,17 +2218,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 518--519
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 549--550
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 551--552
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 556--557
+Underfull \hbox (badness 10000) in paragraph at lines 553--554
 
  []
 
@@ -2237,33 +2232,87 @@ Underfull \hbox (badness 10000) in paragraph at lines 558--559
 
  []
 
-<Images/HighLamb.png, id=119, 1489.06313pt x 1011.02719pt>
-File: Images/HighLamb.png Graphic file (type png)
-<use Images/HighLamb.png>
-Package pdftex.def Info: Images/HighLamb.png  used on input line 564. on input 
-line 564.
-Package pdftex.def Info: Requested size: 469.47046pt x 318.75294pt on input lin
-e 564.
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 572--574
+
+Underfull \hbox (badness 10000) in paragraph at lines 560--561
 
  []
 
-[10 <./Images/HighLamb.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 577.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 577.
+<Images/HighLamb.png, id=119, 1489.06313pt x 1011.02719pt>
+File: Images/HighLamb.png Graphic file (type png)
+<use Images/HighLamb.png>
+Package pdftex.def Info: Images/HighLamb.png  used on input line 566. on input 
+line 566.
+Package pdftex.def Info: Requested size: 328.62788pt x 223.12088pt on input lin
+e 566.
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 574--576
+
+ []
+
+<Images/NonConLamb.png, id=132, 1480.02937pt x 1067.48813pt>
+File: Images/NonConLamb.png Graphic file (type png)
+<use Images/NonConLamb.png>
+Package pdftex.def Info: Images/NonConLamb.png  used on input line 580. on inpu
+t line 580.
+Package pdftex.def Info: Requested size: 328.62788pt x 237.0145pt on input line
+ 580.
+[10 <./Images/HighLamb.png> <./Images/NonConLamb.png>]
+<Images/ConvOnce.png, id=140, 1637.36719pt x 1094.58937pt>
+File: Images/ConvOnce.png Graphic file (type png)
+<use Images/ConvOnce.png>
+Package pdftex.def Info: Images/ConvOnce.png  used on input line 591. on input 
+line 591.
+Package pdftex.def Info: Requested size: 328.62788pt x 219.68228pt on input lin
+e 591.
+<Images/ConvMany.png, id=141, 1583.9175pt x 1076.52188pt>
+File: Images/ConvMany.png Graphic file (type png)
+<use Images/ConvMany.png>
+Package pdftex.def Info: Images/ConvMany.png  used on input line 600. on input 
+line 600.
+Package pdftex.def Info: Requested size: 328.62788pt x 223.34949pt on input lin
+e 600.
+ [11 <./Images/ConvOnce.png> <./Images/ConvMany.png>]
+<Images/SlowConv.png, id=149, 1588.43437pt x 1089.31969pt>
+File: Images/SlowConv.png Graphic file (type png)
+<use Images/SlowConv.png>
+Package pdftex.def Info: Images/SlowConv.png  used on input line 610. on input 
+line 610.
+Package pdftex.def Info: Requested size: 328.62788pt x 225.35645pt on input lin
+e 610.
+ [12 <./Images/SlowConv.png>]
+<Images/TopHalfConv.png, id=158, 1624.56938pt x 1099.10625pt>
+File: Images/TopHalfConv.png Graphic file (type png)
+<use Images/TopHalfConv.png>
+Package pdftex.def Info: Images/TopHalfConv.png  used on input line 618. on inp
+ut line 618.
+Package pdftex.def Info: Requested size: 328.62788pt x 222.333pt on input line 
+618.
+<Images/BothDiverge.png, id=160, 1669.73813pt x 1097.60063pt>
+File: Images/BothDiverge.png Graphic file (type png)
+<use Images/BothDiverge.png>
+Package pdftex.def Info: Images/BothDiverge.png  used on input line 626. on inp
+ut line 626.
+Package pdftex.def Info: Requested size: 328.62788pt x 216.0159pt on input line
+ 626.
+ [13 <./Images/TopHalfConv.png> <./Images/BothDiverge.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 633.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 633.
  (SML_A3_beijer_schmidl.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 577.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 577.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 633.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 633.
 Package rerunfilecheck Info: File `SML_A3_beijer_schmidl.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 577.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 633.
  ) 
 Here is how much of TeX's memory you used:
- 29378 strings out of 493312
- 561288 string characters out of 3142818
- 633837 words of memory out of 3000000
- 32483 multiletter control sequences out of 15000+200000
+ 29422 strings out of 493312
+ 562148 string characters out of 3142818
+ 634517 words of memory out of 3000000
+ 32512 multiletter control sequences out of 15000+200000
  539427 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,12n,66p,10436b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2284,9 +2333,9 @@ cm/cmsy5.pfb><D:/Programs/MikTex/fonts/type1/public/amsfonts/cm/cmsy6.pfb><D:/P
 rograms/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Programs/MikTex/fon
 ts/type1/public/amsfonts/cm/cmtt10.pfb><D:/Programs/MikTex/fonts/type1/public/a
 msfonts/cm/cmtt12.pfb>
-Output written on SML_A3_beijer_schmidl.pdf (10 pages, 990872 bytes).
+Output written on SML_A3_beijer_schmidl.pdf (13 pages, 4723458 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 69 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 251 PDF objects out of 1000 (max. 8388607)
+ 78 named destinations out of 1000 (max. 500000)
+ 58 words of extra memory for PDF output out of 10000 (max. 10000000)
 
