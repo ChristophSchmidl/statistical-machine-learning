@@ -336,7 +336,7 @@ Make a plot of the mean of the data set as a function of the number of points. C
 
 \textbf{Answer:}\\
 
-The true mean of the data points is $\approx 5.579$ which is close to the original position if the lighthouse $\alpha_t = 5.022$. I assume that we probably need between 250 and 500 more data points because we can already see from the plot that the graph converges around the point of 400 data points.\\
+The true mean of the data points is $\approx 5.579$ which is close to the original position of the lighthouse $\alpha_t = 5.022$. I assume that we probably need between 250 and 500 more data points because we can already see from the plot that the graph converges around the point of 400 data points.\\
 
 \begin{lstlisting}[language=Python]
 mus = [np.mean(positions[:i + 1]) for i in range(N_points)]
@@ -388,7 +388,58 @@ Hint: Create a function that calculates the (log)likelihood at a specific point 
 
 \textbf{Answer:}\\
 
+The following code produced figure \ref{fig:132}.
 
+\begin{lstlisting}[language=Python]
+arrived_datapoints = [1, 2, 3, 20]
+alpha_list, beta_list = np.meshgrid(np.linspace(-10, 10, num=500), np.linspace(0, 5, num=250))
+plt.style.use('classic')
+
+for k in arrived_datapoints:
+    x = positions[:k]
+    likelihood = k * np.log(beta_list/np.pi)
+    for loc in x:
+        likelihood -= np.log(beta_list**2 + (loc - alpha_list)**2)
+        
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+    ax.plot_surface(alpha_list, beta_list, likelihood, cmap=plt.cm.viridis, vmin=-200, vmax=likelihood.max())
+    plt.xlabel(r'$\alpha$')
+    plt.ylabel(r'$\beta$')
+    ax.set_zlabel('$\ln p(D | \alpha, \beta)$')
+    plt.title('Log likelihood for $k = {}$'.format(k))
+    plt.savefig('1_3_2_{}.png'.format(k), bbox_inches='tight', dpi=300)
+    plt.show()
+\end{lstlisting}
+
+ \begin{figure*}
+        \centering
+        \begin{subfigure}[b]{0.475\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Images/1_3_2_1.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.475\textwidth}  
+            \centering 
+            \includegraphics[width=\textwidth]{Images/1_3_2_2.png}
+            
+        \end{subfigure}
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{Images/1_3_2_3.png}
+           
+        \end{subfigure}
+        \quad
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{Images/1_3_2_20.png}
+           
+        \end{subfigure}
+        \caption[ Log likelihood at point $(\alpha, \beta)$ after k points have arrived ]
+        {\small Log likelihood at point $(\alpha, \beta)$ after k points have arrived} 
+        \label{fig:132}
+    \end{figure*}
 
 \subsection*{1.3.3}
 

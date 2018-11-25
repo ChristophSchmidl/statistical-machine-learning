@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.17)  25 NOV 2018 22:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.17)  25 NOV 2018 23:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2140,129 +2140,134 @@ Underfull \hbox (badness 10000) in paragraph at lines 389--390
 
  []
 
+<Images/1_3_2_1.png, id=149, 462.2871pt x 361.35pt>
+File: Images/1_3_2_1.png Graphic file (type png)
+<use Images/1_3_2_1.png>
+Package pdftex.def Info: Images/1_3_2_1.png  used on input line 419.
+(pdftex.def)             Requested size: 223.00133pt x 174.31169pt.
+<Images/1_3_2_2.png, id=150, 462.2871pt x 361.35pt>
+File: Images/1_3_2_2.png Graphic file (type png)
+<use Images/1_3_2_2.png>
+Package pdftex.def Info: Images/1_3_2_2.png  used on input line 424.
+(pdftex.def)             Requested size: 223.00133pt x 174.31169pt.
+<Images/1_3_2_3.png, id=151, 462.2871pt x 361.35pt>
+File: Images/1_3_2_3.png Graphic file (type png)
+<use Images/1_3_2_3.png>
+Package pdftex.def Info: Images/1_3_2_3.png  used on input line 430.
+(pdftex.def)             Requested size: 223.00133pt x 174.31169pt.
+<Images/1_3_2_20.png, id=152, 462.2871pt x 361.35pt>
+File: Images/1_3_2_20.png Graphic file (type png)
+<use Images/1_3_2_20.png>
+Package pdftex.def Info: Images/1_3_2_20.png  used on input line 436.
+(pdftex.def)             Requested size: 223.00133pt x 174.31169pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 395--396
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 399--400
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 412--413
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 418--419
+Underfull \hbox (badness 10000) in paragraph at lines 446--447
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--421
+Underfull \hbox (badness 10000) in paragraph at lines 448--449
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 426--427
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 428--429
-
- []
-
-
+[7] [8 <./Images/1_3_2_1.png> <./Images/1_3_2_2.png> <./Images/1_3_2_3.png> <./
+Images/1_3_2_20.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 450--451
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 452--453
-
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 491--492
+Underfull \hbox (badness 10000) in paragraph at lines 461--462
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--494
+Underfull \hbox (badness 10000) in paragraph at lines 463--464
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 517--518
+Underfull \hbox (badness 10000) in paragraph at lines 469--470
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 519--520
+Underfull \hbox (badness 10000) in paragraph at lines 471--472
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 477--478
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 479--480
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 503--504
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 534--535
+Underfull \hbox (badness 10000) in paragraph at lines 542--543
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 536--537
+Underfull \hbox (badness 10000) in paragraph at lines 544--545
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 549--550
+Underfull \hbox (badness 10000) in paragraph at lines 568--569
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 551--552
+Underfull \hbox (badness 10000) in paragraph at lines 570--571
+
+ []
+
+[10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 585--586
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--577
+Underfull \hbox (badness 10000) in paragraph at lines 587--588
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 578--579
-
- []
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 645--646
+Underfull \hbox (badness 10000) in paragraph at lines 600--601
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 647--648
+Underfull \hbox (badness 10000) in paragraph at lines 602--603
 
  []
 
-[11]
-<Images/32b.png, id=211, 1340.6085pt x 712.5822pt>
-File: Images/32b.png Graphic file (type png)
-<use Images/32b.png>
-Package pdftex.def Info: Images/32b.png  used on input line 671.
-(pdftex.def)             Requested size: 469.47046pt x 249.53798pt.
- [12 <./Images/32b.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 695--697
+
+Underfull \hbox (badness 10000) in paragraph at lines 627--628
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 629--630
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 696--697
 
  []
 
@@ -2271,89 +2276,105 @@ Underfull \hbox (badness 10000) in paragraph at lines 698--699
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 731--732
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 733--734
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 738--739
+[13]
+<Images/32b.png, id=252, 1340.6085pt x 712.5822pt>
+File: Images/32b.png Graphic file (type png)
+<use Images/32b.png>
+Package pdftex.def Info: Images/32b.png  used on input line 722.
+(pdftex.def)             Requested size: 469.47046pt x 249.53798pt.
+ [14 <./Images/32b.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 746--748
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 740--741
+Underfull \hbox (badness 10000) in paragraph at lines 749--750
 
  []
 
-<Images/HighLamb.png, id=220, 1489.06313pt x 1011.02719pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 782--783
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 784--785
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 789--790
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 791--792
+
+ []
+
+<Images/HighLamb.png, id=261, 1489.06313pt x 1011.02719pt>
 File: Images/HighLamb.png Graphic file (type png)
 <use Images/HighLamb.png>
-Package pdftex.def Info: Images/HighLamb.png  used on input line 746.
+Package pdftex.def Info: Images/HighLamb.png  used on input line 797.
 (pdftex.def)             Requested size: 328.62788pt x 223.12088pt.
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 754--756
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 805--807
 
  []
 
-<Images/NonConLamb.png, id=234, 1480.02937pt x 1067.48813pt>
+<Images/NonConLamb.png, id=275, 1480.02937pt x 1067.48813pt>
 File: Images/NonConLamb.png Graphic file (type png)
 <use Images/NonConLamb.png>
-Package pdftex.def Info: Images/NonConLamb.png  used on input line 760.
+Package pdftex.def Info: Images/NonConLamb.png  used on input line 811.
 (pdftex.def)             Requested size: 328.62788pt x 237.0145pt.
-[14 <./Images/HighLamb.png> <./Images/NonConLamb.png>]
-<Images/ConvOnce.png, id=242, 1637.36719pt x 1094.58937pt>
+[16 <./Images/HighLamb.png> <./Images/NonConLamb.png>]
+<Images/ConvOnce.png, id=283, 1637.36719pt x 1094.58937pt>
 File: Images/ConvOnce.png Graphic file (type png)
 <use Images/ConvOnce.png>
-Package pdftex.def Info: Images/ConvOnce.png  used on input line 771.
+Package pdftex.def Info: Images/ConvOnce.png  used on input line 822.
 (pdftex.def)             Requested size: 328.62788pt x 219.68228pt.
-<Images/ConvMany.png, id=243, 1583.9175pt x 1076.52188pt>
+<Images/ConvMany.png, id=284, 1583.9175pt x 1076.52188pt>
 File: Images/ConvMany.png Graphic file (type png)
 <use Images/ConvMany.png>
-Package pdftex.def Info: Images/ConvMany.png  used on input line 780.
+Package pdftex.def Info: Images/ConvMany.png  used on input line 831.
 (pdftex.def)             Requested size: 328.62788pt x 223.34949pt.
- [15 <./Images/ConvOnce.png> <./Images/ConvMany.png>]
-<Images/SlowConv.png, id=251, 1588.43437pt x 1089.31969pt>
+ [17 <./Images/ConvOnce.png> <./Images/ConvMany.png>]
+<Images/SlowConv.png, id=292, 1588.43437pt x 1089.31969pt>
 File: Images/SlowConv.png Graphic file (type png)
 <use Images/SlowConv.png>
-Package pdftex.def Info: Images/SlowConv.png  used on input line 790.
+Package pdftex.def Info: Images/SlowConv.png  used on input line 841.
 (pdftex.def)             Requested size: 328.62788pt x 225.35645pt.
- [16 <./Images/SlowConv.png>]
-<Images/TopHalfConv.png, id=260, 1624.56938pt x 1099.10625pt>
+ [18 <./Images/SlowConv.png>]
+<Images/TopHalfConv.png, id=301, 1624.56938pt x 1099.10625pt>
 File: Images/TopHalfConv.png Graphic file (type png)
 <use Images/TopHalfConv.png>
-Package pdftex.def Info: Images/TopHalfConv.png  used on input line 798.
+Package pdftex.def Info: Images/TopHalfConv.png  used on input line 849.
 (pdftex.def)             Requested size: 328.62788pt x 222.333pt.
-<Images/BothDiverge.png, id=262, 1669.73813pt x 1097.60063pt>
+<Images/BothDiverge.png, id=303, 1669.73813pt x 1097.60063pt>
 File: Images/BothDiverge.png Graphic file (type png)
 <use Images/BothDiverge.png>
-Package pdftex.def Info: Images/BothDiverge.png  used on input line 806.
+Package pdftex.def Info: Images/BothDiverge.png  used on input line 857.
 (pdftex.def)             Requested size: 328.62788pt x 216.0159pt.
- [17 <./Images/TopHalfConv.png> <./Images/BothDiverge.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 813.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 813.
+ [19 <./Images/TopHalfConv.png> <./Images/BothDiverge.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 864.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 864.
  (./SML_A3_beijer_schmidl.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 813.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 813.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 864.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 864.
 Package rerunfilecheck Info: File `SML_A3_beijer_schmidl.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 813.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 864.
  ) 
 Here is how much of TeX's memory you used:
- 30339 strings out of 492649
- 578255 string characters out of 6129621
- 730493 words of memory out of 5000000
- 33678 multiletter control sequences out of 15000+600000
- 539427 words of font info for 59 fonts, out of 8000000 for 9000
+ 30420 strings out of 492649
+ 579442 string characters out of 6129621
+ 738584 words of memory out of 5000000
+ 33728 multiletter control sequences out of 15000+600000
+ 540972 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,12n,66p,10434b,1897s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -2364,24 +2385,26 @@ usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
 r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
 local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
 cal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loca
-l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
-texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/te
-xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texl
-ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive
-/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/20
-18/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2018/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on SML_A3_beijer_schmidl.pdf (17 pages, 4829334 bytes).
+l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/
+texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texl
+ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texliv
+e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2
+018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2018
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2018/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt12.pfb>
+Output written on SML_A3_beijer_schmidl.pdf (19 pages, 6837797 bytes).
 PDF statistics:
- 374 PDF objects out of 1000 (max. 8388607)
- 311 compressed objects within 4 object streams
- 157 named destinations out of 1000 (max. 500000)
- 73 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 424 PDF objects out of 1000 (max. 8388607)
+ 349 compressed objects within 4 object streams
+ 180 named destinations out of 1000 (max. 500000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 
