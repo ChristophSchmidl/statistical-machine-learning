@@ -336,6 +336,8 @@ Make a plot of the mean of the data set as a function of the number of points. C
 
 \textbf{Answer:}\\
 
+The true mean of the data points is $\approx 5.579$ which is close to the original position if the lighthouse $\alpha_t = 5.022$. I assume that we probably need between 250 and 500 more data points because we can already see from the plot that the graph converges around the point of 400 data points.\\
+
 \begin{lstlisting}[language=Python]
 mus = [np.mean(positions[:i + 1]) for i in range(N_points)]
 mean = [np.mean(positions)] * (N_points)
