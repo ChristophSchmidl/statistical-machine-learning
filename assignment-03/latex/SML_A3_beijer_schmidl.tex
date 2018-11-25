@@ -234,8 +234,41 @@ Plot $p(\alpha|\mathcal{D}, \beta = 2)$ as a function of $\alpha$ over the inter
 
 \textbf{Answer:}\\
 
+The mean of the data is $ \approx 1.02$ but the value which maximizes the likelihood is $\hat{\alpha}\approx 2.57$. We assume that 10 data points are not sufficiently large to compute a reliable result.
+
+\begin{lstlisting}[language=Python]
+# 10 points in km
+data = np.array([3.6, 7.7, -2.6, 4.9, -2.3, 0.2, -7.3, 4.4, 7.3, -5.7])
+# distance beta from the shore is known to be 2 km
+beta = 2
+alpha_list = np.linspace(-10, 10, num=1000)
+
+def get_probability_1_1_4(x, alpha, beta):
+    return np.product(beta/(np.pi*beta**2+(x-alpha)**2))
 
 
+likelihoods = [get_probability_1_1_4(data, alpha, beta) for alpha in alpha_list]
+plt.xlabel(r'$\alpha$')
+plt.ylabel(r'$p(\alpha|D, \beta = 2)$')
+plt.plot(alpha_list, likelihoods)
+plt.savefig('1_1_4.png')
+plt.show()
+
+print("Mean of the data: {}".format(np.mean(data)))
+
+max_likelihood_index = np.argmax(likelihoods)
+max_likelihood_value = np.max(likelihoods)
+
+print("Max likelihood value {} at position {}.".format(max_likelihood_value, max_likelihood_index))
+print("Alpha value which maximizes likelihood: {}".format(alpha_list[max_likelihood_index]))
+\end{lstlisting}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/1_1_4.png}
+\caption{Plotting probability density over $\alpha$}
+\label{fig:114}
+\end{figure}
 
 \textbf{Part 2 - Generate the lighthouse data}\\
 
