@@ -171,6 +171,32 @@ p(x_k | \alpha, \beta) &= p(\theta_k) \times \big| \frac{d \theta}{d x} \big|\\
 &= \frac{\beta}{\pi [\beta^2 + (x_k - \alpha)^2 ]}
 \end{align*}
 
+Plotting the distribution as shown in figure \ref{fig:112} using the following code:
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt 
+%matplotlib inline
+
+def get_probability_distribution(x, alpha, beta):
+    return beta/(np.pi*(beta**2+(x-alpha)**2))
+    
+x = np.linspace(-10, 10, num=1000) 
+probs = get_probability_distribution(x, 3, 1) 
+plt.xlabel(r'$x_k$')
+plt.ylabel(r'$p(x_k|\alpha, \beta)$')
+plt.plot(x, probs)
+plt.savefig('1_1_2.png')
+plt.show()    
+\end{lstlisting}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/1_1_2.png}
+\caption{Plotting $p(x_k | \alpha, \beta)$ with $\alpha = 3$ and $\beta = 1$}
+\label{fig:112}
+\end{figure}
+
 \subsection*{1.1.3}
 
 Inferring the position of the lighthouse corresponds to estimating $\alpha$ and $\beta$ from the data $\mathcal{D}$. This is still quite difficult, but if we assume that $\beta$ is known, then from Bayes’ theorem we know that $p(\alpha|\mathcal{D}, \beta) \propto p(\mathcal{D}|\alpha, \beta) p(\alpha|\beta)$. We have no a priori knowledge about the position $\alpha$ along the coast other than that it should not depend on the distance out at sea.\\
