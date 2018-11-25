@@ -141,7 +141,35 @@ Hint: use the Jacobian $|\frac{d \theta}{d x }|$ (Bishop, p.18) and the fact tha
 
 \textbf{Answer:}\\
 
+Isolating variable $\theta_k$ using arctan:
 
+\begin{align*}
+\beta \tan(\theta_k) &= x_k - \alpha\\
+\tan(\theta_k) &= \frac{x_k - \alpha}{\beta}\\
+\theta_k &= \tan^{-1}(\frac{x_k - \alpha}{\beta})
+\end{align*}
+
+Computing the jacobian and using the little hint that $(tan^{-1}x)' = \frac{1}{1 + x^2}$:
+
+\begin{align*}
+|\frac{d \theta}{d x }| &= \frac{1}{1 + (\frac{x_k - \alpha}{\beta})^2} \times \frac{\beta}{\beta^2}\\
+&= \frac{\beta}{\beta^2 + \beta^2(\frac{x_k - \alpha}{\beta})^2}\\
+&= \frac{\beta}{ \beta^2 + (x_k - \alpha)^2}
+\end{align*}
+
+Showing that the expected distribution over $x$ given $\alpha$ and $\beta$ can be written as
+
+\begin{align*}
+p(x_k | \alpha, \beta) = \frac{\beta}{\pi [\beta^2 + (x_k - \alpha)^2 ]}
+\end{align*}
+
+by:
+
+\begin{align*}
+p(x_k | \alpha, \beta) &= p(\theta_k) \times \big| \frac{d \theta}{d x} \big|\\
+&= \frac{1}{\pi} \times  \frac{\beta}{ \beta^2 + (x_k - \alpha)^2}\\
+&= \frac{\beta}{\pi [\beta^2 + (x_k - \alpha)^2 ]}
+\end{align*}
 
 \subsection*{1.1.3}
 
