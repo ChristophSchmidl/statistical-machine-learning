@@ -370,6 +370,13 @@ Use (3) to get an expression for the loglikelihood of the data $\mathcal{D}$ as 
 
 \textbf{Answer:}\\
 
+\begin{align*}
+p(\mathcal{D}| \alpha, \beta) &= \prod_{k = 1}N p(x_k | \alpha, \beta)\\
+\ln p(\mathcal{D} | \alpha, \beta) &= \ln \prod_{k = 1}^N p(x_k | \alpha, \beta)\\
+&= \sum_{k = 1}^N \ln p(x_k | \alpha, \beta)\\
+&= \sum_{k = 1}^N \ln \frac{\beta}{\pi [\beta^2 + (x_k - \alpha)^2]}\\
+&= N \ln \frac{\beta}{\pi} - \sum_{k = 1}^N \ln [ \beta^2 + (x_k - \alpha)^2]
+\end{align*}
 
 \subsection*{1.3.2}
 
