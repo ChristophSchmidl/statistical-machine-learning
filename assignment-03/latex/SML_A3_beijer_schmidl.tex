@@ -108,7 +108,17 @@ would be a reasonable distribution over $\theta_k$ between $\pm \frac{\pi}{2}$ (
 
 \textbf{Answer:}\\
 
+The description states that photo-detectors are only located on the coast side but not on the shore side. Normally a lighthouse emits light in a rotating fashion of $360^{\circ}$ but based on the before mentioned fact we can assume that photo-detectors can only detect light beams in an angle of $180^{\circ}$ around the light house on the coast side, whereas the remaining $180^{\circ}$ on the shore side are not detected by any photo-detectors. If we transform the degrees into radians then we have $360^{\circ} = 2 \pi $ radians and $180^{\circ} =  \pi $ radians. Based on the fact that we are only interested in the specific angle $\theta_k$ and not the whole region of $180^{\circ}$ or $\pi$ radians, $\frac{1}{\pi}$ seems like a reasonable distribution in this case.\\
 
+We can also show that $p(\theta_k | \alpha, \beta) = \frac{1}{\pi}$ is a reasonable distribution over $\theta_k$ between $\pm \frac{\pi}{2}$ by demsonstrating that it integrates to 1:
+
+\begin{align*}
+\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{1}{\pi}  \: dx &= \bigg[ \frac{x}{\pi} \bigg]_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\\
+&= \big[ \frac{\frac{\pi}{2}}{\pi} \big] - \big[- \frac{\frac{\pi}{2}}{\pi} \big]\\
+&= \frac{\frac{\pi}{2} + \frac{\pi}{2}}{\pi}\\
+&= \frac{\pi}{\pi}\\
+&= 1
+\end{align*}
 
 \subsection*{1.1.2}
 
