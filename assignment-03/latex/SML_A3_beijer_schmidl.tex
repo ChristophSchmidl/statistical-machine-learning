@@ -211,6 +211,19 @@ and give an expression for the value $\hat{\alpha}$ that maximizes this posterio
 
 \textbf{Answer:}\\
 
+\begin{align*}
+L &= \ln(p(\alpha|\mathcal{D}, \beta))\\
+&= \ln(\prod_{k=1}^N \frac{\beta}{\pi [\beta^2 + (x_k - \alpha)^2]})\\
+&= \sum_{k=1}^N \ln (\frac{\beta}{\pi} \times \frac{1}{\beta^2 + (x_k - \alpha)^2})\\
+&= N \ln \frac{\beta}{\pi} - \sum_{k=1}^N \ln [\beta^2 + (x_k - \alpha)^2]\\
+&= constant - \sum_{k = 1}^N \ln [\beta^2 + (x_k - \alpha)^2]
+\end{align*}
+
+Expression for the value $\hat{\alpha}$ that maximizes this posterior density:
+
+\begin{align*}
+\hat{\alpha} = \argmax_\alpha \sum_{k = 1}^N \ln [\beta^2 + (x_k - \alpha)^2]
+\end{align*}
 
 \subsection*{1.1.4}
 
