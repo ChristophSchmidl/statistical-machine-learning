@@ -281,6 +281,22 @@ Sample a random position $(\alpha_t, \beta_t)$ from a uniform distribution over 
 
 \textbf{Answer:}\\
 
+\begin{lstlisting}[language=Python]
+# Exercise 1.2.1
+
+alpha_t = np.random.uniform(0, 10) 
+beta_t = np.random.uniform(2, 4)
+
+print(alpha_t)
+print(beta_t)
+\end{lstlisting}
+
+We will work with:
+
+\begin{itemize}
+	\item $\alpha_t = 5.022$
+	\item $\beta_t = 2.436$
+\end{itemize}
 
 \subsection*{1.2.2}
 
@@ -288,6 +304,31 @@ From this position generate a data set $\mathcal{D} = \{ x_1,..., x_N \}$ of 500
 
 \textbf{Answer:}\\
 
+We already know from exercise 1.1.2 that we can calculate the isolated angle $\theta_k$ by restructuring the following equation: 
+
+\begin{align*}
+ \beta \tan(\theta_k) = x_k - \alpha
+\end{align*}
+
+Getting the isolated position $x_k$ is even easier to do:
+
+\begin{align*}
+\beta \tan(\theta_k) &= x_k - \alpha\\
+x_k &= \beta \tan(\theta_k) + \alpha
+\end{align*}
+
+\begin{lstlisting}[language=Python]
+# Exercise 1.2.2
+
+def position(angle, alpha, beta): 
+    return beta * np.tan(angle) + alpha
+
+N_points = 500
+angles = np.random.uniform(-np.pi/2, np.pi/2, N_points)
+positions = [position(angle, alpha_t, beta_t) for angle in angles]
+
+print(positions)
+\end{lstlisting}
 
 \subsection*{1.2.3}
 
