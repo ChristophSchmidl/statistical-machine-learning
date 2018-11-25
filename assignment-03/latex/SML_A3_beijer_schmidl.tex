@@ -336,7 +336,27 @@ Make a plot of the mean of the data set as a function of the number of points. C
 
 \textbf{Answer:}\\
 
+\begin{lstlisting}[language=Python]
+mus = [np.mean(positions[:i + 1]) for i in range(N_points)]
+mean = [np.mean(positions)] * (N_points)
+X = np.arange(1, N_points + 1)
+plt.plot(X, mus, label='Mean over time')
+plt.plot(X, mean, label='True mean')
+plt.xlabel('data points')
+plt.ylabel(r'$\alpha$')
+plt.legend()
+plt.savefig('1_2_3.png', bbox_inches='tight', dpi=300)
+plt.show()
 
+print("Mean of the data points: {}".format(np.mean(positions)))
+\end{lstlisting}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/1_2_3.png}
+\caption{Plotting probability density over $\alpha$}
+\label{fig:114}
+\end{figure}
 
 \textbf{Part 3 - Find the lighthouse}\\
 
