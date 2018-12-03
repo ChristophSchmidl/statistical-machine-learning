@@ -309,7 +309,7 @@ Train the network on this data set. Use at least 40 hidden nodes and a learning 
 One widely used kernel function for Gaussian process regression is given by the exponential of quadratic form, with the addition of constant and linear terms (eq. 6.63 Bishop):
 
 \begin{eqnarray} \label{eq:5}
-k(\textbf{x}, \textbf{x'}) = \theta_0 \exp(- \frac{\theta_1}{2} || \textbf{x} - \textbf{x}' ||^2) + \theta_2 + \theta_3 \textbf{x}^T \textbf{x}'
+k(\textbf{x}, \textbf{x}') = \theta_0 \exp(- \frac{\theta_1}{2} || \textbf{x} - \textbf{x}' ||^2) + \theta_2 + \theta_3 \textbf{x}^T \textbf{x}'
 \end{eqnarray}
 
 We denote by $\boldsymbol{\theta}  = (\theta_0, \theta_1, \theta_2, \theta_3)$ the hyperparameter vector governing the kernel function $k$.
