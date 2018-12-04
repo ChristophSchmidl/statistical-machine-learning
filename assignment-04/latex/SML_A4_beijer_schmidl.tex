@@ -383,19 +383,146 @@ Using the same kernel from (\ref{eq:5}), compute the Gram matrix \textbf{K(X,X)}
 
 \textbf{Part 2 - Gaussian processes for regression}\\
 
+We would like to apply Gaussian process models to the problem of regression (Bishop 6.4.2). We consider a noisy model of the form 
+
+\begin{align*}
+t_n = y_n + \epsilon_n,
+\end{align*}
+
+where $y_n = y(x_n)$ and $\epsilon_n$ are i.i.d. samples from a random noise variable on the observed target values. Furthermore, we assume that the noise process has a Gaussian distribution given by:
+
+\begin{eqnarray} \label{eq:6}
+p(t_n | y_n) = \mathcal{N}(t_n | y_n, \beta^{-1})
+\end{eqnarray}
+
+Going back to a one-dimensional input space, we consider the following training data consisting of four data points 
+
+\begin{align*}
+\mathcal{D} \{ (x_1 = -0.5, t_1 = 0.5), (x_2 = 0.2, t_2 = -1), (x_3 = 0.3, t_3 = 3),(x_4 = -0.1, t_4 = -2.5) \}
+\end{align*}
+
+
+\subsection*{3.2.1}
+
+Just as before, compute the Gram matrix of the training data for $\boldsymbol{\theta} = (1,1,1,1)$. Then, taking $\beta = 1$ in Equation \ref{eq:6}, compute the covariance matrix \textbf{C} corresponding to the marginal distribution of the training target values: $p(\textbf{t}) = \mathcal{N}(\textbf{t} | \textbf{0, C})$.\\
+
+\textbf{Answer:}\\
+
+
+
+
+
+
+\subsection*{3.2.2}
+
+Using the previous results, compute the mean and the covariance of the conditional distribution $p(t | \textbf{t})$ of a new target value $t$ corresponding to the input $x = 0$. Which equations from Bishop do you need?\\
+
+\textbf{Answer:}\\
+
+
+
+
+
+
+
+\subsection*{3.2.3}
+
+Does the mean of the conditional distribution $p(t | \textbf{t})$ go to zero in the limit $x \to \pm \infty$? If so, explain why this happens. If not, how would you set the parameters $\boldsymbol{\theta}$ of the kernel function to make it happen?\\
+
+\textbf{Answer:}\\
+
+ 
 
 
 \section*{Exercise 4 - EM and doping (weight 5)}
 
+In a certain hypothetical sport, banned substance '\textbf{X}' has become popular as a performance enhancing drug, as its presence is hard to establish in blood samples directly. Recently, it has been discovered that users of the drug tend to show a strong positive correlation between concentrations of two other quantities, $x_1$ and $x_2$, present in the blood. In contrast, 'clean' athletes tend to fall in one of two or three groups, that either show no or a negative correlation between $x_1$ and $x_2$. Unfortunately, as each sample contains only a single, instantaneous, measurement for each variable, it is not possible to establish this correlation from the sample. However, in many cases it is possible to distinguish to which \textit{class} a certain sample belongs by also looking at the values of two other measured variables, $x_3$ and $x_4$: certain combinations of measured values are often typical for one class but highly unusual for others.\\
+After a high profile event, a large scale test has resulted in 2000 samples. Rumours suggest the number of positives could be as high as 20\%. However, the exact relationship between different classes and typical $x$ values is still not clear. This is where the EM-algorithm comes in...\\
+
+The blood sample measurements are modelled as a mixture of $K$ Gaussians, one for each class
+
+\begin{eqnarray} \label{eq:7}
+p(x | \mu, \Sigma, \pi) = \sum^K_{k = 1} \pi_k \mathcal{N}(x | \mu_k, \sigma_k)
+\end{eqnarray}
+
+where $\textbf{x} = [x_1, x_2, x_3, x_4]$ represents the values for the measured quantities in the blood sample, $\mu = \{ \mu_1, ..., \mu_K\}$ and $\Sigma = \{ \Sigma_1, ..., \Sigma_K\}$ are the means and covariance matrices of the Gaussians for each class, and $\pi = \{ \pi_1, ..., \pi_K\}$ are the mixing coefficients in the overall data set.\\
+
+Load the data using\\
+
+\hspace{1cm} \texttt{data = load('a011\_mixdata.txt', '-ASCII');}\\
+
+and set N to the number of datapoints and D to the number of variables in the dataset X.
+
+\subsection*{4.1}
+
+Try to give an estimate of the number, size and shape of the classes in the data, by plotting the distribution of the variables, e.g. using \texttt{hist()}, \texttt{scatter()} or \texttt{scatter3()}.\\
+
+\textbf{Answer:}\\
 
 
 
 
-\subsection*{3.2d}
+
+
+\subsection*{4.2}
+
+Implement an EM-algorithm using the description and formulas given in Bishop, §9.2.2. Use variable K for the number of classes and choose a priori equal mixing coefficients $\pi_k$. Initialize the means $\boldsymbol{\\mu}_k$, to random values around the sample mean of each variable, e.g. set $\mu_{k,1}$ to  $\bar{x}_1 + [-1 \leq \epsilon \leq +1]$. Initialize the $\Sigma_k$ to diagonal matrices with reasonably high variances, e.g. $4*\texttt{rand()}+2$, to avoid very small responsibilities in the first step. Make sure the EM-loop runs over at least 100 iterations. Display relevant quantities, at least the log likelihood (9.28), after each step so you can monitor progress and convergence. Write a plot routine that plots the $x_1, x_2$ coordinates of the data points, and color each data point according to the most probable component according to the mixture model.\\
+
+\textbf{Answer:}\\
 
 
 
-\subsection*{3.2e}
+
+
+
+\subsection*{4.3}
+
+Set $K = 2$, initialize your random generator and run the EM-algorithm on the data. Describe what happens. Try different random initializations and compare results.\\
+\textit{(Should converge within 50 steps to two clusters, accounting for $\pm 1/3$ resp. $2/3$ of the data)}. Plot the $x_1, x_2$ coordinates colored according to the most probable component. Compute the correlation coefficients 
+
+\begin{eqnarray} \label{eq:8}
+p_{12} = \frac{cov[x_1, x_2]}{\sqrt{var[x_1] var[x_2]}}
+\end{eqnarray}
+
+of each of the components (i.e., use their covariance matrices to compute variances and covariances in (\ref{eq:8}), see also (Bishop, eq. (2.93))). Does either class show the characteristic strong\footnote{According to Wikipedia, the correlation is none if $|p| < 0.1$, small if $0.1 < |p| < 0.3$, medium if $0.3 < |p| < 0.5$ and strong if $|p| > 0.5$} positive correlation for $\{ x_1, x_2\}$?\\
+
+
+\textbf{Answer:}\\
+
+
+
+
+
+
+
+\subsection*{4.4}
+
+Increase the number of classes to $K = 3$ and rerun your algorithm on the data, again trying different random initializations. Plot the $x_1, x_2$ coordinates colored according to the most probable component and compute the correlation coefficients of each of the components. Check both your plot and your coefficients if one of the clusters now displays the strong positive $\{ x_1, x_2\}$ correlation we are looking for.\\
+Increase to $K = 4$, do the same, and see if this improves your result (in terms of detection of the doping-clusters). Based on your findings, is the rumoured 1-in-5 estimate for users of X credible?\\
+
+
+\textbf{Answer:}\\
+
+
+
+\subsection*{4.5}
+
+Having found the offending cluster in the data using the EM-algorithm, we are now presented with four samples $\{ A, B, C, D\}$, with values for $[x_1, x_2, x_3, x_4]$ given as 
+
+\begin{align*}
+A &= [11.85, 2.2, 0.5, 4.0]\\
+B &= [11.95, 3.1, 0.0, 1.0]\\
+C &= [12.00, 2.5, 0.0, 2.0]\\
+D &= [12.00, 3.0, 1.0, 6.3]
+\end{align*}
+
+One of these is from a subject who took drug X, and one is from a subject who tried to tamper with the test by artificially altering one or more of the $x_i$ levels in his/her blood sample.\\
+
+Identify which sample belongs to the suspected user and which one belongs to the 'fraud'.\\
+
+\textbf{Answer:}\\
+
+
 
 
 
