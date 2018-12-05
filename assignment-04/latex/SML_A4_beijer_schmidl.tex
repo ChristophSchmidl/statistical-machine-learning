@@ -83,7 +83,7 @@
 
 \textbf{Part 1 - The IRLS algorithm}\\
 
-Many machine learning problems require minimizing / maximizing some function $f(x)$. For this, an alternative to the familiar gradient descent technqiue, is the so called Newton-Raphson iterative method:
+Many machine learning problems require minimizing / maximizing some function $f(x)$. For this, an alternative to the familiar gradient descent technique, is the so called Newton-Raphson iterative method:
 
 \begin{eqnarray} \label{eq:1}
 \textbf{x}^{(n+1)} = \textbf{x}^{(n)} - \textbf{H}^{-1} \nabla f(\textbf{x}^{(n)})
@@ -103,9 +103,13 @@ x^{(n+1)} = x^{(n)} - \frac{f'(x^{(n)})}{f''(x^{(n)})}
 
 \textbf{Answer:}\\
 
+\begin{align*}
+x^{(x+1)} &= x^{(n)} - \frac{\sin'(x^{(n)})}{\sin''(x^{(n)})}\\
+&=  x^{(n)} - \frac{\cos(x^{(n)})}{-\sin(x^{(n)})}\\
+&=  x^{(n)} + \frac{\cos(x^{(n)})}{\sin(x^{(n)})}\\
+\end{align*}
 
-
-
+TODO: Insert graph to visualize maximum and minimum for sin(x)
 
 
 
