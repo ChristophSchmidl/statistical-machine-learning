@@ -103,14 +103,68 @@ x^{(n+1)} = x^{(n)} - \frac{f'(x^{(n)})}{f''(x^{(n)})}
 
 \textbf{Answer:}\\
 
+Expression for the minimization / maximization of the function $f(x) = \sin(x)$:
+
 \begin{align*}
 x^{(x+1)} &= x^{(n)} - \frac{\sin'(x^{(n)})}{\sin''(x^{(n)})}\\
 &=  x^{(n)} - \frac{\cos(x^{(n)})}{-\sin(x^{(n)})}\\
 &=  x^{(n)} + \frac{\cos(x^{(n)})}{\sin(x^{(n)})}\\
 \end{align*}
 
-TODO: Insert graph to visualize maximum and minimum for sin(x)
+\begin{lstlisting}[language=Python]
+import numpy as np
+import sympy as sp
 
+# Exercise 1.1.1
+
+## See also: https://docs.sympy.org/latest/tutorial/calculus.html
+
+def f(x):
+    return np.sin(x)
+
+def iterative_optimization(x):
+    """ Using Newton-Raphson iterative optimization scheme """
+    return x + (np.cos(x)/np.sin(x))
+
+x_t = 1
+n_iterations = 5
+
+print("Starting the optimization process with x_0: {}".format(x_t))
+
+for i in range(n_iterations):
+    x_t = iterative_optimization(x_t)
+    print("Step {}: {}".format(i, x_t))
+    
+# Starting the optimization process with x_0: 1
+# Step 0: 1.6420926159343308
+# Step 1: 1.5706752771612507
+# Step 2: 1.5707963267954879
+# Step 3: 1.5707963267948966
+# Step 4: 1.5707963267948966
+
+# Starting the optimization process with x_0: -1
+# Step 0: -1.6420926159343308
+# Step 1: -1.5706752771612507
+# Step 2: -1.5707963267954879
+# Step 3: -1.5707963267948966
+# Step 4: -1.5707963267948966
+\end{lstlisting}
+
+
+
+If we take $x_0 = 1$, then the algorithm converges after 4 steps towards $1.5707963267948966$ which is an approximation of $\frac{\pi}{2}$.\\ 
+If we take $x_0 = -1$, then the algorithm converges after 4 steps towards $-1.5707963267948966$ which is an approximation of $-\frac{\pi}{2}$.
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/sine_cosine.png}
+\caption{Sine and Cosine}
+\label{Fig:sine-cosine}
+\end{figure}
+
+When we take a look at figure \ref{Fig:sine-cosine} then we can see that the maximum and minimum of the sine function is indeed at $(x = \frac{\pi}{2}, f(x) = 1)$ and $(x = -\frac{\pi}{2}, f(x) = -1)$ with possible shiftings to the right and left based on the periodic nature of the sine function.\\
+
+Note: Also see \url{https://en.wikipedia.org/wiki/Newton%27s_method#Applications}
 
 
 \subsection*{1.1.2}
