@@ -192,6 +192,39 @@ Show using e.g. a Matlab implementation that for this situation the IRLS algorit
 
 \textbf{Answer:}\\
 
+Regarding equation (\ref{eq:3}), $\mathcal{C}_1$ represents the posterior of class 1 given the feature vector $\phi$. $\sigma(a)$ represents the logistic sigmoid function defined by (see Bishop, page 197, eq. 4.59): 
+
+\begin{align*}
+\sigma(a) = \frac{1}{1 + \exp(-a)}
+\end{align*} 
+
+The standard logistic function is the same as the above (see: \url{https://en.wikipedia.org/wiki/Logistic_function}) and is defined  as
+
+\begin{align*}
+f(x) = \frac{1}{1 + e^{-x}}
+\end{align*}
+
+Therefore, 
+
+\begin{align*}
+p(\mathcal{C}_1 | \phi ) = y(\phi) = \sigma(w^T \phi) = \frac{1}{1 + \exp(-(w^T\phi))}
+\end{align*}
+
+As stated in Bishop, page 208, eq 4.99 and 4.100: The Newton-Raphson update formula for the logistic regression model becomes 
+
+\begin{align*}
+\textbf{w}^{new} &= \textbf{w}^{old} - (\boldsymbol{\Phi} ^T \textbf{R} \boldsymbol{\Phi} )^{-1} \boldsymbol{\Phi} ^T (\textbf{y} - \textbf{t})\\
+&= (\boldsymbol{\Phi}^T \textbf{R} \boldsymbol{\Phi} )^{-1} \{ \boldsymbol{\Phi}^T \textbf{R}  \boldsymbol{\Phi} \textbf{w}^{(old)} - \boldsymbol{\Phi}^T (\textbf{y} - \textbf{t})  \}\\
+&= (\boldsymbol{\Phi}^T \textbf{R} \boldsymbol{\Phi} )^{-1} \boldsymbol{\Phi}^T \textbf{R} \textbf{z} 
+\end{align*}
+
+where \textbf{z} is an N-dimensional vector with elements
+
+\begin{align*}
+\textbf{z} = \boldsymbol{\Phi} \textbf{w}^{old} - \textbf{R}^{-1} (\textbf{y} -\textbf{t})
+\end{align*}
+
+
 
 TODO:
 
@@ -205,6 +238,8 @@ TODO:
 Useful internet resources which helped solving this exercise:
 
 \begin{itemize}
+	\item Second Order Optimization - The Math of Intelligence 2: \url{https://www.youtube.com/watch?v=UIFMLK2nj_w}
+	\item Logistic Regression - The Math of Intelligence (Week 2): \url{https://www.youtube.com/watch?v=D8alok2P468}
 	\item \url{https://thelaziestprogrammer.com/sharrington/math-of-machine-learning/solving-logreg-newtons-method}
 	\item \url{http://cs229.stanford.edu/notes/cs229-notes1.pdf}
 	\item \url{https://www.stat.cmu.edu/~cshalizi/350/lectures/26/lecture-26.pdf}
