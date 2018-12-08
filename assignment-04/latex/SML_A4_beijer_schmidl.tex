@@ -192,20 +192,6 @@ Show using e.g. a Matlab implementation that for this situation the IRLS algorit
 
 \textbf{Answer:}\\
 
-Regarding equation (\ref{eq:3}), $\mathcal{C}_1$ represents the posterior of class 1 given the feature vector $\phi$. $\sigma(a)$ represents the logistic sigmoid function defined by (see Bishop, page 197, eq. 4.59): 
-
-\begin{align*}
-\sigma(a) = \frac{1}{1 + \exp(-a)}
-\end{align*} 
-
-The standard logistic function is the same as the above (see: \url{https://en.wikipedia.org/wiki/Logistic_function}) and is defined  as
-
-\begin{align*}
-f(x) = \frac{1}{1 + e^{-x}}
-\end{align*}
-
-Therefore, 
-
 \begin{align*}
 p(\mathcal{C}_1 | \phi ) = y(\phi) = \sigma(w^T \phi) = \frac{1}{1 + \exp(-(w^T\phi))}
 \end{align*}
@@ -226,13 +212,67 @@ where \textbf{z} is an N-dimensional vector with elements
 
 
 
-TODO:
+The following Python code converges after 6 iterations towards $\hat{\textbf{w}}^T = [  9.78227684, -21.73839298]$ which is pretty close to the optimal solution.
 
-\begin{itemize}
-	\item Read Bishop, §4.3.2
-	\item Read Bishop, eq.4.96 - 98
-	\item The IRLS algorithm
-\end{itemize}
+
+\begin{lstlisting}[language=Python]
+# Exercise 1.1.2
+
+def sigmoid(x):
+    """ The standard logistic function. np.exp also accepts arrays"""
+    return 1.0 / (1 + np.exp(-x))
+
+def gradient_of_error(phi, y, t):
+    """ Gradient (first-order derivatives) of the error function, see Bishop page 207, eq. 4.96 """
+    return np.dot(phi.T, y - t)
+
+def hessian_of_error(phi, y):
+    """ Hessian (second-order derivatives) of the error function, see Bishop page 207, eq. 4.97 """
+    R = np.diag(np.ravel(y * (1 - y)))
+    return np.dot(phi.T, np.dot(R, phi))
+
+
+w = np.array([ [1.0], [1.0] ]) # two-dimensional weight vector
+x = np.array([0.3, 0.44, 0.46, 0.6])
+t = np.array([ [1], [0], [1], [0] ]) # targets
+phi = np.array([ [1, x_element] for x_element in x ]) # feature vector
+
+for i in range(10):
+    y = sigmoid(np.dot(phi, w)) # class estimates
+    
+    current_gradient = gradient_of_error(phi, y, t)
+    current_hessian = hessian_of_error(phi, y)
+    
+    w = w - np.dot(np.linalg.inv(current_hessian), current_gradient)
+    
+    print("Iteration {}: \nphi={} \ny={}, \ncurrent_gradient={}, \ncurrent_hessian={}, \nw={}\n".format(
+        i, phi, y, current_gradient, current_hessian, w))
+    
+# Converges after 6 iterations  
+# w=[[  9.78227684][-21.73839298]]
+\end{lstlisting}
+
+\vspace{1em}
+
+In order to show that $\phi = 0.45$ is indeed the decision boundary, we  show that the probability of a data point with $\phi = 0.45$ is the same for both classes. That means that both classes have a probability of  $0.5$ since $p(C_1 \vert \phi) + p(C_2 \vert \phi) = 1$.
+
+		\begin{align*}
+			p(C_1 \vert \phi) = y(\phi) = \sigma (\boldsymbol w^T \phi) = \sigma (\begin{pmatrix} 9.78227684 \\ -21.73839298 \end{pmatrix}^T \begin{pmatrix} 1\\0.45 \end{pmatrix}) \approx 0.50
+		\end{align*}
+
+We can also prove that in a slightly different way using the optimal solution:
+
+\begin{align*}
+p(C_1 | \phi) &= \frac{1}{1 + \exp(-w^T \phi)}\\
+0.5 &= \frac{1}{1 + \exp(-[9.8, -21.7]^T [1, \phi])}\\
+0.5 &= \frac{1}{1 + \exp(-9.8 + 21.7 \phi)}\\
+2 &= 1 + \exp{-9.8 + 21.7 \phi}\\
+1 &= \exp(-9.8 + 21.7 \phi)\\
+\ln(1) &= -9.8 + 21.7 \phi\\
+0 &= -9.8 + 21.7 \phi\\
+21.7 \phi &= 9.8\\
+\phi &= \frac{9.8}{21.7} \approx 0.45
+\end{align*}
 
 
 Useful internet resources which helped solving this exercise:
