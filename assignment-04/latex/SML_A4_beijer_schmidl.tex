@@ -313,6 +313,43 @@ Make a scatter plot of the data, similar to Figure \ref{Fig:two-class-dataset}. 
 
 \textbf{Answer:}\\
 
+The following Python code generates figure \ref{Fig:1_2_1}:
+
+\begin{lstlisting}[language=Python]
+# Exercise 1.2.1
+
+data = np.loadtxt("data/a010_irlsdata.txt")
+
+print("Shape of loaded data: {}".format(data.shape))
+X = data[:,0:2] # feature vector
+print("Shape of feature vector: {}".format(X.shape))
+
+Y = data[:,2:3] # label vector
+print("Shape of label vector: {}".format(Y.shape))
+
+# Plot
+plt.scatter(X[:,0], X[:,1], c=Y.ravel())
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.savefig('figure_1_2_1.png')
+plt.show()
+\end{lstlisting}
+
+\vspace{1em}
+
+We do not think that Logistic Regression is a good approach to classify this type of data because the data does not seem to be linearly separable.
+
+The decision boundary drawn by Logistic regression is a linear combination of features and weights denoted by $w_0 + \sum_i w_iX_i$ and therefore is only able to draw a hyperplane through the space to predict one class of each side respectively. The presented data cannot be divided by such a plane except when it would be possible to apply kernel methods like in Support Vector Machines which maps the problem into a new space.\\
+
+See also: \url{https://homes.cs.washington.edu/~marcotcr/blog/linear-classifiers/}
+
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_1_2_1.png}
+\caption{Scatter plot of two class data of exercise 1 - Part 2}
+\label{Fig:1_2_1}
+\end{figure}
 
 
 
