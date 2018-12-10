@@ -30,6 +30,18 @@ plt.ylabel('$r_n$',size=40)
 plt.legend(prop={'size': 20})
 
 #%%
+Lambda1 = 10
+Lambda2 = 1
+
+
+eta = 2/(Lambda1+Lambda2)
+
+OnAbsRad1 = 1-eta*Lambda1
+OnAbsRad2 = 1-eta*Lambda2
+
+print(OnAbsRad1,OnAbsRad2)
+
+#%%
 
 
 def g(x,y,a1,a2,lambda1,lambda2):
@@ -65,9 +77,10 @@ def plotTraject(Times,x,y,a1,a2,lambda1,lambda2,eta,ax):
             print("Converged at step " + str(i+1))
             printed = True
         x,y = xnew,ynew
-        #print(x,y)
+        print("New x = \t" + str(x) + "\nNew y = \t" + str(y))
     print(xnew)
     print(ynew)
+    print(np.abs(xnew-a1) + np.abs(ynew-a2))
 
 def PlotLine(ax,x,y,minval,maxval):
     ax.plot([x,x],[y,y],[minval,maxval],color='red')
@@ -78,24 +91,26 @@ def PlotLine(ax,x,y,minval,maxval):
 
     
 
-xmin = -100
-xmax = 100
-ymin = -100
-ymax = 100
+xmin = -5
+xmax = 5
+ymin = -5
+ymax = 5
 xamount = 1000
 yamount = 1000
 a1 = 1
 a2 = 1
-lambda1 = 1
-lambda2 = 0.5
+lambda1 = 10
+lambda2 = 1
 fig = plt.figure("Test")
 ax = fig.gca(projection='3d')
-Times = 5
+Times = 100
 
 x,y = 3,4
 
-eta = 3
-#eta = 2/(lambda1+lambda2)
+#eta = 1
+eta = 2/(lambda1+lambda2)
+#eta *= (1/10)
+
 
 ax,fig,maxval = plotContour(xmin,xmax,ymin,ymax,xamount,yamount,a1,a2,lambda1,lambda2,"test",ax,fig)
 
