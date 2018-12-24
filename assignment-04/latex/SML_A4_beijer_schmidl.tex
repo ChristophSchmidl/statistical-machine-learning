@@ -415,9 +415,50 @@ Create a plot of an isotropic 2D Gaussian $y = 3 \cdot \mathcal{N}(\textbf{0}|\f
 \textbf{Answer:}\\
 
 
+This can be done by using the following code:
 
+\begin{lstlisting}[language=Python]
+def Gaus(X):
+    FirstPart = 1/np.power(2*np.pi,len(X)/2)*1/(np.power(np.linalg.det(Sigma),0.5))
+    Exp = -(1/2)*np.matmul(np.transpose(X-Mu),np.matmul(np.linalg.inv(Sigma),X-Mu))
+    return FirstPart*np.exp(Exp)
 
+def Plot(X,Y,Name):
+    x,y = np.hsplit(X,2)
+    x = np.reshape(x,(41,41))
+    y = np.reshape(y,(41,41))
+    z = np.reshape(Y,(41,41))
+    fig = plt.figure(Name)
+    ax = fig.gca(projection='3d')
+    surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,
+                       linewidth=1, antialiased=True)
+Sigma = (2/5)*np.identity(2)
+Mu = np.zeros(2)
+x = y = np.arange(-2,2+0.1,0.1)
+x,y = np.meshgrid(x,y)
+X = []
+for i in range(len(x)):
+    for j in range(len(x[0])):
+        X.append(np.array([x[i][j],y[i][j]]))
+X = np.array(X)
+Y = np.array([Gaus(x) for x in X])
+\end{lstlisting}
 
+The function "Gaus"(line 1) simply follows the definition of the multi-variable Gaussian as given at page 78 of Bishop.:
+
+\begin{equation}
+\mathcal N (x|\mu,\sigma^2) = \frac{1}{(2\pi)^{\frac{D}{2}}} \frac{1}{\abs{\Sigma}^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1} (x-\mu)}
+\end{equation}
+
+For plotting, we need to reshape it because this is the way that matplotlib plots, it takes 2 2D arrays for X and Y and 1 2D array for z.
+The construction with the for-loop ensures that X contains all points required uniquely.
+The plot of the Gaussian can be seen at figure \ref{GausPlot}:
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/Plot_Gaussian.png}
+\caption{Gaussian function $Y = 3 \cdot \mathcal{N}(\textbf{0}|\frac{2}{5}\textbf{I}_2)$ graphed.}
+\label{GausPlot}
+\end{figure}
 
 
 \subsection*{2.2}

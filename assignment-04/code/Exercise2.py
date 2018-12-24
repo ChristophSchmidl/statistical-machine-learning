@@ -8,11 +8,17 @@ Created on Sat Dec  8 13:43:40 2018
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
-
+from time import time
 from mpl_toolkits.mplot3d import Axes3D
 
 
-
+import matplotlib.pylab as pylab
+params = {'legend.fontsize': 'x-large',
+         'axes.labelsize': 50,
+         'axes.titlesize':'x-large',
+         'xtick.labelsize': 25,
+         'ytick.labelsize': 25}
+pylab.rcParams.update(params)
 #%% Functions
 
 
@@ -28,10 +34,21 @@ def Plot(X,Y,Name):
     x = np.reshape(x,(41,41))
     y = np.reshape(y,(41,41))
     z = np.reshape(Y,(41,41))
+    
+
     fig = plt.figure(Name)
     ax = fig.gca(projection='3d')
     surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,
                        linewidth=1, antialiased=True)
+    fig.colorbar(surf, shrink=0.5, aspect=5,pad=-0.07)
+
+    ax.view_init(azim=-120,elev = 70)
+    ax.set_zlabel('\nY  ',fontsize=50)
+    ax.set_ylabel('\n$X_1$  ',fontsize=50)
+    ax.set_xlabel('\n\n$X_0$',fontsize=50)
+
+    
+
 
 
 
@@ -49,14 +66,15 @@ class NeuralNW():
         #print(self.w1)
         
     
-    def setNetworkOnce(self,Num,Printen=False):
-        self.HiddenLayer = np.array(np.tanh(self.w1[0] * self.TrainX[Num][0] + self.w1[1] * self.TrainX[Num][1]) + self.w1[2]*self.TrainX[Num][2])
+    def setNetworkOnce(self,Num):
+        self.HiddenLayer = np.tanh(np.dot(self.w1[0], self.TrainX[Num][0]) + np.dot(self.w1[1] , self.TrainX[Num][1]) + np.dot(self.w1[2],self.TrainX[Num][2]))
         self.HiddenLayer = np.insert(self.HiddenLayer,0,1)
         #print(self.HiddenLayer)
+        #print(type(self.HiddenLayer))
+
         
         self.Output = np.sum(self.HiddenLayer*self.w2)
-        if(Printen):
-            print(self.Output)
+
     
     def TrainNetwork(self,Num):
         self.setNetworkOnce(Num)
@@ -83,40 +101,40 @@ class NeuralNW():
         Out = np.array(Out)
         
         Plot(self.X,Out,Name)
-#%%Constants
+##%%Constants
 
 Sigma = (2/5)*np.identity(2)
 Mu = np.zeros(2)
-D = 2
-M = 8
-
 x = y = np.arange(-2,2+0.1,0.1)
-
 x,y = np.meshgrid(x,y)
-
 X = []
-
-
 for i in range(len(x)):
     for j in range(len(x[0])):
         X.append(np.array([x[i][j],y[i][j]]))
 X = np.array(X)
+Y = np.array([Gaus(x) for x in X])
+
+Plot(X,Y,"Plot Gaussian")
+
 
 eta = 0.1
-Y = np.array([Gaus(x) for x in X])
+D = 2
+M = 8
+
 
 
 #%%
 
 Network = NeuralNW(X,Y,eta)
-
+Now = time()
 #Network.setNetworkOnce(0,Printen=True)
 
 #Network.TrainNetwork(0)
-#Plot(X,Y,"Real")
-#Network.PlotOutput("First")
+Plot(X,Y,"Real")
+Network.PlotOutput("First")
 
-for i in range(20):
+for i in range(1000):
     Network.TrainNetworkAll()
 
 Network.PlotOutput("Second")
+print(time()-Now)
