@@ -430,8 +430,13 @@ def Plot(X,Y,Name):
     z = np.reshape(Y,(41,41))
     fig = plt.figure(Name)
     ax = fig.gca(projection='3d')
-    surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,
-                       linewidth=1, antialiased=True)
+    surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=1, antialiased=True)
+    fig.colorbar(surf, shrink=0.5, aspect=5,pad=-0.07)
+    ax.view_init(azim=-120,elev = 70)
+    ax.set_zlabel('\nY  ',fontsize=50)
+    ax.set_ylabel('\n$X_1$  ',fontsize=50)
+    ax.set_xlabel('\n\n$X_0$',fontsize=50)
+
 Sigma = (2/5)*np.identity(2)
 Mu = np.zeros(2)
 x = y = np.arange(-2,2+0.1,0.1)
@@ -444,13 +449,13 @@ X = np.array(X)
 Y = np.array([Gaus(x) for x in X])
 \end{lstlisting}
 
-The function "Gaus"(line 1) simply follows the definition of the multi-variable Gaussian as given at page 78 of Bishop.:
+The function "Gaus"(line 1) simply follows the definition of the multi-variable Gaussian as given at page 78 of Bishop:
 
 \begin{equation}
 \mathcal N (x|\mu,\sigma^2) = \frac{1}{(2\pi)^{\frac{D}{2}}} \frac{1}{\abs{\Sigma}^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1} (x-\mu)}
 \end{equation}
 
-For plotting, we need to reshape it because this is the way that matplotlib plots, it takes 2 2D arrays for X and Y and 1 2D array for z.
+For plotting, we need to reshape it because this is the way that matplotlib plots, it takes 2 2D arrays for X and Y and 1 2D array for z. The other lines create the colorbar and axis labels.
 The construction with the for-loop ensures that X contains all points required uniquely.
 The plot of the Gaussian can be seen at figure \ref{GausPlot}:
 
@@ -467,8 +472,53 @@ Implement a 2-layer neural network with $D = 2$ input nodes, $K = 1$ output node
 
 \textbf{Answer:}\\
 
+For the network I created a class in Python:
 
+\begin{lstlisting}[language=Python]
+class NeuralNW():
+    def __init__(self,X,Y,eta):
+        self.w1 = np.random.random_sample((D+1,M))-0.5
+        self.w2 = np.random.random_sample(M+1)-0.5
+        self.X = X
+        self.Y = Y
+        self.TrainX = []
+        for x in self.X:
+            self.TrainX.append(np.array([1,x[0],x[1]]))
+        self.TrainX = np.array(self.TrainX)
 
+    def setNetworkOnce(self,Num):
+        self.HiddenLayer = np.tanh(np.dot(self.w1[0], self.TrainX[Num][0]) + np.dot(self.w1[1] , self.TrainX[Num][1]) + np.dot(self.w1[2],self.TrainX[Num][2]))
+        self.HiddenLayer = np.insert(self.HiddenLayer,0,1)
+        self.Output = np.sum(self.HiddenLayer*self.w2)
+
+    def TrainNetwork(self,Num):
+        self.setNetworkOnce(Num)
+        Delta2 = self.Output - Y[Num]
+        Delta1 = (1-np.square(self.HiddenLayer))*self.w2*Delta2
+        Der2 = Delta2*self.HiddenLayer
+        Delta1 = Delta1[1:]
+        Der1 = np.array([Delta1*self.TrainX[Num][0],Delta1*self.TrainX[Num][1] , Delta1*self.TrainX[Num][2]])
+        self.w2 -= eta*Der2
+        self.w1 -= eta*Der1
+        
+    def TrainNetworkAll(self):
+        for i in range(len(self.X)):
+            self.TrainNetwork(i)
+            
+    def PlotOutput(self,Name):
+        Out = []
+        for i in range(len(X)):
+            self.setNetworkOnce(i)
+            Out.append(self.Output)
+        Out = np.array(Out)
+        Plot(self.X,Out,Name)
+\end{lstlisting}
+
+When it is initialized it creates two sets of weights. The first (w1) are the weights form the inputs to the hidden layer. There are D inputs + 1 bias, so there are (D+1) sets of weights leading to the M hidden layers. This I represent in a two dimensional (D+1,M) matrix, where w1[0][5] stands for the weight between $x_0$ (bias) and $z_5$, of the hidden layer.
+The hidden layer is connected to the one output by M+1 weights, since we have another bias $z_0$. The fandom\_sample function gives a random number between [0,1] so I lower it by 0.5 to make it between [-0.5,0.5].
+Then it stores the X and Y values and for convenience creates an array "self.X" which already has $x_0$ as bias, which is always 1.
+
+To run something through the model 
 
 
 
