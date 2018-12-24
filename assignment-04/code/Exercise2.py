@@ -27,21 +27,15 @@ def Gaus(X):
     Exp = -(1/2)*np.matmul(np.transpose(X-Mu),np.matmul(np.linalg.inv(Sigma),X-Mu))
     return FirstPart*np.exp(Exp)
 
-
-
 def Plot(X,Y,Name):
     x,y = np.hsplit(X,2)
     x = np.reshape(x,(41,41))
     y = np.reshape(y,(41,41))
     z = np.reshape(Y,(41,41))
-    
-
     fig = plt.figure(Name)
     ax = fig.gca(projection='3d')
-    surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,
-                       linewidth=1, antialiased=True)
+    surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=1, antialiased=True)
     fig.colorbar(surf, shrink=0.5, aspect=5,pad=-0.07)
-
     ax.view_init(azim=-120,elev = 70)
     ax.set_zlabel('\nY  ',fontsize=50)
     ax.set_ylabel('\n$X_1$  ',fontsize=50)
@@ -62,46 +56,34 @@ class NeuralNW():
         for x in self.X:
             self.TrainX.append(np.array([1,x[0],x[1]]))
         self.TrainX = np.array(self.TrainX)
-        #print(self.TrainX[0:10])
-        #print(self.w1)
-        
-    
+
     def setNetworkOnce(self,Num):
         self.HiddenLayer = np.tanh(np.dot(self.w1[0], self.TrainX[Num][0]) + np.dot(self.w1[1] , self.TrainX[Num][1]) + np.dot(self.w1[2],self.TrainX[Num][2]))
         self.HiddenLayer = np.insert(self.HiddenLayer,0,1)
-        #print(self.HiddenLayer)
-        #print(type(self.HiddenLayer))
-
-        
         self.Output = np.sum(self.HiddenLayer*self.w2)
 
-    
     def TrainNetwork(self,Num):
         self.setNetworkOnce(Num)
         Delta2 = self.Output - Y[Num]
         Delta1 = (1-np.square(self.HiddenLayer))*self.w2*Delta2
-        
-        #print(np.shape(Delta1))
         Der2 = Delta2*self.HiddenLayer
-        #print(Delta1)
         Delta1 = Delta1[1:]
         Der1 = np.array([Delta1*self.TrainX[Num][0],Delta1*self.TrainX[Num][1] , Delta1*self.TrainX[Num][2]])
-        #print((Der1))
         self.w2 -= eta*Der2
         self.w1 -= eta*Der1
         
     def TrainNetworkAll(self):
         for i in range(len(self.X)):
             self.TrainNetwork(i)
+            
     def PlotOutput(self,Name):
         Out = []
         for i in range(len(X)):
             self.setNetworkOnce(i)
             Out.append(self.Output)
         Out = np.array(Out)
-        
         Plot(self.X,Out,Name)
-##%%Constants
+#%%Constants
 
 Sigma = (2/5)*np.identity(2)
 Mu = np.zeros(2)
