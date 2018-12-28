@@ -514,11 +514,31 @@ class NeuralNW():
         Plot(self.X,Out,Name)
 \end{lstlisting}
 
+\subsubsection*{Initialization}
+
 When it is initialized it creates two sets of weights. The first (w1) are the weights form the inputs to the hidden layer. There are D inputs + 1 bias, so there are (D+1) sets of weights leading to the M hidden layers. This I represent in a two dimensional (D+1,M) matrix, where w1[0][5] stands for the weight between $x_0$ (bias) and $z_5$, of the hidden layer.
 The hidden layer is connected to the one output by M+1 weights, since we have another bias $z_0$. The fandom\_sample function gives a random number between [0,1] so I lower it by 0.5 to make it between [-0.5,0.5].
 Then it stores the X and Y values and for convenience creates an array "self.X" which already has $x_0$ as bias, which is always 1.
 
-To run something through the model 
+\subsubsection*{Set network}
+To run something through the model you can set all the layers of the network, including the output, by calling the "setNetworkOnce" function. This runs the nth (given by "Num") entry of the X array. The bias is set at 1 using "np.insert(self.HiddenLayer,0,1)".
+
+\subsubsection*{TrainNetwork \& TrainNetworkAll}
+
+This will run the nth point (given by Num) of the vector X and set the weights according to the 'simple example' given at page 245 of Bishop. TrainNetworkAll will call the function TrainNetwork for all points in X.
+
+\subsubsection*{PlotOutput}
+
+This will put every point in X through the network and plot it's output. 
+
+
+The initial output is for M = 8 can be seen in the following figure \ref{First}:
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/First.png}
+\caption{Inital output of the network for m = 8.}
+\label{First}
+\end{figure}
 
 
 
@@ -533,14 +553,217 @@ Train the network for $M = 8$ hidden nodes on the previously stored $\textbf{X}$
 \textbf{Answer:}\\
 
 
+The code I used for this is:
 
 
+\begin{lstlisting}[language=Python]
+eta = 0.1
+D = 2
+M = 8
+Network = NeuralNW(X,Y,eta)
+Now = time()
+
+Network.PlotOutput("First")
+
+for i in range(2000):
+    if (i == 199):
+        Network.PlotOutput("Second")
+        print(time()-Now)
+    Network.TrainNetworkAll()
+
+Network.PlotOutput("Third")
+print(time()-Now)
+\end{lstlisting}
+
+First we create an instance of the Network class. Then we plot the initial output and run it for some iterations, this case, 200. Then we plot the final output and the time it took to run the model.
+
+200 iterations took me around 19.7 seconds and created the follow figure \ref{Second}:
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/Second.png}
+\caption{Output after 200 iterations of training.}
+\label{Second}
+\end{figure}
 
 
+Then we ran it for 2000 iterations and the results you can see at figure \ref{Third}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/Third.png}
+\caption{Output after 2000 iterations of training.}
+\label{Third}
+\end{figure}
 
 \subsection*{2.4}
 
 Permute the $\textbf{X}$ and $\textbf{Y}$ arrays to a random order using the \texttt{randperm()} function, keeping corresponding $x$ and $y$ together. Repeat the network training session using this randomized data set. Verify that convergence is now much quicker. Can you understand why? Try out the effect of different numbers of hidden nodes, different initial weights and different learning rates on speed and quality of the network training. Explain your results.
+\textbf{Answer:}\\
+
+
+We permute by doing the following:
+
+
+\begin{lstlisting}[language=Python]
+    def TrainNetworkRand(self):
+        for i in np.random.permutation(len(self.X)):
+            self.TrainNetwork(i)
+\end{lstlisting}
+
+This is a function of the NeuralNetwork class. Instead of training every data point from start to finish this randomizes the order, which is equal to randomizing X and Y. (It's a little bit better since it randomizes every time it's training)
+
+We get an indication of the convergence by using the following error function:
+
+\begin{lstlisting}[language=Python]
+    def Distance(self):
+        Out = []
+        for i in range(len(X)):
+            self.setNetworkOnce(i)
+            Out.append(self.Output)
+        Out = np.array(Out)
+        return np.sum(np.abs(self.Y - Out))
+\end{lstlisting}
+
+This takes the output for every point and calculates how far it is from the target, and sums it. The following code we used to show the convergence for a random permuation is indeed faster:
+
+\begin{lstlisting}[language=Python]
+NetworkRand = NeuralNW(X,Y,eta)
+for i in range(20):
+    NetworkRand.TrainNetworkRand()
+print(NetworkRand.Distance())
+
+NetworkNorm = NeuralNW(X,Y,eta)
+for i in range(20):
+    NetworkNorm.TrainNetworkAll()
+print(NetworkNorm.Distance())
+\end{lstlisting}
+
+A typical result would be something like ~50 for the randomized training and ~100-250 for the sequential training. By choosing random points the difference between the output and the desired output is higher, therefore more training can be done. With the desired output being close to the target not much training will be done since the gradient is not as high. 
+
+\subsubsection*{Different parameters}
+
+We've tested the convergence by choosing different parameters and looking at the Error after 100 iterations of random training.
+First we've tested for the amount of nodes M using the following code:
+
+
+\begin{lstlisting}[language=Python]
+ErrorsM = []
+Mlist = np.linspace(1,50,50,dtype=np.int)
+
+for M in Mlist:
+    print(M)
+    NetworkTestM = NeuralNW(X,Y,eta)
+    for i in range(100):
+        NetworkTestM.TrainNetworkRand()
+    ErrorsM.append(NetworkTestM.Distance())
+
+plt.figure("Erors M")
+plt.plot(Mlist,ErrorsM)
+plt.xlabel('M')
+plt.ylabel('Error')
+
+plt.figure("Time M")
+plt.plot(Mlist,TimeList)
+plt.xlabel('M')
+plt.ylabel('t(s)')
+\end{lstlisting}
+
+This creates an list of 1,2,...,50, to test Neural networks with these amount of hidden layers. Then it trains the network and append the error. It also keeps track of how long the training took. Finally it plots the error and the execution times.
+The result can be viewed in figure \ref{Merror}.
+
+
+
+\begin{figure}[H]	
+	\begin{subfigure}{0.45\textwidth} % width of left subfigure
+		\includegraphics[width=\textwidth]{Images/ErrorVarM.png}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth} % width of left subfigure
+		\includegraphics[width=\textwidth]{Images/Time_M.png}
+	\end{subfigure}
+	\caption{The error and time for various amount of hidden layers M. The time taken is fairly constant and the error seems to be constant after ~10-20 hidden layers. So it's best to take around 20 hidden layers.}
+	\label{Merror}
+\end{figure}
+
+
+We also tested the effect of different $\eta$, for which we took a logarithmically, meaning that the log of the different $\eta's$ reveals a linear scale.
+
+We used the following code:
+
+\begin{lstlisting}[language=Python]
+Errorseta = []
+M = 8
+EtaLog = np.linspace(-4,2,50)
+
+Etas = np.power(10,EtaLog)
+
+for eta in Etas:
+    print(eta)
+    NetworkTesteta = NeuralNW(X,Y,eta)
+    for i in range(100):
+        NetworkTesteta.TrainNetworkRand()
+    Errorseta.append(NetworkTesteta.Distance())
+
+plt.figure("Errors eta")
+plt.plot(Etas,Errorseta)
+plt.xlabel('$\eta$')
+plt.ylabel('Error')
+\end{lstlisting}
+
+So we took 50 different values for $\eta$ between $10^-4$ and $10^2$. The plot we got from this calculation is figure \ref{EtaErr}:
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/ErrorVarEta.png}
+\caption{Errors for different values of $\eta$. A value around 0.1-1.5 seems to be the best.}
+\label{EtaErr}
+\end{figure}
+
+Finally to test the influence of the starting values of the weights we we took a random value between $[-0.5+i,0.5+i]$ with i varying from -5 to 5. So we can test if a lower random weight or a higher random weight would be beneficial. We did it using the following code:
+
+\begin{lstlisting}[language=Python]
+ErrorW = []
+Weights = []
+eta = 0.1
+for i in range(-5,5):
+    print(i)
+    Weights.append([])
+    for j in range(10):
+        w1 = np.random.random_sample((D+1,M))-0.5+i
+        w2 = np.random.random_sample(M+1)-0.5+i
+        Weights[-1].append((w1,w2))
+
+
+for partWeight in Weights:
+    ErrorW.append(0)
+    for w1,w2 in partWeight:
+        NetworkTestW = NeuralNW(X,Y,eta)
+        NetworkTestW.setWeights(w1,w2)
+        for i in range(100):
+            NetworkTestW.TrainNetworkRand()
+        ErrorW[-1] += NetworkTestW.Distance()
+
+ErrorW = np.array(ErrorW)/10
+
+WPlot = range(-5,5)
+plt.figure("Errors in W")
+plt.plot(WPlot,ErrorW)
+plt.xlabel('Inital weights bias')
+plt.ylabel('Error')
+
+    def setWeights(self,w1,w2):
+        self.w1 = w1
+        self.w2 = w2
+\end{lstlisting}
+
+We tested very different w 10 times to reduce the bias for taking random values for w. The number i we called the 'bias'. The code from 30-32 is part of the Neuralnetwork class and is used to set the weights.
+The plot we got from this can be seen at figure \ref{WDif}.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/Errors_in_W.png}
+\caption{The bias on the random value of the inital weights. A bias of 0 seems to be the best.}
+\label{WDif}
+\end{figure}
+
+To summarize: Only the amount of hidden networks could be a little bit higher in order to get a better convergence, but the values for w and $\eta$ given in the assignment seemed to be quite close to the optimal, as we can conclude from our tests.
+
 
 \begin{figure}[H]
 \center
@@ -559,7 +782,6 @@ Load the data using\\
 
 \hspace{1cm} \texttt{X = data(:,1:2); Y = data(:,3);}\\
 
-\textbf{Answer:}\\
 
 
 
@@ -572,7 +794,24 @@ Create a $2D$-plot of the target probability density function. Notice that the d
 
 \textbf{Answer:}\\
 
+This has been done with the following code:
 
+\begin{lstlisting}[language=Python]
+Data = np.genfromtxt('data/a017_NNpdfGaussMix.txt')
+
+X = Data[:,0:2]
+Y = Data[:,2]
+Plot(X,Y,"2.5")
+\end{lstlisting}
+
+
+Figure \ref{2.5} shows the plot:
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/2,5.png}
+\caption{Plot of the data.}
+\label{2.5}
+\end{figure}
 
 
 

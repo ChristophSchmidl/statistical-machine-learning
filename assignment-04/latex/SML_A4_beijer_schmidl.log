@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.9.28)  24 DEC 2018 15:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.9.28)  28 DEC 2018 19:47
 entering extended mode
 **./SML_A4_beijer_schmidl.tex
 (SML_A4_beijer_schmidl.tex
@@ -2145,234 +2145,297 @@ Underfull \hbox (badness 10000) in paragraph at lines 473--474
  []
 
 [8 <./Images/Plot_Gaussian.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 530--531
+<Images/First.png, id=259, 1825.5402pt x 1045.0242pt>
+File: Images/First.png Graphic file (type png)
+<use Images/First.png>
+Package pdftex.def Info: Images/First.png  used on input line 538. on input lin
+e 538.
+Package pdftex.def Info: Requested size: 469.47046pt x 268.73398pt on input lin
+e 538.
+
+Underfull \hbox (badness 10000) in paragraph at lines 550--551
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 533--534
+[9 <./Images/First.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 553--554
 
  []
 
-<Images/multi-modal.png, id=258, 417.56pt x 349.305pt>
+<Images/Second.png, id=281, 1842.1623pt x 1045.0242pt>
+File: Images/Second.png Graphic file (type png)
+<use Images/Second.png>
+Package pdftex.def Info: Images/Second.png  used on input line 583. on input li
+ne 583.
+Package pdftex.def Info: Requested size: 469.47046pt x 266.31021pt on input lin
+e 583.
+<Images/Third.png, id=283, 1847.9439pt x 1045.0242pt>
+File: Images/Third.png Graphic file (type png)
+<use Images/Third.png>
+Package pdftex.def Info: Images/Third.png  used on input line 592. on input lin
+e 592.
+Package pdftex.def Info: Requested size: 469.47046pt x 265.48103pt on input lin
+e 592.
+[10 <./Images/Second.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 599--601
+
+ []
+
+[11 <./Images/Third.png>]
+<Images/ErrorVarM.png, id=338, 2254.1013pt x 1202.5728pt>
+File: Images/ErrorVarM.png Graphic file (type png)
+<use Images/ErrorVarM.png>
+Package pdftex.def Info: Images/ErrorVarM.png  used on input line 677. on input
+ line 677.
+Package pdftex.def Info: Requested size: 211.26027pt x 112.70422pt on input lin
+e 677.
+<Images/Time_M.png, id=339, 2251.2105pt x 1202.5728pt>
+File: Images/Time_M.png Graphic file (type png)
+<use Images/Time_M.png>
+Package pdftex.def Info: Images/Time_M.png  used on input line 680. on input li
+ne 680.
+Package pdftex.def Info: Requested size: 211.26027pt x 112.85101pt on input lin
+e 680.
+<Images/ErrorVarEta.png, id=341, 2254.1013pt x 1211.2452pt>
+File: Images/ErrorVarEta.png Graphic file (type png)
+<use Images/ErrorVarEta.png>
+Package pdftex.def Info: Images/ErrorVarEta.png  used on input line 714. on inp
+ut line 714.
+Package pdftex.def Info: Requested size: 469.47046pt x 252.26204pt on input lin
+e 714.
+ [12 <./Images/ErrorVarM.png> <./Images/Time_M.png>]
+<Images/Errors_in_W.png, id=390, 2254.1013pt x 1212.6906pt>
+File: Images/Errors_in_W.png Graphic file (type png)
+<use Images/Errors_in_W.png>
+Package pdftex.def Info: Images/Errors_in_W.png  used on input line 760. on inp
+ut line 760.
+Package pdftex.def Info: Requested size: 469.47046pt x 252.56306pt on input lin
+e 760.
+
+[13 <./Images/ErrorVarEta.png>]
+<Images/multi-modal.png, id=431, 417.56pt x 349.305pt>
 File: Images/multi-modal.png Graphic file (type png)
 <use Images/multi-modal.png>
-Package pdftex.def Info: Images/multi-modal.png  used on input line 547. on inp
-ut line 547.
+Package pdftex.def Info: Images/multi-modal.png  used on input line 770. on inp
+ut line 770.
 Package pdftex.def Info: Requested size: 187.78531pt x 157.08984pt on input lin
-e 547.
+e 770.
 
-Underfull \hbox (badness 10000) in paragraph at lines 554--556
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 560--561
+Underfull \hbox (badness 10000) in paragraph at lines 777--779
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 562--563
+Underfull \hbox (badness 10000) in paragraph at lines 783--784
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 571--572
-
- []
-
-[9 <./Images/multi-modal.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 573--574
+Underfull \hbox (badness 10000) in paragraph at lines 793--794
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 591--592
+Underfull \hbox (badness 10000) in paragraph at lines 795--796
+
+ []
+
+[14 <./Images/Errors_in_W.png> <./Images/multi-modal.png>]
+<Images/2,5.png, id=444, 1804.5819pt x 1045.0242pt>
+File: Images/2,5.png Graphic file (type png)
+<use Images/2,5.png>
+Package pdftex.def Info: Images/2,5.png  used on input line 811. on input line 
+811.
+Package pdftex.def Info: Requested size: 469.47046pt x 271.85934pt on input lin
+e 811.
+
+Underfull \hbox (badness 10000) in paragraph at lines 830--831
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 603--604
+Underfull \hbox (badness 10000) in paragraph at lines 842--843
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 605--606
+Underfull \hbox (badness 10000) in paragraph at lines 844--845
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 613--614
+Underfull \hbox (badness 10000) in paragraph at lines 852--853
+
+ []
+
+[15 <./Images/2,5.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 854--855
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 615--616
+Underfull \hbox (badness 10000) in paragraph at lines 857--858
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 618--619
+Underfull \hbox (badness 10000) in paragraph at lines 873--874
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 634--635
+Underfull \hbox (badness 10000) in paragraph at lines 876--877
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 637--638
-
- []
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 645--646
+Underfull \hbox (badness 10000) in paragraph at lines 884--885
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 647--648
+Underfull \hbox (badness 10000) in paragraph at lines 886--887
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 656--657
+Underfull \hbox (badness 10000) in paragraph at lines 895--896
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 659--660
+Underfull \hbox (badness 10000) in paragraph at lines 898--899
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 668--669
+Underfull \hbox (badness 10000) in paragraph at lines 907--908
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 930--931
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 691--692
+Underfull \hbox (badness 10000) in paragraph at lines 932--933
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--694
+Underfull \hbox (badness 10000) in paragraph at lines 941--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 702--703
+Underfull \hbox (badness 10000) in paragraph at lines 943--944
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 704--705
+Underfull \hbox (badness 10000) in paragraph at lines 953--954
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 714--715
+Underfull \hbox (badness 10000) in paragraph at lines 955--956
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 716--717
-
- []
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 723--725
+Underfull \hbox (badness 10000) in paragraph at lines 962--964
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 732--733
+Underfull \hbox (badness 10000) in paragraph at lines 971--972
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 734--735
+Underfull \hbox (badness 10000) in paragraph at lines 973--974
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--737
+Underfull \hbox (badness 10000) in paragraph at lines 975--976
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 742--743
+Underfull \hbox (badness 10000) in paragraph at lines 981--982
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 744--745
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 983--984
 
  []
 
 Missing character: There is no Â in font cmr10!
 Missing character: There is no § in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 753--754
+Underfull \hbox (badness 10000) in paragraph at lines 992--993
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 755--756
-
- []
-
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 771--772
+Underfull \hbox (badness 10000) in paragraph at lines 994--995
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 774--775
+Underfull \hbox (badness 10000) in paragraph at lines 1010--1011
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 784--786
+Underfull \hbox (badness 10000) in paragraph at lines 1013--1014
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 788--789
+Underfull \hbox (badness 10000) in paragraph at lines 1023--1025
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 803--804
+Underfull \hbox (badness 10000) in paragraph at lines 1027--1028
+
+ []
+
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 1042--1043
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 805--806
+Underfull \hbox (badness 10000) in paragraph at lines 1044--1045
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 807--808
+Underfull \hbox (badness 10000) in paragraph at lines 1046--1047
 
  []
 
-[13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 813.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 813.
+[19]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1052.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1052.
  (SML_A4_beijer_schmidl.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 813.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 813.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1052.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1052.
+
 Package rerunfilecheck Info: File `SML_A4_beijer_schmidl.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 813.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1052.
  ) 
 Here is how much of TeX's memory you used:
- 29887 strings out of 493312
- 567783 string characters out of 3142818
- 774967 words of memory out of 3000000
- 32828 multiletter control sequences out of 15000+200000
+ 30099 strings out of 493312
+ 571059 string characters out of 3142818
+ 775703 words of memory out of 3000000
+ 32899 multiletter control sequences out of 15000+200000
  541603 words of font info for 66 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,14n,66p,10436b,1898s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2394,9 +2457,9 @@ s/cm/cmsy5.pfb><D:/Programs/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:
 onts/type1/public/amsfonts/cm/cmti10.pfb><D:/Programs/MikTex/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb><D:/Programs/MikTex/fonts/type1/public/amsfonts/cm/cmtt
 12.pfb>
-Output written on SML_A4_beijer_schmidl.pdf (13 pages, 1643517 bytes).
+Output written on SML_A4_beijer_schmidl.pdf (19 pages, 4576623 bytes).
 PDF statistics:
- 440 PDF objects out of 1000 (max. 8388607)
- 217 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 641 PDF objects out of 1000 (max. 8388607)
+ 351 named destinations out of 1000 (max. 500000)
+ 78 words of extra memory for PDF output out of 10000 (max. 10000000)
 
