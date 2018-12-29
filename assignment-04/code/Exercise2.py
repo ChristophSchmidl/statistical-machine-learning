@@ -42,6 +42,9 @@ def Plot(X,Y,Name,save=False,savename=None):
     ax.set_xlabel('\n\n$X_0$',fontsize=50)
     if(save):
         pylab.get_current_fig_manager().window.showMaximized()
+        ax.set_xlim3d([-2, 2])
+        ax.set_ylim3d([-2, 2])
+        ax.set_zlim3d([0, 1.5])
         plt.savefig(savename,dpi=100,layout='tight_layout')
         plt.close(Name)
 
@@ -160,14 +163,17 @@ M = 8
 
 
 NetworkRand = NeuralNW(X,Y,eta)
-for i in range(20):
+for i in range(100):
     NetworkRand.TrainNetworkRand()
 print(NetworkRand.Distance())
+
+NetworkRand.PlotOutput("Test")
 
 NetworkNorm = NeuralNW(X,Y,eta)
 for i in range(20):
     NetworkNorm.TrainNetworkAll()
 print(NetworkNorm.Distance())
+
 #%% Testing - Amount of Nodes
 
 
@@ -255,21 +261,33 @@ Data = np.genfromtxt('data/a017_NNpdfGaussMix.txt')
 
 X2 = Data[:,0:2]
 Y2 = Data[:,2]
-Plot(X2,Y2,"2.5",save=True,savename="Test.png")
+Plot(X2,Y2,"2.5")
 
 
 
 
 
-#%%
+#%% This is to test the convergence for different Eta's in case it often overshoots --> Spoiler: that wasn't the case (Warning: Takes a long time to compute!)
 eta = 0.01
+
+Etas = [1e-2,5e-3,1e-3,5e-4,1e-4,5e-5,1e-5,5e-6,1e-6]
 RealDataNNW = NeuralNW(X2,Y2,eta)
-for i in range(2000):
-    RealDataNNW.TrainNetworkRand()
-    if (i % 20 == 0):
-        RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i))
-        print(i)
+M = 160
+Errors = []
 
-    
-    
+for eta in Etas:
+    print(eta)
+    Errors.append([])
+    for i in range(2000):
+        RealDataNNW.TrainNetworkRand()
+        if (i % 20 == 0):
+            #RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i))
+            Errors[-1].append(RealDataNNW.Distance())
+        
 
+    Errors[-1].append(RealDataNNW.Distance())
+    
+    plt.plot(Errors[-1],label='eta = ' + str(eta))
+
+    TestList.append((Errors,eta))
+plt.legend()
