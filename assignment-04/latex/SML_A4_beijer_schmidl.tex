@@ -361,9 +361,16 @@ Modify the Iterative Reweighted Least Squares algorithm from part 1 to calculate
 
 \textbf{Answer:}\\
 
+\begin{align*}
+p(C_1 | \phi) &= \frac{1}{1 + \exp(-w^T \phi)}\\
+&= \frac{1}{1 + \exp(-[0.0, 0.0, 0.0]^T [1, \phi, \phi])}\\
+&= \frac{1}{1 + \exp([0.0, 0.0, 0.0])}\\
+&= \frac{1}{1 + \exp(0)}\\
+&= \frac{1}{1 + 1}\\
+&= \frac{1}{2}
+\end{align*}
 
-
-
+According to the logistic regression model with the weight vector $\textbf{w}^T = [0, 0, 0]$, both classes have a probability of 0.5.
 
 
 
