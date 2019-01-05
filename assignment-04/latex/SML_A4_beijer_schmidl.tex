@@ -843,7 +843,12 @@ Implement the kernel given by Equation (\ref{eq:5}) in Matlab as a function of $
 
 \textbf{Answer:}\\
 
+We can simply define the function as:
 
+\begin{lstlisting}[language=Python]
+def k(x,x2,T):
+    T[0]*np.exp(-(T[1]/2)*np.power(np.abs(x-x2),2))+T[2]+T[3]*x*x2
+\end{lstlisting}
 
 
 
