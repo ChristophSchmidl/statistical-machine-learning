@@ -402,14 +402,17 @@ print("Shape of t: {}".format(t.shape[0]))
 
 phi = np.array([ [1, x_element[0], x_element[1]] for x_element in x ]) # feature vector
 
+y = sigmoid(np.dot(phi, w))
+print("Cross entropy error before optimization: {}".format(cross_entropy_error(y, t)))
+
 for i in range(0, 1000):
     y = sigmoid(np.dot(phi, w)) # class estimates
     current_gradient = gradient_of_error(phi, y, t)
     current_hessian = hessian_of_error(phi, y)
     
-    w = w - np.dot(inv(cur_hessian), cur_gradient) 
+    w = w - np.dot(np.linalg.inv(current_hessian), current_gradient)
     
-print("Cross entropy error after optimization: {}".format(cross_entropy_error(y, t)) )
+print("Cross entropy error after optimization: {}".format(cross_entropy_error(y, t)))
 print("Weights: {}".format(w))
 
 # Normalised [0,1]
@@ -421,6 +424,12 @@ plt.xlabel('X')
 plt.ylabel('Y')
 plt.savefig('figure_1_2_3.png')
 plt.show()
+
+# Cross entropy error before optimization: [693.14718056]
+# Cross entropy error after optimization: [692.96935948]
+# Weights: [[ 0.00440664]
+# [-0.02139153]
+# [-0.04930069]]
 \end{lstlisting}
 
 \begin{figure}[H]
@@ -430,13 +439,7 @@ plt.show()
 \label{Fig:1_2_3}
 \end{figure}
 
-The cross entropy error before and after optimization stayed the same at 693.14718056. The following weights also did not change:\\
-
-\begin{align*}
-[[ 2.10831048e-14]\\
- [-7.90757147e-14]\\
- [ 5.09542676e-14]]
-\end{align*}
+The cross entropy error only improved slightly from 693.14718056 to 692.96935948.\\
 
 We think the problem lies within the nature of the data that it is not linearly separable which we can also see in the transparency/probabilities in figure \ref{Fig:1_2_3}. The decision boundary seems to be drawn through the middle (linearly) although the data is not seperable that way. Based on the fact that only linear basis functions are used for this non linearly separable data explains that outcome. A non-linear basis function would probably yield better results.
 
@@ -448,11 +451,38 @@ Introduce two Gaussian basis functions as features $\phi_1, \phi_2$, similar to 
 
 \textbf{Answer:}\\
 
+The following Python code generates figure \ref{Fig:1_2_4}:
+
+\begin{lstlisting}[language=Python]
+# Exercise 1.2.4
+
+# Use identical, isotropic covariance matrices Sigma = sigma^2 * I with sigma^2 = 0.2
+# and center the basis functions around mu_1 = (0,0) and mu_2 = (1,1)
+
+def gaussian_basis_function(data, origin, variance):
+    sigma = variance * np.identity(np.array(data).shape[0])
+    a = (data-origin).T
+    normalizer = 1.0 / (2*np.pi)**(a.shape[0]/2) * 1.0 / np.linalg.det(sigma)**(1/2)
+    return normalizer * np.exp(-(1.0/2)*np.dot(a.T, np.dot(inv(sigma), a)))
+
+phi = np.array([[1, gaussian_basis_function(xx, (0, 0), 0.2), gaussian_basis_function(xx, (1, 1), 0.2)] for xx in x])
+
+plt.scatter(phi[:, 1], phi[:, 2], c = t.squeeze())
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.savefig('figure_1_2_4.png')
+plt.show()
+\end{lstlisting}
 
 
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_1_2_4.png}
+\caption{Scatter plot of two class data in new feature space using gaussian basis functions}
+\label{Fig:1_2_4}
+\end{figure}
 
-
-
+The new feature space is a lot more suitable to a linear classifier because a linear decision boundary can be drawn which separates most of the two classes from each other, although not every point seems to be clearly separable. Nevertheless, this makes logistic regression an appropriate choice.
 
 
 
@@ -464,6 +494,51 @@ Run the algorithm. Make a scatter plot of the data, similar to Figure \ref{Fig:t
 
 
 \textbf{Answer:}\\
+
+The following Python code generates figure \ref{Fig:1_2_5}:
+
+\begin{lstlisting}[language=Python]
+# Exercise 1.2.5
+
+y = sigmoid(np.dot(phi, w))
+print("Cross entropy error before optimization: {}".format(cross_entropy_error(y, t)))
+
+for i in range(0, 1000):
+    y = sigmoid(np.dot(phi, w)) # class estimates
+    current_gradient = gradient_of_error(phi, y, t)
+    current_hessian = hessian_of_error(phi, y)
+    
+    w = w - np.dot(np.linalg.inv(current_hessian), current_gradient)
+    
+print("Cross entropy error after optimization: {}".format(cross_entropy_error(y, t)))
+print("Weights: {}".format(w))
+
+# Normalised [0,1]
+y = (y - np.min(y))/np.ptp(y)
+
+cmap = plt.get_cmap('Blues')
+plt.scatter(x[:, 0], x[:, 1], c = np.squeeze(cmap(y)))
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.savefig('figure_1_2_5.png')
+plt.show()
+
+# Cross entropy error before optimization: [690.64901362]
+# Cross entropy error after optimization: [346.50408046]
+# Weights: [[  7.10834887]
+# [-15.42143347]
+# [-15.53830921]]
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_1_2_5.png}
+\caption{Scatter plot of two class data an their probabilities in new feature space using gaussian basis functions}
+\label{Fig:1_2_5}
+\end{figure}
+
+The cross entropy error improved significantly to 346.50408046. Figure \ref{Fig:1_2_5} shows that the gaussian basis functions are able to separate a big amount of the data at its origin of (0,0) and (1,1) and only data points in the middle have uncertain probabilities around 0.5. The cross entropy error would probably rise again if the origin of the gaussian basis functions shifted towards other origins.
 
 
 \section*{Exercise 2 - Neural network regression (weight 5)}
@@ -905,12 +980,14 @@ Implement the kernel given by Equation (\ref{eq:5}) in Matlab as a function of $
 
 \textbf{Answer:}\\
 
-We can simply define the function as:
 
+<<<<<<< HEAD
 \begin{lstlisting}[language=Python]
 def k(x,x2,T):
     return T[0]*np.exp(-(T[1]/2)*np.power(np.abs(x-x2),2))+T[2]+T[3]*x*x2
 \end{lstlisting}
+=======
+>>>>>>> 271b8d91ec376e1687eef9c0bc3919adb2e6d095
 
 
 
