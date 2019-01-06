@@ -909,7 +909,7 @@ We can simply define the function as:
 
 \begin{lstlisting}[language=Python]
 def k(x,x2,T):
-    T[0]*np.exp(-(T[1]/2)*np.power(np.abs(x-x2),2))+T[2]+T[3]*x*x2
+    return T[0]*np.exp(-(T[1]/2)*np.power(np.abs(x-x2),2))+T[2]+T[3]*x*x2
 \end{lstlisting}
 
 
@@ -918,6 +918,8 @@ def k(x,x2,T):
 
 We first consider the univariate case. For the parameter values $\boldsymbol{\theta} = (1,1,1,1)$ and $N = 101$ equally spaced points $\textbf{X}$ in the interval $[-1,1]$, compute the Gram matrix $\textbf{K(X,X)}$ (eq. 6.54 Bishop). What is the dimension of \textbf{K}? How can we show that \textbf{K} is positive semidefinite?\\
 
+
+
 Note: Even when \textbf{K} is positive definitive, some of its eigenvalues may be too small to accurately compute (same for the determinant). This may pose a problem when generating a multivariate Gaussian distribution using \textbf{K} as its covariance matrix. You can alleviate this issue by adding a small diagonal term to \textbf{K}.\\
 
 
@@ -925,6 +927,32 @@ Note: Even when \textbf{K} is positive definitive, some of its eigenvalues may b
 
 
 
+A Gram matrix is a $N x N$ symmetric matrix (Bischop page 293, just before (6.6)). So in this case, the matrix is $101 x 101$.
+
+A Gram matrix can be computed usinng the following code:
+
+\begin{lstlisting}[language=Python]
+def GramMatrix(X,T):
+    N = len(X)
+    Gram = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            Gram[i][j] = k(X[i],X[j],T)
+    return Gram
+\end{lstlisting}
+
+It first creates an empty $N x N$ matrix, then fills it using the kernel function as required by the definition of the matrix. To show that K is positive semidefinite we could calculate the eigenvalues of the matrix and see if they are all $\geq 0$. This can be done with the following code:
+
+\begin{lstlisting}[language=Python]
+def SemiDef(Matrix):
+    FixedMatrix = Matrix + 1e-10*np.identity(len(Matrix))
+    EigVals = np.linalg.eigvals(FixedMatrix)
+    Lowest = np.min(EigVals)
+    IsSemi = np.real(Lowest)>=0
+    return IsSemi
+\end{lstlisting}
+
+This first adds a small value of $10^-10$ to the diagonal, as suggested by the note. Then it calculates it's eigenvalues, takes the minimum and looks if the real part is greater then 0. (by default the eigenvalue is complex since any matrix has eigenvalues as a complex number, since some polynomials of the characteristic polynomial of a matrix (like $x^2+1$) cannot be factorized using only real numbers. Often in practise the imaginary part is due to inaccuracies and it needs to be neglected in order to see if the lowest value is greater or equal then 0.
 
 
 
@@ -943,14 +971,46 @@ Describe the differences between the plots. Explain in which way each of the ker
 \textbf{Answer:}\\
 
 
+We've done this using the following code:
 
 
+\begin{lstlisting}[language=Python]
+Theta = np.array([[1, 4, 0, 0], [9, 4, 0, 0], [1, 64, 0, 0], [1, 0.25, 0, 0],
+                  [1, 4, 10, 0], [1, 4, 0, 5]])
+for j in range(len(Theta)):
+    T = Theta[j]
+    K = GramMatrix(X,T) 
+    for i in range(5):
+        TestGaus = np.random.multivariate_normal([0]*101,K)
+        Ax = plt.subplot(2, 3, j + 1)
+        Ax.set_xticks(np.round(np.linspace(-1, 1, 5), 2))
+        for tick in Ax.xaxis.get_major_ticks():
+            tick.label.set_fontsize(30)
+        for tick in Ax.yaxis.get_major_ticks():
+            tick.label.set_fontsize(30)
+        Ax.set_xlim([-1,1])
+        Ax.plot(X,TestGaus)
+        Ax.set_title(str(T),size=30)
+\end{lstlisting}
 
+First we save the different Theta's. Then we use the multivariate.normal function to randomly take a value from the multivariate Gaussian $p(\textbf y) = \mathcal N (\textbf y | 0,\textbf K)$. We plot these in a subplot and then make sure the plot looks better by adjusting the size of the labels and set the xlimit.
+
+What we got can be seen in figure \ref{3.1.3}:
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/3,1,3.png}
+\caption{Samples from Gaussian process prior using the Gram matrix with the $\theta's$ given.}
+\label{3.1.3}
+\end{figure}
+
+%Say something about the parameters!
 \subsection*{3.1.4}
 
 We now move to the bivariate case. Instead of an interval, we now consider a 2-D grid of equally spaced points of size $N = 21 \times 21$ in $[-1,1] \times [-1,1]$. We collect all these grid points in a data matrix \textbf{X}, where each one of the 441 observations has two dimensions. What is the dimension of \textbf{K} now? What does this tell you about the scalability of sampling multivariate functions from Gaussian processes in higher dimensions?\\
 
 \textbf{Answer:}\\
+
+The Gram matrix K is now a 441 x 441 matrix, with 194,481 entries. This tells that this doesn't scale so well in higher dimensions, for the size of the matrix grows very fast. (The amount of points grows to the power of the amount of dimensions, or: $\#points = n^{2D}$, with n the amount of points in one dimension and D the amount of dimensions. The factor two appears for the Gram Matrix is a square matrix. 
 
 
 
@@ -959,17 +1019,53 @@ We now move to the bivariate case. Instead of an interval, we now consider a 2-D
 
 \subsection*{3.1.5}
 
-Using the same kernel from (\ref{eq:5}), compute the Gram matrix \textbf{K(X,X)} on the grid for each hyperparameter configuration $\boldsymbol{\theta} \in \{(1, 1, 1, 1), (1, 10, 1, 1), (1, 1, 1, 10)\}$. For each \textbf{K}, generate and plot four random surfaces from the Gaussian process prior $\textbf{yX()} ~\mathcal{N}\textbf{(0, K(X,X)})$. Compare the observed differences to the univariate case.\\
+Using the same kernel from (\ref{eq:5}), compute the Gram matrix \textbf{K(X,X)} on the grid for each hyperparameter configuration $\boldsymbol{\theta} \in \{(1, 1, 1, 1), (1, 10, 1, 1), (1, 1, 1, 10)\}$. For each \textbf{K}, generate and plot four random surfaces from the Gaussian process prior $\textbf{y(X)} $~$ \mathcal{N}\textbf{(0, K(X,X)})$. Compare the observed differences to the univariate case.\\
 
 
 \textbf{Answer:}\\
 
 
+We used the following code:
+
+
+\begin{lstlisting}[language=Python]
+Theta = np.array([[1, 1, 1, 1], [1, 10, 1, 1], [1, 1, 1, 10]])
+for T in Theta:
+    fig = plt.figure(str(T))
+    fig.suptitle(str(T),fontsize=50)
+    Gram2 = GramMatrix(X,T)
+    for i in range(4):     
+        Z = np.random.multivariate_normal([0]*441,Gram2)
+        Z = np.reshape(Z,(21,21))
+        ax = fig.add_subplot(221+i,projection='3d')
+        ax.set_xticks(np.round(np.linspace(-1, 1, 5), 2))
+        ax.set_yticks(np.round(np.linspace(-1, 1, 5), 2))
+        surf = ax.plot_surface(x, y, Z, cmap=cm.coolwarm,linewidth=1, antialiased=True)
+        fig.colorbar(surf, shrink=0.5, aspect=5,pad=-0.07)
+        ax.view_init(azim=-120,elev = 70)
+    pylab.get_current_fig_manager().window.showMaximized()
+    plt.subplots_adjust(wspace=0, hspace=0)
+\end{lstlisting}
 
 
 
 
 
+
+This resulted in the following images:
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/[_1__1__1_10].png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/[_1_10__1__1].png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/[1_1_1_1].png}
+\end{figure}
 
 \textbf{Part 2 - Gaussian processes for regression}\\
 
