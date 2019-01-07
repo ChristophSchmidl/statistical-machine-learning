@@ -1235,9 +1235,87 @@ Try to give an estimate of the number, size and shape of the classes in the data
 
 \textbf{Answer:}\\
 
+The following Python code generates figure \ref{Fig:4_1_a} and \ref{Fig:4_1_b}:
+
+\begin{lstlisting}[language=Python]
+# Exercise 4.1
+
+data = np.loadtxt("data/a011_mixdata.txt")
+
+N = data.shape[0]
+print("Number of data points 'N': {}".format(N))
+
+D = data.shape[1]
+print("Number of variables 'D': {}".format(D))
+
+mean_1 = np.mean(data[:,0], axis=0)
+mean_2 = np.mean(data[:,1], axis=0)
+mean_3 = np.mean(data[:,2], axis=0)
+mean_4 = np.mean(data[:,3], axis=0)
+
+print("Mean of x_1: {}".format(mean_1))
+print("Mean of x_1: {}".format(mean_2))
+print("Mean of x_1: {}".format(mean_3))
+print("Mean of x_1: {}".format(mean_4))
+
+min_1 = np.min(data[:,0])
+max_1 = np.max(data[:,0])
+min_2 = np.min(data[:,1])
+max_2 = np.max(data[:,1])
+min_3 = np.min(data[:,2])
+max_3 = np.max(data[:,2])
+min_4 = np.min(data[:,3])
+max_4 = np.max(data[:,3])
+print("Min and max of x_1: {}, {}".format(min_1, max_1))
+print("Min and max of x_2: {}, {}".format(min_2, max_2))
+print("Min and max of x_3: {}, {}".format(min_3, max_3))
+print("Min and max of x_4: {}, {}".format(min_4, max_4))
+
+# See: https://seaborn.pydata.org/generated/seaborn.pairplot.html
+# Pairplot shows you the correlation between two variables
+# The diagonal just shows the histogram of one variable
+df = pd.DataFrame(data, columns=["$x_1$", "$x_2$", "$x_3$", "$x_4$"])
+sns.set(style="ticks", color_codes=True)
+sns.pairplot(df)
+plt.savefig('figure_4_1_a.png')
+plt.show()
+
+
+sns.scatterplot(data=data)
+plt.xlabel('Datapoint index')
+plt.ylabel('value')
+plt.savefig('figure_4_1_b.png')
+plt.show()
+
+# Number of data points 'N': 2000
+# Number of variables 'D': 4
+# Mean of x_1: 11.8984181195
+# Mean of x_1: 1.9129965287477
+# Mean of x_1: 0.37928800998915
+# Mean of x_1: 3.7035525292735003
+# Min and max of x_1: 11.315281, 12.37204
+# Min and max of x_2: -4.8354242, 4.8635103
+# Min and max of x_3: -2.9653298, 3.1605988
+# Min and max of x_4: -3.2219019, 10.582742
+\end{lstlisting}
 
 
 
+\begin{figure}[H]
+\center
+\includegraphics[width=0.7
+\textwidth]{Images/figure_4_1_a.png}
+\caption{Histograms and correlations between two variables}
+\label{Fig:4_1_a}
+\end{figure}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.8
+\textwidth]{Images/figure_4_1_b.png}
+\caption{Scatter plot of all four variable values along their their datapoint index}
+\label{Fig:4_1_b}
+\end{figure}
 
 
 \subsection*{4.2}
