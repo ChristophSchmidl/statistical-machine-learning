@@ -1154,8 +1154,9 @@ t_n = y_n + \epsilon_n,
 
 where $y_n = y(x_n)$ and $\epsilon_n$ are i.i.d. samples from a random noise variable on the observed target values. Furthermore, we assume that the noise process has a Gaussian distribution given by:
 
-\begin{eqnarray} \label{eq:6}
+\begin{eqnarray}
 p(t_n | y_n) = \mathcal{N}(t_n | y_n, \beta^{-1})
+ \label{eq:6}
 \end{eqnarray}
 
 Going back to a one-dimensional input space, we consider the following training data consisting of four data points 
@@ -1172,6 +1173,19 @@ Just as before, compute the Gram matrix of the training data for $\boldsymbol{\t
 \textbf{Answer:}\\
 
 
+Given equation (6.61) and (6.62) from Bishop:
+
+\begin{align}
+p(t) &= \int p(\textbf t | \textbf y)p(\textbf y) d \textbf y = \mathcal N (\textbf t| \textbf 0 , \textbf C) \tag{6.61}\\
+C(x_n,x_m) &= k(x_n,x_m) + \beta^{-1}\delta_{nm} \tag{6.62}
+\end{align}
+
+Therefore we simply get:
+
+\begin{equation}
+C = K + \beta^{-1}I_N
+\end{equation}
+
 
 
 
@@ -1179,7 +1193,6 @@ Just as before, compute the Gram matrix of the training data for $\boldsymbol{\t
 \subsection*{3.2.2}
 
 Using the previous results, compute the mean and the covariance of the conditional distribution $p(t | \textbf{t})$ of a new target value $t$ corresponding to the input $x = 0$. Which equations from Bishop do you need?\\
-
 \textbf{Answer:}\\
 
 

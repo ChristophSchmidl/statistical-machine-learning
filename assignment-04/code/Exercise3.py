@@ -41,6 +41,8 @@ def SemiDef(Matrix):
 def Normal(x,mu,sigma):
     return (1/(np.sqrt(2*np.pi*np.square(sigma))))*np.exp(-np.square(x-mu)/(2*np.square(sigma)))
 
+def C(K,Beta):
+    return K + Beta**-1*np.identity(len(K))
 
     
 #%%Constants
@@ -109,4 +111,5 @@ for T in Theta:
     plt.subplots_adjust(wspace=0, hspace=0)
 
 
-
+#%%
+    
