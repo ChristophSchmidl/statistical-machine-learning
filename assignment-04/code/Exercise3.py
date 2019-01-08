@@ -41,16 +41,23 @@ def SemiDef(Matrix):
 def Normal(x,mu,sigma):
     return (1/(np.sqrt(2*np.pi*np.square(sigma))))*np.exp(-np.square(x-mu)/(2*np.square(sigma)))
 
-def C(K,Beta):
-    return K + Beta**-1*np.identity(len(K))
-
+def MeanSigma(X,xnew,C,t,Theta):
+    N = len(x)
+    K = np.zeros(N)
+    for i in range(N):
+        K[i] = k(x[i],xnew,Theta)
+    Cinv = np.linalg.inv(C)
+    Mean = np.dot(K.transpose(),np.dot(Cinv,t))[0]
+    c = k(xnew,xnew,Theta)+1
+    Sigma = c - np.dot(K.transpose(),np.dot(Cinv,K))
+    return Mean,Sigma
     
 #%%Constants
     
-T = np.array([1,1,1,1])
+Theta = np.array([1,1,1,1])
 X = np.linspace(-1,1,101)
 
-Gram = GramMatrix(X,T)
+Gram = GramMatrix(X,Theta)
 
 print(SemiDef(Gram))
 
@@ -67,7 +74,7 @@ Theta = np.array([[1, 4, 0, 0], [9, 4, 0, 0], [1, 64, 0, 0], [1, 0.25, 0, 0],
 for j in range(len(Theta)):
     T = Theta[j]
     K = GramMatrix(X,T) 
-    for i in range(5):
+    for i in range(100000):
         Gaus = np.random.multivariate_normal([0]*101,K)
         Ax = plt.subplot(2, 3, j + 1)
         Ax.set_xticks(np.round(np.linspace(-1, 1, 5), 2))
@@ -76,7 +83,7 @@ for j in range(len(Theta)):
         for tick in Ax.yaxis.get_major_ticks():
             tick.label.set_fontsize(30)
         Ax.set_xlim([-1,1])
-        Ax.plot(X,TestGaus)
+        Ax.plot(X,Gaus)
         Ax.set_title(str(T),size=30)
 
 #%%
@@ -113,3 +120,42 @@ for T in Theta:
 
 #%%
     
+Theta = np.array([1,1,1,1])
+D = np.array([[-0.5,0.5],[0.2,-1],[0.3,3],[-0.1,-2.5]])
+x,t = np.hsplit(D,2)
+Gram = GramMatrix(x,Theta)
+C = Gram + np.identity(len(Gram))
+print(MeanSigma(x,0,C,t,Theta))
+#%%
+
+plt.scatter(x,t)
+
+X = np.linspace(np.min(x),np.max(x),100)
+MeanSig = []
+
+for xpart in X:
+    MeanSig.append(MeanSigma(x,xpart,C,t,Theta))
+
+MeanSig = np.array(MeanSig)
+Mean,Sigma = np.hsplit(MeanSig,2)
+
+Y1 = Mean
+Y2 = Mean+np.sqrt(Sigma)
+Y3 = Mean-np.sqrt(Sigma)
+
+
+plt.plot(X,Y1)
+plt.plot(X,Y2,'--')
+plt.plot(X,Y3,'--')
+
+#%%
+
+print(MeanSigma(x,-1e50,C,t,Theta))
+
+#%%
+
+
+Theta2 = np.array([100,100,0,0])
+
+print(MeanSigma(x,-1e50,C,t,Theta2))
+print(MeanSigma(x,1e50,C,t,Theta2))
