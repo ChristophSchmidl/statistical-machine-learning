@@ -61,13 +61,8 @@ Gram = GramMatrix(X,Theta)
 
 print(SemiDef(Gram))
 
-#%%
 
-
-Norm = Normal(X,0,Gram)
-Exp = np.exp(X)
-
-#%%
+#%%3.3
 
 Theta = np.array([[1, 4, 0, 0], [9, 4, 0, 0], [1, 64, 0, 0], [1, 0.25, 0, 0],
                   [1, 4, 10, 0], [1, 4, 0, 5]])
@@ -86,7 +81,7 @@ for j in range(len(Theta)):
         Ax.plot(X,Gaus)
         Ax.set_title(str(T),size=30)
 
-#%%
+#%% 
 x = y = np.linspace(-1,1,21)
 x,y = np.meshgrid(x,y)
 X = []
