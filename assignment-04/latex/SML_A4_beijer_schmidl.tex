@@ -1562,7 +1562,7 @@ of each of the components (i.e., use their covariance matrices to compute varian
 
 
 
-The correlation for $x_1$ and $x_2$ are -0.325795621751765 and -0.05387307557365256 respectively. Therefore, there is no strong positive correlation.\\
+The correlation for $x_1$ and $x_2$ are -0.325795621751765 for component  1 and -0.05387307557365256 for component 0. Therefore, there is no strong positive correlation.\\
 
 The following Python code generated figure \ref{Fig:4_3_log_likelihoods} and \ref{Fig:4_3_responsibilities}.
 
@@ -1606,7 +1606,7 @@ print("Correlation between x1 and x2: {}".format(correlation))
 \begin{figure}[H]
 \center
 \includegraphics[width=0.6\textwidth]{Images/figure_4_3_log_likelihoods.png}
-\caption{Log Likelihoods after 40 iterations}
+\caption{Log Likelihoods}
 \label{Fig:4_3_log_likelihoods}
 \end{figure}
 
@@ -1622,7 +1622,74 @@ Increase to $K = 4$, do the same, and see if this improves your result (in terms
 
 \textbf{Answer:}\\
 
+Setting with $K = 3$\\
 
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_4_a_resp.png}
+\caption{Component responsibilities of data points when k=3}
+\label{Fig:4_4_a_responsibilities}
+\end{figure}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_4_a_log_likelihoods.png}
+\caption{Log Likelihoods}
+\label{Fig:4_4_a_log_likelihoods}
+\end{figure}
+
+The correlation between x1 and x2 for the different components are the following:
+
+\begin{itemize}
+	\item Component 0: 0.08087460101865655
+	\item Component 1: -0.7230732922604372
+	\item Component 2: -0.014620843890103857
+\end{itemize}
+
+At this point with $K = 3$ we cannot see any strong positive correlation.\\
+
+
+
+
+
+
+Setting with $K=4$\\
+
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_4_b_resp.png}
+\caption{Component responsibilities of data points when k=4}
+\label{Fig:4_4_b_responsibilities}
+\end{figure}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_4_b_log_likelihoods.png}
+\caption{Log Likelihoods}
+\label{Fig:4_4_b_log_likelihoods}
+\end{figure}
+
+The correlation between x1 and x2 for the different components are the following:
+
+\begin{itemize}
+	\item Component 0: -0.894262700271773
+	\item Component 1: 0.03626336720359386
+	\item Component 2: 0.9151233789602066
+	\item Component 3: -0.05253892018496478
+\end{itemize}
+
+
+When we increase the number of clusters/components to $K = 4$, we can see a strong positive correlation between x1 and x2 with component/cluster 2 with a coefficient of 0.9151233789602066.\\
+
+
+The rumoured 1-in-5 estimate for users of X are credible and are actually a bit higher than 20\%, namely 21.2\%. The calculation is based on dividing the datapoints which belong to component 2 by the total number of datapoints. The corresponding Python code looks like this:
+
+\begin{lstlisting}[language=Python]
+percentage_of_drug_abuse = len(data[np.argmax(gamma, 1)==2,0])/N
+print(percentage_of_drug_abuse)
+# 0.212
+\end{lstlisting}
 
 \subsection*{4.5}
 
@@ -1641,8 +1708,35 @@ Identify which sample belongs to the suspected user and which one belongs to the
 
 \textbf{Answer:}\\
 
+We can get the different likelihoods for the samples by executing the following Python code:
 
+\begin{lstlisting}[language=Python]
+# Exercise 4.5
 
+samples = np.array([[11.85, 2.2, 0.5, 4.0],
+                 [11.95, 3.1, 0.0, 1.0],
+                 [12.00, 2.5, 0.0, 2.0],
+                 [12.00, 3.0, 1.0, 6.3]])
+
+likelihoods = np.zeros((len(samples), K))
+
+for i in range(0, len(samples)):
+    likelihood = [pi[k] * gaussian(samples[i], mu[k], sigma[k]) for k in range(0, K)]
+    likelihood /= np.sum(likelihood)
+    likelihoods[i] = likelihood
+
+for i in range(len(likelihoods)):
+    print("Likelihood for sample {}: {}".format(i, likelihoods[i]))
+    
+# Likelihood for sample 0: [4.12081596e-01 5.81451502e-01 4.98335178e-04 5.96856647e-03]
+# Likelihood for sample 1: [9.17954224e-01 1.41990969e-05 2.87027450e-05 8.20028744e-02]
+# Likelihood for sample 2: [6.71823809e-05 3.24443556e-05 9.99884498e-01 1.58757605e-05]
+# Likelihood for sample 3: [1.28736925e-06 9.93178802e-01 4.62268466e-12 6.81991031e-03]
+\end{lstlisting}
+
+Based on the above likelihoods, sample C is probably a subject who took drug X because it belongs to component/cluster 2 with a confidence of 99.9\%. which has a strong positive correlation with x1 and x2.\\
+Sample A probably belongs to the subject who tampered with with blood sample because the confidence is equally divided amongst component 0 and component 1. \\
+Sample B and D probably belong to 'clean' athletes.
 
 
 \end{document}
