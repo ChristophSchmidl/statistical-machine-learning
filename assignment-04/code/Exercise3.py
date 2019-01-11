@@ -13,8 +13,8 @@ import matplotlib.pylab as pylab
 params = {'legend.fontsize': 'x-large',
          'axes.labelsize': 50,
          'axes.titlesize':'x-large',
-         'xtick.labelsize': 25,
-         'ytick.labelsize': 25}
+         'xtick.labelsize': 50,
+         'ytick.labelsize': 50}
 pylab.rcParams.update(params)
 
 #%%
@@ -69,7 +69,7 @@ Theta = np.array([[1, 4, 0, 0], [9, 4, 0, 0], [1, 64, 0, 0], [1, 0.25, 0, 0],
 for j in range(len(Theta)):
     T = Theta[j]
     K = GramMatrix(X,T) 
-    for i in range(5):
+    for i in range(10000):
         Gaus = np.random.multivariate_normal([0]*101,K)
         Ax = plt.subplot(2, 3, j + 1)
         Ax.set_xticks(np.round(np.linspace(-1, 1, 5), 2))
@@ -80,6 +80,8 @@ for j in range(len(Theta)):
         Ax.set_xlim([-1,1])
         Ax.plot(X,Gaus)
         Ax.set_title(str(T),size=30)
+
+
 
 #%% 
 x = y = np.linspace(-1,1,21)

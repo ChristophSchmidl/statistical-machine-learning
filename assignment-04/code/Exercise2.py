@@ -16,8 +16,8 @@ import matplotlib.pylab as pylab
 params = {'legend.fontsize': 'x-large',
          'axes.labelsize': 50,
          'axes.titlesize':'x-large',
-         'xtick.labelsize': 25,
-         'ytick.labelsize': 25}
+         'xtick.labelsize': 40,
+         'ytick.labelsize': 40}
 pylab.rcParams.update(params)
 #%% Functions
 
@@ -104,13 +104,7 @@ class NeuralNW():
         Out = np.array(Out)
         return np.sum(np.abs(self.Y - Out))
         
-    def getOutput(self):
-        Out = []
-        for i in range(len(X)):
-            self.setNetworkOnce(i)
-            Out.append(self.Output)
-        return np.array(Out)
-        
+
         
             
     def PlotOutput(self,Name,save=False,savename=None,title=None):
@@ -120,7 +114,6 @@ class NeuralNW():
             Out.append(self.Output)
         Out = np.array(Out)
         Plot(self.X,Out,Name,save=save,savename=savename,title=title)
-#%%
 
 
 
@@ -136,9 +129,6 @@ for i in range(len(x)):
         X.append(np.array([x[i][j],y[i][j]]))
 X = np.array(X)
 Y = np.array([Gaus(x) for x in X])
-import sys
-sys.exit("Stop to make sure the correct path is loaded")
-#%%2.1
 
 Plot(X,Y,"Plot Gaussian")
 
@@ -156,7 +146,7 @@ Now = time()
 Network.PlotOutput("Initial_Output")
 
 for i in range(2000):
-    if (i == 199):
+    if (i == 200):
         Network.PlotOutput("Plot_200_iterations")
     Network.TrainNetworkAll()
 
@@ -169,14 +159,12 @@ for i in range(20):
     NetworkRand.TrainNetworkRand()
 print("Error for the random training = ",NetworkRand.Distance())
 
-NetworkRand.PlotOutput("Random_Training")
 
 NetworkNorm = NeuralNW(X,Y)
 for i in range(20):
     NetworkNorm.TrainNetworkAll()
 print("Error for the sequential network = ",NetworkNorm.Distance())
 
-NetworkNorm.PlotOutput("Sequential_Training")
 
 
 #%% Testing - Amount of Nodes
@@ -273,17 +261,14 @@ Plot(X2,Y2,"2.5")
 #%%
 
 RealDataNNW = NeuralNW(X2,Y2,eta=0.01,M=80)
-
-
-
 for i in range(2000):
     
     if (i % 20 == 0):
-        RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i) + ".png",title="Iteration " + str(i))
+        #RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i) + ".png",title="Iteration " + str(i))
     RealDataNNW.TrainNetworkRand()
 
 
-RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i+1) + ".png",title="Iteration " + str(i+1))
+#RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i+1) + ".png",title="Iteration " + str(i+1))
 
 
 #%% This is to test the convergence for different Eta's in case it often overshoots --> Spoiler: that wasn't the case (Warning: Takes a long time to compute!)
