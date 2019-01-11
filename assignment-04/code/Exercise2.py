@@ -16,8 +16,8 @@ import matplotlib.pylab as pylab
 params = {'legend.fontsize': 'x-large',
          'axes.labelsize': 50,
          'axes.titlesize':'x-large',
-         'xtick.labelsize': 25,
-         'ytick.labelsize': 25}
+         'xtick.labelsize': 40,
+         'ytick.labelsize': 40}
 pylab.rcParams.update(params)
 #%% Functions
 
@@ -27,13 +27,15 @@ def Gaus(X):
     Exp = -(1/2)*np.matmul(np.transpose(X-Mu),np.matmul(np.linalg.inv(Sigma),X-Mu))
     return FirstPart*np.exp(Exp)
 
-def Plot(X,Y,Name,save=False,savename=None):
+def Plot(X,Y,Name,save=False,savename=None,title=None):
     x,y = np.hsplit(X,2)
     x = np.reshape(x,(41,41))
     y = np.reshape(y,(41,41))
     z = np.reshape(Y,(41,41))
     fig = plt.figure(Name,figsize=(32,24))
     ax = fig.gca(projection='3d')
+    if(title != None):
+        plt.title(title,fontsize=40)
     surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=1, antialiased=True)
     fig.colorbar(surf, shrink=0.5, aspect=5,pad=-0.07)
     ax.view_init(azim=-120,elev = 70)
@@ -102,25 +104,17 @@ class NeuralNW():
         Out = np.array(Out)
         return np.sum(np.abs(self.Y - Out))
         
-    def getOutput(self):
-        Out = []
-        for i in range(len(X)):
-            self.setNetworkOnce(i)
-            Out.append(self.Output)
-        return np.array(Out)
-        
+
         
             
-    def PlotOutput(self,Name,save=False,savename=None):
+    def PlotOutput(self,Name,save=False,savename=None,title=None):
         Out = []
         for i in range(len(self.X)):
             self.setNetworkOnce(i)
             Out.append(self.Output)
         Out = np.array(Out)
-        Plot(self.X,Out,Name,save=save,savename=savename)
-#%%
-import sys
-sys.exit("Error message")
+        Plot(self.X,Out,Name,save=save,savename=savename,title=title)
+
 
 
 #%%Constants
@@ -135,8 +129,6 @@ for i in range(len(x)):
         X.append(np.array([x[i][j],y[i][j]]))
 X = np.array(X)
 Y = np.array([Gaus(x) for x in X])
-
-#%%2.1
 
 Plot(X,Y,"Plot Gaussian")
 
@@ -154,7 +146,7 @@ Now = time()
 Network.PlotOutput("Initial_Output")
 
 for i in range(2000):
-    if (i == 199):
+    if (i == 200):
         Network.PlotOutput("Plot_200_iterations")
     Network.TrainNetworkAll()
 
@@ -167,14 +159,12 @@ for i in range(20):
     NetworkRand.TrainNetworkRand()
 print("Error for the random training = ",NetworkRand.Distance())
 
-NetworkRand.PlotOutput("Random_Training")
 
 NetworkNorm = NeuralNW(X,Y)
 for i in range(20):
     NetworkNorm.TrainNetworkAll()
 print("Error for the sequential network = ",NetworkNorm.Distance())
 
-NetworkNorm.PlotOutput("Sequential_Training")
 
 
 #%% Testing - Amount of Nodes
@@ -265,39 +255,20 @@ X2 = Data[:,0:2]
 Y2 = Data[:,2]
 Plot(X2,Y2,"2.5")
 
+
+
+
 #%%
 
 RealDataNNW = NeuralNW(X2,Y2,eta=0.01,M=80)
-
 for i in range(2000):
-    RealDataNNW.TrainNetworkRand()
+    
     if (i % 20 == 0):
-        RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i) + ".png")
-        
-RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i+1) + ".png")
+        #RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i) + ".png",title="Iteration " + str(i))
+    RealDataNNW.TrainNetworkRand()
+
+
+#RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i+1) + ".png",title="Iteration " + str(i+1))
 
 
 #%% This is to test the convergence for different Eta's in case it often overshoots --> Spoiler: that wasn't the case (Warning: Takes a long time to compute!)
-eta = 0.01
-
-Etas = [1e-2,5e-3,1e-3,5e-4,1e-4,5e-5,1e-5,5e-6,1e-6]
-RealDataNNW = NeuralNW(X2,Y2,eta)
-M = 160
-Errors = []
-
-for eta in Etas:
-    print(eta)
-    Errors.append([])
-    for i in range(2000):
-        RealDataNNW.TrainNetworkRand()
-        if (i % 20 == 0):
-            #RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i))
-            Errors[-1].append(RealDataNNW.Distance())
-        
-
-    Errors[-1].append(RealDataNNW.Distance())
-    
-    plt.plot(Errors[-1],label='eta = ' + str(eta))
-
-    TestList.append((Errors,eta))
-plt.legend()

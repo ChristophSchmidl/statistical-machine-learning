@@ -560,19 +560,31 @@ def Gaus(X):
     Exp = -(1/2)*np.matmul(np.transpose(X-Mu),np.matmul(np.linalg.inv(Sigma),X-Mu))
     return FirstPart*np.exp(Exp)
 
-def Plot(X,Y,Name):
+def Plot(X,Y,Name,save=False,savename=None,title=None):
     x,y = np.hsplit(X,2)
     x = np.reshape(x,(41,41))
     y = np.reshape(y,(41,41))
     z = np.reshape(Y,(41,41))
-    fig = plt.figure(Name)
+    fig = plt.figure(Name,figsize=(32,24))
     ax = fig.gca(projection='3d')
+    if(title != None):
+        plt.title(title,fontsize=40)
     surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=1, antialiased=True)
     fig.colorbar(surf, shrink=0.5, aspect=5,pad=-0.07)
     ax.view_init(azim=-120,elev = 70)
     ax.set_zlabel('\nY  ',fontsize=50)
     ax.set_ylabel('\n$X_1$  ',fontsize=50)
     ax.set_xlabel('\n\n$X_0$',fontsize=50)
+    
+    if(save):
+        pylab.get_current_fig_manager().window.showMaximized()
+        ax.set_xlim3d([-2, 2])
+        ax.set_ylim3d([-2, 2])
+        ax.set_zlim3d([0, 1.5])
+        plt.savefig(savename,dpi=100,layout='tight_layout')
+        plt.close(Name)
+        return
+    plt.show()
 
 Sigma = (2/5)*np.identity(2)
 Mu = np.zeros(2)
@@ -584,13 +596,15 @@ for i in range(len(x)):
         X.append(np.array([x[i][j],y[i][j]]))
 X = np.array(X)
 Y = np.array([Gaus(x) for x in X])
+
+Plot(X,Y,"Plot Gaussian")
 \end{lstlisting}
 
-The function "Gaus"(line 1) simply follows the definition of the multi-variable Gaussian as given at page 78 of Bishop:
+The function "Gaus"(line 1) simply follows the definition of the multi-variable Gaussian as given by equation 2.43 at page 78 of Bishop:
 
-\begin{equation}
-\mathcal N (x|\mu,\sigma^2) = \frac{1}{(2\pi)^{\frac{D}{2}}} \frac{1}{\abs{\Sigma}^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1} (x-\mu)}
-\end{equation}
+\begin{align}
+\mathcal N (x|\mu,\sigma^2) = \frac{1}{(2\pi)^{\frac{D}{2}}} \frac{1}{\abs{\Sigma}^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1} (x-\mu)}\tag{2.43}
+\end{align}
 
 For plotting, we need to reshape it because this is the way that matplotlib plots, it takes 2 2D arrays for X and Y and 1 2D array for z. The other lines create the colorbar and axis labels.
 The construction with the for-loop ensures that X contains all points required uniquely.
@@ -613,15 +627,22 @@ For the network I created a class in Python:
 
 \begin{lstlisting}[language=Python]
 class NeuralNW():
-    def __init__(self,X,Y,eta):
+    def __init__(self,X,Y,eta=0.1,D=2,K=1,M=8):
         self.w1 = np.random.random_sample((D+1,M))-0.5
         self.w2 = np.random.random_sample(M+1)-0.5
         self.X = X
         self.Y = Y
         self.TrainX = []
+        self.eta = eta
         for x in self.X:
             self.TrainX.append(np.array([1,x[0],x[1]]))
         self.TrainX = np.array(self.TrainX)
+
+
+    def setWeights(self,w1,w2):
+        self.w1 = w1
+        self.w2 = w2
+
 
     def setNetworkOnce(self,Num):
         self.HiddenLayer = np.tanh(np.dot(self.w1[0], self.TrainX[Num][0]) + np.dot(self.w1[1] , self.TrainX[Num][1]) + np.dot(self.w1[2],self.TrainX[Num][2]))
@@ -630,25 +651,37 @@ class NeuralNW():
 
     def TrainNetwork(self,Num):
         self.setNetworkOnce(Num)
-        Delta2 = self.Output - Y[Num]
+        Delta2 = self.Output - self.Y[Num]
         Delta1 = (1-np.square(self.HiddenLayer))*self.w2*Delta2
         Der2 = Delta2*self.HiddenLayer
         Delta1 = Delta1[1:]
         Der1 = np.array([Delta1*self.TrainX[Num][0],Delta1*self.TrainX[Num][1] , Delta1*self.TrainX[Num][2]])
-        self.w2 -= eta*Der2
-        self.w1 -= eta*Der1
+        self.w2 -= self.eta*Der2
+        self.w1 -= self.eta*Der1
         
     def TrainNetworkAll(self):
         for i in range(len(self.X)):
             self.TrainNetwork(i)
             
-    def PlotOutput(self,Name):
+    def TrainNetworkRand(self):
+        for i in np.random.permutation(len(self.X)):
+            self.TrainNetwork(i)
+    
+    def Distance(self):
         Out = []
-        for i in range(len(X)):
+        for i in range(len(self.X)):
             self.setNetworkOnce(i)
             Out.append(self.Output)
         Out = np.array(Out)
-        Plot(self.X,Out,Name)
+        return np.sum(np.abs(self.Y - Out))
+        
+    def PlotOutput(self,Name,save=False,savename=None,title=None):
+        Out = []
+        for i in range(len(self.X)):
+            self.setNetworkOnce(i)
+            Out.append(self.Output)
+        Out = np.array(Out)
+        Plot(self.X,Out,Name,save=save,savename=savename,title=title)
 \end{lstlisting}
 
 \subsubsection*{Initialization}
@@ -663,6 +696,14 @@ To run something through the model you can set all the layers of the network, in
 \subsubsection*{TrainNetwork \& TrainNetworkAll}
 
 This will run the nth point (given by Num) of the vector X and set the weights according to the 'simple example' given at page 245 of Bishop. TrainNetworkAll will call the function TrainNetwork for all points in X.
+
+\subsection*{Distance}
+
+This will calculate the distance between the output and the target. This is used to numerically evaluate the network's results.
+
+\subsection*{TrainNetworkRand}
+
+This trains the network but selects the data at random, which will be useful soon.
 
 \subsubsection*{PlotOutput}
 
@@ -694,9 +735,6 @@ The code I used for this is:
 
 
 \begin{lstlisting}[language=Python]
-eta = 0.1
-D = 2
-M = 8
 Network = NeuralNW(X,Y,eta)
 Now = time()
 
@@ -712,9 +750,7 @@ Network.PlotOutput("Third")
 print(time()-Now)
 \end{lstlisting}
 
-First we create an instance of the Network class. Then we plot the initial output and run it for some iterations, this case, 200. Then we plot the final output and the time it took to run the model.
-
-200 iterations took me around 19.7 seconds and created the follow figure \ref{Second}:
+First we create an instance of the Network class. Then we plot the initial output and run it for some iterations, this case, 2000. We plot the intermediate result at 200 times.Then we plot the final output. In 200 iterations we got the following output, figure \ref{Second}
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Images/Second.png}
@@ -730,6 +766,8 @@ Then we ran it for 2000 iterations and the results you can see at figure \ref{Th
 \caption{Output after 2000 iterations of training.}
 \label{Third}
 \end{figure}
+
+So it reassembles the function after 200 iterations and a lot more after 2000. 
 
 \subsection*{2.4}
 
@@ -763,18 +801,24 @@ We get an indication of the convergence by using the following error function:
 This takes the output for every point and calculates how far it is from the target, and sums it. The following code we used to show the convergence for a random permuation is indeed faster:
 
 \begin{lstlisting}[language=Python]
-NetworkRand = NeuralNW(X,Y,eta)
+NetworkRand = NeuralNW(X,Y)
 for i in range(20):
     NetworkRand.TrainNetworkRand()
-print(NetworkRand.Distance())
+print("Error for the random training = ",NetworkRand.Distance())
 
-NetworkNorm = NeuralNW(X,Y,eta)
+
+NetworkNorm = NeuralNW(X,Y)
 for i in range(20):
     NetworkNorm.TrainNetworkAll()
-print(NetworkNorm.Distance())
+print("Error for the sequential network = ",NetworkNorm.Distance())
 \end{lstlisting}
 
-A typical result would be something like ~50 for the randomized training and ~100-250 for the sequential training. By choosing random points the difference between the output and the desired output is higher, therefore more training can be done. With the desired output being close to the target not much training will be done since the gradient is not as high. 
+A typical result would be something like ~50 for the randomized training and ~100-250 for the sequential training. By choosing random points the difference between the output and the desired output is higher, therefore more training can be done. With the desired output being close to the target not much training will be done since the gradient is not as high. An example output is:
+
+\begin{quote}
+Error for the random training =  55.80648504579132\\
+Error for the sequential network =  128.7314508706291
+\end{quote}
 
 \subsubsection*{Different parameters}
 
@@ -811,7 +855,7 @@ The result can be viewed in figure \ref{Merror}.
 
 \begin{figure}[H]	
 	\begin{subfigure}{0.45\textwidth} % width of left subfigure
-		\includegraphics[width=\textwidth]{Images/ErrorVarM.png}
+		\includegraphics[width=\textwidth]{Images/Errors_M.png}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth} % width of left subfigure
 		\includegraphics[width=\textwidth]{Images/Time_M.png}
@@ -827,14 +871,13 @@ We used the following code:
 
 \begin{lstlisting}[language=Python]
 Errorseta = []
-M = 8
 EtaLog = np.linspace(-4,2,50)
 
 Etas = np.power(10,EtaLog)
 
 for eta in Etas:
     print(eta)
-    NetworkTesteta = NeuralNW(X,Y,eta)
+    NetworkTesteta = NeuralNW(X,Y,eta=eta)
     for i in range(100):
         NetworkTesteta.TrainNetworkRand()
     Errorseta.append(NetworkTesteta.Distance())
@@ -858,9 +901,9 @@ Finally to test the influence of the starting values of the weights we we took a
 \begin{lstlisting}[language=Python]
 ErrorW = []
 Weights = []
-eta = 0.1
+D = 2
+M = 8
 for i in range(-5,5):
-    print(i)
     Weights.append([])
     for j in range(10):
         w1 = np.random.random_sample((D+1,M))-0.5+i
@@ -868,10 +911,11 @@ for i in range(-5,5):
         Weights[-1].append((w1,w2))
 
 
-for partWeight in Weights:
+for i, partWeight in enumerate(Weights):
+    print(i)
     ErrorW.append(0)
     for w1,w2 in partWeight:
-        NetworkTestW = NeuralNW(X,Y,eta)
+        NetworkTestW = NeuralNW(X,Y)
         NetworkTestW.setWeights(w1,w2)
         for i in range(100):
             NetworkTestW.TrainNetworkRand()
@@ -884,10 +928,6 @@ plt.figure("Errors in W")
 plt.plot(WPlot,ErrorW)
 plt.xlabel('Inital weights bias')
 plt.ylabel('Error')
-
-    def setWeights(self,w1,w2):
-        self.w1 = w1
-        self.w2 = w2
 \end{lstlisting}
 
 We tested very different w 10 times to reduce the bias for taking random values for w. The number i we called the 'bias'. The code from 30-32 is part of the Neuralnetwork class and is used to set the weights.
@@ -935,10 +975,9 @@ This has been done with the following code:
 
 \begin{lstlisting}[language=Python]
 Data = np.genfromtxt('data/a017_NNpdfGaussMix.txt')
-
-X = Data[:,0:2]
-Y = Data[:,2]
-Plot(X,Y,"2.5")
+X2 = Data[:,0:2]
+Y2 = Data[:,2]
+Plot(X2,Y2,"2.5")
 \end{lstlisting}
 
 
@@ -958,6 +997,38 @@ Figure \ref{2.5} shows the plot:
 \subsection*{2.6}
 
 Train the network on this data set. Use at least 40 hidden nodes and a learning rate parameter no higher than $\eta = 0.01$. Make sure the input data is properly randomized. Run the training phase for at least 2000 complete cycles and follow the progress by plotting the updated network output after every 20 full cycles. How does the final output of the network compare to the target distribution in the data? Explain. How could you improve the neural network in terms of speed of convergence and/or quality of the approximation?
+
+
+\textbf{Answer:}\\
+
+
+The following code has been used to produce the result:
+
+\begin{lstlisting}[language=Python]
+RealDataNNW = NeuralNW(X2,Y2,eta=0.01,M=80)
+for i in range(2000):
+    
+    if (i % 20 == 0):
+        RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i) + ".png",title="Iteration " + str(i))
+    RealDataNNW.TrainNetworkRand()
+
+
+RealDataNNW.PlotOutput("Real" + str(i),save=True,savename="../latex/Images/Final2/" + str(i+1) + ".png",title="Iteration " + str(i+1))
+\end{lstlisting}
+
+
+The code trains the network 2000 times and saves the output of the network every 20th time. 
+The images can be found in the folder "2Final". We have also made an video which shows all the 101 pictures.
+The end result looks similar as the target, however, the small higher part of the target is not reproduced so well.
+The neural network is too simple to capture the picture perfectly. It works well when there is a smooth change but abrupt changes are very hard to model.
+The input is just the X values, so the output change in a similar as it's input, therefore, less abrupt changes in the target are easier to model.
+We could improve the accuracy and convergence by, for example, fine-tuning the learning rate $\eta$. We could also chose a more complex neural network, one that, for instance, takes all the X values as input (as if it were "pixels"). The following picture \ref{Final2} shows the final output:
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Images/2Final/2000.png}
+\caption{Final output of the neural network fitting the Multi-modal probability density.}
+\label{Final2}
+\end{figure}
 
 
 
@@ -1002,7 +1073,7 @@ Note: Even when \textbf{K} is positive definitive, some of its eigenvalues may b
 
 
 
-A Gram matrix is a $N x N$ symmetric matrix (Bischop page 293, just before (6.6)). So in this case, the matrix is $101 x 101$.
+A Gram matrix is a $N \times N$ symmetric matrix (Bischop page 293, just before (6.6)). So in this case, the matrix is $101 x 101$.
 
 A Gram matrix can be computed usinng the following code:
 
@@ -1016,7 +1087,7 @@ def GramMatrix(X,T):
     return Gram
 \end{lstlisting}
 
-It first creates an empty $N x N$ matrix, then fills it using the kernel function as required by the definition of the matrix. To show that K is positive semidefinite we could calculate the eigenvalues of the matrix and see if they are all $\geq 0$. This can be done with the following code:
+It first creates an empty $N \times N$ matrix, then fills it using the kernel function as required by the definition of the matrix. To show that K is positive semidefinite we could calculate the eigenvalues of the matrix and see if they are all $\geq 0$. This can be done with the following code:
 
 \begin{lstlisting}[language=Python]
 def SemiDef(Matrix):
@@ -1025,9 +1096,10 @@ def SemiDef(Matrix):
     Lowest = np.min(EigVals)
     IsSemi = np.real(Lowest)>=0
     return IsSemi
+print(SemiDef(Gram))
 \end{lstlisting}
 
-This first adds a small value of $10^{-10}$ to the diagonal, as suggested by the note. Then it calculates it's eigenvalues, takes the minimum and looks if the real part is greater then 0. (by default the eigenvalue is complex since any matrix has eigenvalues as a complex number, since some polynomials of the characteristic polynomial of a matrix (like $x^2+1$) cannot be factorized using only real numbers.) Though since K is a symmetric real matrix, the matrix is Hermitian and the eigenvalues are all real, so the imaginary part is due to numerical inaccuracies and it needs to be neglected in order to see if the lowest value is greater or equal then 0.\footnote{That a symmetric real matrix is Hermitian and that Hermitian matrices have real eigenvalues is shown at wikipedia at \url{https://en.wikipedia.org/wiki/Hermitian_matrix}}
+This first adds a small value of $10^{-10}$ to the diagonal, as suggested by the note. Then it calculates it's eigenvalues, takes the minimum and looks if the real part is greater then 0. (by default the eigenvalue is complex since any matrix has eigenvalues as a complex number, since some polynomials of the characteristic polynomial of a matrix (like $x^2+1$) cannot be factorized using only real numbers.) Though since K is a symmetric real matrix, the matrix is Hermitian and the eigenvalues are all real, so the imaginary part is due to numerical inaccuracies and it needs to be neglected in order to see if the lowest value is greater or equal then 0.\footnote{That a symmetric real matrix is Hermitian and that Hermitian matrices have real eigenvalues is shown at wikipedia at \url{https://en.wikipedia.org/wiki/Hermitian_matrix}}The printstatement was "true", so it is a positive semidefinite matrix.
 
 
 
@@ -1078,7 +1150,7 @@ What we got can be seen in figure \ref{3.1.3}:
 \label{3.1.3}
 \end{figure}
 
-You can see a few differences: some plots have a higher maximum value. Others have lines that are more straight while others have lines that are more squiggly. For example, compare [1. 64. 0. 0.] with [1.0.25 0. 0.]. What differs is the second $\theta_1$. %Why would that matter?
+You can see a few differences: some plots have a higher maximum value. Others have lines that are more straight while others have lines that are more squiggly. For example, compare [1. 64. 0. 0.] with [1.0.25 0. 0.]. What differs is the second $\theta_1$. The exponent function is then more sensitive for changes in the input and thus you get more squiggles. 
 
 %Say something about the parameters!
 \subsection*{3.1.4}
@@ -1143,7 +1215,7 @@ This resulted in the following images:
 \end{figure}
 
 
-
+We see again that a high value for $\theta_2$ results in more squiggles, though now they are 2-dimensional.
 
 
 \textbf{Part 2 - Gaussian processes for regression}\\
@@ -1188,7 +1260,7 @@ Therefore we simply get:
 C = K + \beta^{-1}I_N\label{C}
 \end{equation}
 
-
+The code to get C is shown in 3.2.2 . 
 
 
 
