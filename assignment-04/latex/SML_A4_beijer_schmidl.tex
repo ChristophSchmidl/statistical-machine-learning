@@ -1433,8 +1433,115 @@ Implement an EM-algorithm using the description and formulas given in Bishop, §
 
 \textbf{Answer:}\\
 
+The following Python code generated figure \ref{Fig:log_likelihoods} and \ref{Fig:responsibilities}:
+
+\begin{lstlisting}[language=Python]
+# Exercise 4.2
+
+def gaussian(x, mu, sigma):
+    '''
+    Implementation of the gaussian pdf from scratch because scipy throws LinAlgErr when
+    covariance matrix is near singular when using multivariate_normal
+    See: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html
+    '''
+    normalizer = 1. / (2*np.pi)**(x.shape[0]/2) * 1. / np.sqrt(np.linalg.det(sigma))
+    return normalizer * np.exp(-1./2 * np.dot(x - mu, np.dot(np.linalg.inv(sigma), x - mu)))
+
+def calculate_log_likelihood(data, pi, mu, sigma, K):
+    return np.sum([np.log(np.sum([pi[k] * gaussian(x, mu[k], sigma[k]) for k in range(0, K)])) for x in data])
 
 
+def expectation_maximization(data, K, iterations=100, early_stopping=False, epsilon=0.01):
+    # ******1. Initialize values and evaluate log likelihood ****** 
+    
+    N = data.shape[0]
+    D = data.shape[1]
+    
+    # equally likely mixing coefficients
+    pi = np.ones(K)/K 
+    # means, random values around the sample means from -1 to +1
+    mu = np.random.uniform(-1, 1, size=(K, D)) + data.mean(axis=0) 
+    # covariance matrices, diagonal matrices with variance = 4 * random + 2
+    sigma = [np.diagflat(np.random.rand(1, data.shape[1]) * 4 + 2) for _ in range(0, K)]
+    # responsibilities initiated to 0
+    gamma = np.zeros((data.shape[0], K))
+    
+    log_likelihoods = []
+    
+    log_likelihoods.append(calculate_log_likelihood(data, pi, mu, sigma, K))
+    print("Initial log likelihood: {:.4f}".format(log_likelihoods[0]))
+    
+    for i in range(1, iterations+1):
+    
+        
+        # ****** 2. E-step: evaluate responsibilities ****** 
+        for k in range(0, K):
+            gamma[:, k] = [pi[k] * gaussian(sample, mu[k], sigma[k]) for sample in data]
+
+        gamma = gamma / np.repeat(np.sum(gamma, 1)[np.newaxis], K, axis=0).T
+    
+
+        # ****** 3. M-step: Re-estimate parameters ****** 
+        N_k = np.sum(gamma, 0)
+        
+        for k in range(0, K):
+            mu[k] = 1./N_k[k] * np.dot(gamma[:, k], data)
+            sigma[k] = 1./N_k[k] * np.dot(gamma[:, k], (data - mu[k])[np.newaxis].T * (data - mu[k])[np.newaxis])
+
+        pi = N_k / N
+        
+        
+        # ****** 4. Evaluate log likelihood ****** 
+
+        log_likelihoods.append(calculate_log_likelihood(data, pi, mu, sigma, K))
+        print("Iteration {:d}: Log likelihood = {:.2f}".format(i, log_likelihoods[i]))
+        print("Difference of log likelihoods: {:.5f}\n".format(np.abs(log_likelihoods[i-1] - log_likelihoods[i])))
+        
+        if early_stopping:
+            if np.abs(log_likelihoods[i-1] - log_likelihoods[i]) < epsilon:
+                print("Converged after {} iterations.".format(i))
+                break   
+    
+    return pi, mu, sigma, gamma, log_likelihoods
+    
+K = 4    
+    
+pi, mu, sigma, gamma, log_likelihoods = expectation_maximization(data, K)
+
+# *** Plotting ***
+log_likelihood_range = range(0, len(log_likelihoods))
+plt.plot(log_likelihood_range, log_likelihoods, linewidth=2, linestyle="-")
+plt.xlabel('Iteration')
+plt.ylabel('Log Likelihood')
+plt.savefig('figure_4_2_log_likelihoods.png')
+plt.show()
+    
+colors = ['#148F77', '#3498DB', '#DC7633', '#85C1E9']
+
+plt.figure()
+# 'Predictions' are just based on the responsibilities/gammas
+plt.scatter(data[:, 0], data[:, 1], c = [colors[x] for x in np.argmax(gamma, 1)], alpha = 0.75)
+plt.xlabel('$x_1$')
+plt.ylabel('$x_2$')
+plt.savefig('figure_4_2_resp.png')
+plt.show()    
+\end{lstlisting}
+
+
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_2_resp.png}
+\caption{Component responsibilities of data points when k=4}
+\label{Fig:responsibilities}
+\end{figure}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_2_log_likelihoods.png}
+\caption{Log Likelihoods after 100 iterations}
+\label{Fig:log_likelihoods}
+\end{figure}
 
 
 
@@ -1453,6 +1560,55 @@ of each of the components (i.e., use their covariance matrices to compute varian
 \textbf{Answer:}\\
 
 
+
+
+The correlation for $x_1$ and $x_2$ are -0.325795621751765 and -0.05387307557365256 respectively. Therefore, there is no strong positive correlation.\\
+
+The following Python code generated figure \ref{Fig:4_3_log_likelihoods} and \ref{Fig:4_3_responsibilities}.
+
+\begin{lstlisting}[language=Python]
+# Exercise 4.3
+
+K = 2
+
+pi, mu, sigma, gamma, log_likelihoods = expectation_maximization(data, K, early_stopping=True)
+
+# *** Plotting ***
+log_likelihood_range = range(0, len(log_likelihoods))
+plt.plot(log_likelihood_range, log_likelihoods, linewidth=2, linestyle="-")
+plt.xlabel('Iteration')
+plt.ylabel('Log Likelihood')
+plt.savefig('figure_4_3_log_likelihoods.png')
+plt.show()
+    
+colors = ['#148F77', '#3498DB', '#DC7633', '#85C1E9']
+
+plt.figure()
+# 'Predictions' are just based on the responsibilities/gammas
+plt.scatter(data[:, 0], data[:, 1], c = [colors[x] for x in np.argmax(gamma, 1)], alpha = 0.75)
+plt.xlabel('$x_1$')
+plt.ylabel('$x_2$')
+plt.savefig('figure_4_3_resp.png')
+plt.show()
+
+
+correlation = [sigma[k][0, 1] / np.sqrt(sigma[k][0, 0] * sigma[k][1, 1]) for k in range(0, K)]
+print("Correlation between x1 and x2: {}".format(correlation))
+\end{lstlisting}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_3_resp.png}
+\caption{Component responsibilities of data points when k=2}
+\label{Fig:4_3_responsibilities}
+\end{figure}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.6\textwidth]{Images/figure_4_3_log_likelihoods.png}
+\caption{Log Likelihoods after 40 iterations}
+\label{Fig:4_3_log_likelihoods}
+\end{figure}
 
 
 
